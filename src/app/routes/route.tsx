@@ -1,7 +1,14 @@
 import { Route, Routes, createBrowserRouter } from "react-router-dom";
-import Login from "../pages/Users/loginPage/Login";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
+import { Suspense, lazy } from "react";
+import About from "../pages/Users/aboutPage/About";
+
+// *** Lazy Routes (Tất cả các route ngoài trừ main layout sẽ import vào đây) ***
+const Home = lazy(() => import("../pages/Users/homePage/Home"));
+const Login = lazy(() => import("../pages/Users/loginPage/Login"));
+
+// ********************************
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +16,22 @@ export const router = createBrowserRouter([
     element: (
       <MainLayout>
         <Routes>
-          <Route />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<></>}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<></>}>
+                <About />
+              </Suspense>
+            }
+          />
         </Routes>
       </MainLayout>
     ),
@@ -20,6 +42,8 @@ export const router = createBrowserRouter([
   },
   {
     path: "admin",
-    element: <MainAdminLayout></MainAdminLayout>,
+    element: (<MainAdminLayout>
+      <Routes></Routes>
+    </MainAdminLayout>),
   },
 ]);

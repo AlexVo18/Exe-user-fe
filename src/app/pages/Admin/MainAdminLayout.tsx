@@ -1,8 +1,10 @@
 import React from 'react'
 
-const MainAdminLayout = () => {
+const MainAdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>MainAdminLayout</div>
+    <>
+    {children}
+    </>
   )
 }
 
