@@ -1,4 +1,7 @@
-import { Button } from "@/components/ui/button";
+import { cn } from "@/app/lib/utils";
+import { MenuIcon, Package2Icon } from "lucide-react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -6,16 +9,23 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { MenuIcon, Package2Icon } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
+} from "../ui/navigation-menu";
+import { Button } from "../ui/button";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Separator } from "../ui/separator";
 
 const Navbar = () => {
-  const components: { title: string; href: string }[] = [
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleSheet = () => {
+    setIsSheetOpen((prev) => !prev);
+  };
+
+  const closeSheet = () => {
+    setIsSheetOpen(false);
+  };
+
+  const newsType: { title: string; href: string }[] = [
     {
       title: "Cập nhật hằng tháng",
       href: "/docs/primitives/alert-dialog",
@@ -37,8 +47,8 @@ const Navbar = () => {
     return (
       <div>
         <NavigationMenuLink asChild>
-          <a
-            ref={ref}
+          <Link
+            to={""}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
               className
@@ -49,7 +59,7 @@ const Navbar = () => {
             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
               {children}
             </p>
-          </a>
+          </Link>
         </NavigationMenuLink>
       </div>
     );
@@ -57,64 +67,65 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 mt-2 pb-2">
       <nav className="hidden flex-col justify-between gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 w-full">
-        <div>
+        <Link to={"/"}>
           <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
-        </div>
+        </Link>
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link to={"/"}>
+              <Link to={"/about"} className="ml-4">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-foreground">
-                  Trang chủ
+                  VỀ CHÚNG TÔI
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem className="list-none ">
-              <NavigationMenuTrigger className="text-muted-foreground transition-colors hover:text-foreground ml-4 ">
-                Tin tức
+            <NavigationMenuItem className="list-none ml-4 ">
+              <NavigationMenuTrigger className="text-muted-foreground transition-colors hover:text-foreground ">
+                TIN TỨC
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid w-[200px] gap-3 p-4 md:w-[200px] ">
-                  {components.map((component) => (
+                  {newsType.map((news) => (
                     <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.href}
+                      key={news.title}
+                      title={news.title}
+                      href={news.href}
                     ></ListItem>
                   ))}
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to={"/docs"} className="ml-4">
+              <Link to={"/packs"} className="">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-foreground">
-                  Đồng hành Nuôi Cây
+                  ĐỒNG HÀNH NUÔI CÂY
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
-              <Link to={"/docs"} className="ml-4">
+              <Link to={"/sponsor"} className="ml-4">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-foreground">
-                  Về chúng tôi
+                  TRI ÂN
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Button variant="outline" className="ml-4">
-                Quyên góp
+                <Link to={"/donation"}>QUYÊN GÓP</Link>
               </Button>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
       <nav className="flex justify-between items-center md:hidden w-full ">
-        <div className="">
+        <Link to={"/"}>
           <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
-        </div>
+        </Link>
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              className="shrink-0 md:hidden"
+              className="shrink-0 md:hidden border-none hover:bg-transparent"
               size="icon"
               variant="outline"
             >
@@ -123,44 +134,58 @@ const Navbar = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <nav className="grid gap-6 text-lg font-medium">
-              {/* <Link
-                className="flex items-center gap-2 text-lg font-semibold"
-                to={""}
-              >
-                <Package2Icon className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
-              </Link> */}
-              <Link className="hover:text-foreground mt-2" to={""}>
-                Trang chủ
-              </Link>
-              <Link
-                className="text-muted-foreground hover:text-foreground"
-                to={""}
-              >
-                Tin tức
-              </Link>
-              <Link
-                className="text-muted-foreground hover:text-foreground"
-                to={""}
-              >
-                Đồng hành Nuôi Cây
-              </Link>
-              <Link
-                className="text-muted-foreground hover:text-foreground"
-                to={""}
-              >
-                Về chúng tôi
-              </Link>
-              <div className="flex justify-center">
-                <Button
-                  variant="outline"
-                  className="text-muted-foreground hover:text-foreground text-center"
-                  // to={""}
+            <nav className="grid gap-2 text-lg font-medium">
+              <SheetClose asChild>
+                <Link className="hover:text-foreground mt-2" to={"/"}>
+                  TRANG CHỦ
+                </Link>
+              </SheetClose>
+              <Separator />
+              <SheetClose asChild>
+                <Link
+                  className="text-muted-foreground hover:text-foreground"
+                  to={"/about"}
                 >
-                  Quyên góp
-                </Button>
-              </div>
+                  VỀ CHÚNG TÔI
+                </Link>
+              </SheetClose>
+              <Separator />
+              <SheetClose asChild>
+                <Link
+                  className="text-muted-foreground hover:text-foreground"
+                  to={"/news"}
+                >
+                  TIN TỨC
+                </Link>
+              </SheetClose>
+              <Separator />
+              <SheetClose asChild>
+                <Link
+                  className="text-muted-foreground hover:text-foreground"
+                  to={"/sponsor"}
+                >
+                  ĐỒNG HÀNH NUÔI CÂY
+                </Link>
+              </SheetClose>
+              <Separator />
+              <SheetClose asChild>
+                <Link
+                  className="text-muted-foreground hover:text-foreground"
+                  to={"/packs"}
+                >
+                  TRI ÂN
+                </Link>
+              </SheetClose>
+              <SheetClose asChild className="flex justify-center">
+                <Link to={"/donation"}>
+                  <Button
+                    variant="outline"
+                    className="text-muted-foreground hover:text-foreground text-center"
+                  >
+                    QUYÊN GÓP
+                  </Button>
+                </Link>
+              </SheetClose>
             </nav>
           </SheetContent>
         </Sheet>

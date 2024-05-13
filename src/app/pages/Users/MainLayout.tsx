@@ -6,11 +6,11 @@ import React, { ReactNode } from "react";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      {children}
+      <main className="flex-grow">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 };
 
