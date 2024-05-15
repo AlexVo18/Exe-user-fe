@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="mt-auto bg-mainGreen text-white">
-      <div className="container mx-auto my-10">
+      <div className="container mx-auto mt-10 mb-5">
         <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:mx-20 xs:mx-10 gap-4">
           <div className="col-span-1">
             <div className="text-lg font-bold">VỀ CHÚNG TÔI</div>
@@ -38,8 +38,49 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div></div>
-          <div className="w-full bg-white rounded-3xl px-10 py-6 text-mainBrown flex flex-col gap-2">
+          <div className="text-white flex flex-col">
+            <div className="text-lg font-bold">VỀ CHÚNG TÔI</div>
+            <Separator className="my-2" />
+            <div className="gap-1 flex flex-col">
+              <Link
+                to={"/"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Trang chủ
+              </Link>
+              <Link
+                to={"/about"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Về chúng tôi
+              </Link>
+              <Link
+                to={"/news"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Tin tức
+              </Link>
+              <Link
+                to={"/sponsor"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Đồng hành nuôi cây
+              </Link>
+              <Link
+                to={"/packs"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Tri ân
+              </Link>
+              <Link
+                to={"/donation"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Quyên góp
+              </Link>
+            </div>
+          </div>
+          <div className="w-full bg-white rounded-3xl px-10 py-6 text-mainBrown flex flex-col gap-1 justify-center">
             <div className="font-semibold">Thông Tin Liên Hệ</div>
             <div className="flex gap-2 text-2xl items-center text-mainGreen my-2">
               <Phone />

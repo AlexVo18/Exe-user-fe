@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
             }
           />
           <Route
-            path="/news"
+            path="/news/:type"
             element={
               <Suspense fallback={<></>}>
                 <News />
