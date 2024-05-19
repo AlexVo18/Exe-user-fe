@@ -1,8 +1,11 @@
+import Banner from "@/app/components/banner/Banner";
 
 const Home = () => {
   return (
     <div>
-      <div>Home</div>
+      <Banner />
+      <div className="font-andika font-bold">Google why</div>
+      <div className="">Google why</div>
     </div>
   );
 };
