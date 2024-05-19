@@ -13,6 +13,7 @@ import {
 import { Button } from "../ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Separator } from "../ui/separator";
+import DonateButton from "../homePage/button/DonateButton";
 
 interface ListItemProps extends LinkProps {
   className?: string;
@@ -22,7 +23,6 @@ interface ListItemProps extends LinkProps {
 }
 
 const Navbar = () => {
-
   const newsType: { title: string; href: string }[] = [
     {
       title: "Cập nhật hằng tháng",
@@ -52,7 +52,7 @@ const Navbar = () => {
               )}
               {...props}
             >
-              <div className="text-sm font-medium leading-none">{title}</div>
+              <div className="text-sm leading-none font-semibold">{title}</div>
               <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                 {children}
               </p>
@@ -64,11 +64,11 @@ const Navbar = () => {
   );
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 mt-2 pb-2">
-      <nav className="hidden flex-col justify-between gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 w-full">
+      <nav className="hidden flex-col justify-between gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm w-full">
         <Link to={"/"}>
           <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
         </Link>
-        <NavigationMenu>
+        <NavigationMenu className="font-semibold">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link to={"/about"} className="ml-4">
@@ -78,7 +78,7 @@ const Navbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem className="list-none ml-4 ">
-              <NavigationMenuTrigger className="text-muted-foreground transition-colors hover:text-mainBrown ">
+              <NavigationMenuTrigger className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold">
                 TIN TỨC
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -88,7 +88,7 @@ const Navbar = () => {
                       key={news.title}
                       title={news.title}
                       to={news.href}
-                      className="text-muted-foreground transition-colors hover:text-mainBrown "
+                      className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold"
                     ></ListItem>
                   ))}
                 </div>
@@ -110,21 +110,26 @@ const Navbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Button variant="outline" className="ml-4">
-                <Link to={"/donation"}>QUYÊN GÓP</Link>
-              </Button>
+              <div className="ml-4">
+                <DonateButton
+                  title="QUYÊN GÓP"
+                  textColor="white"
+                  bgColor="bg-mainGreen"
+                  link={"/donation"}
+                />
+              </div>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
-      <nav className="flex justify-between items-center md:hidden w-full ">
+      <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
           <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
         </Link>
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              className="shrink-0 md:hidden border-none hover:bg-transparent"
+              className="shrink-0 lg:hidden border-none hover:bg-transparent"
               size="icon"
               variant="outline"
             >
@@ -180,12 +185,12 @@ const Navbar = () => {
               </SheetClose>
               <SheetClose asChild className="flex justify-center">
                 <Link to={"/donation"}>
-                  <Button
-                    variant="outline"
-                    className="text-muted-foreground hover:text-mainBrown text-center transition-colors"
-                  >
-                    QUYÊN GÓP
-                  </Button>
+                  <DonateButton
+                    title="QUYÊN GÓP"
+                    textColor="white"
+                    bgColor="bg-mainGreen"
+                    link={"/donation"}
+                  />
                 </Link>
               </SheetClose>
             </nav>

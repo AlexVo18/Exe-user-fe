@@ -82,18 +82,28 @@ const Footer = () => {
           </div>
           <div className="w-full bg-white rounded-3xl px-10 py-6 text-mainBrown flex flex-col gap-1 justify-center">
             <div className="font-semibold">Thông Tin Liên Hệ</div>
-            <div className="flex gap-2 text-2xl items-center text-mainGreen my-2">
-              <Phone />
-              <div className="font-bold ">0909 078 423</div>
-            </div>
-            <div className="flex gap-2 items-center ">
-              <Mail />
-              <div>nuoicay@gmail.com</div>
-            </div>
-            <div className="flex gap-2 items-center ">
-              <MapPin className="text-2xl"/>
-              <div>Số 12, đường Hoàng Diệu, phường 13, Quận 9</div>
-            </div>
+            <table>
+              <tr className="text-2xl items-center text-mainGreen">
+                <td>
+                  <Phone />
+                </td>
+                <td className="font-bold pl-2">0909 078 423</td>
+              </tr>
+              <tr>
+                <td>
+                  <Mail />
+                </td>
+                <td className="pl-2">nuoicay@gmail.com</td>
+              </tr>
+              <tr>
+                <td>
+                  <MapPin className="text-2xl" />
+                </td>
+                <td className="pl-2 leading-tight">
+                  Số 12, đường Hoàng Diệu, phường 13, Quận 9
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
         <div className="lg:mx-20 xs:mx-10 my-5">
