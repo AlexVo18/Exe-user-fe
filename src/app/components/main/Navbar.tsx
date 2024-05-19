@@ -13,7 +13,7 @@ import {
 import { Button } from "../ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Separator } from "../ui/separator";
-import DonateButton from "../button/DonateButton";
+import DonateButton from "../homePage/button/DonateButton";
 
 interface ListItemProps extends LinkProps {
   className?: string;

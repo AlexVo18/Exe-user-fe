@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { Heart } from "lucide-react";
 import { Link, LinkProps } from "react-router-dom";
 interface IProps {
