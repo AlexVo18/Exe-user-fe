@@ -14,7 +14,7 @@ const UpdateList = () => {
               <img
                 src="src\assets\Ex.svg"
                 alt="Logo Img"
-                className="md:w-60 w-52 sm:w-40"
+                className="w-60"
               />
             </div>
             <div className="col-span-1 flex justify-center">
@@ -24,7 +24,7 @@ const UpdateList = () => {
               </div>
             </div>
             <div className="flex justify-start items-center col-span-5 my-6">
-              <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg">
+              <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg border-2 border-mainGreen">
                 <div className=" text-xl font-semibold text-mainGreen">
                   Tháng 12/2023
                 </div>
@@ -41,7 +41,7 @@ const UpdateList = () => {
               <img
                 src="src\assets\Ex.svg"
                 alt="Logo Img"
-                className="md:w-60 w-52 sm:w-40"
+                className=" w-60"
               />
             </div>
             <div className="col-span-1 flex justify-center">
@@ -50,19 +50,16 @@ const UpdateList = () => {
                 <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-black"></div>
               </div>
             </div>
-            <div className="flex justify-end order-first items-center col-span-5 ">
-              <div className="flex justify-start items-center col-span-5 my-6">
-                <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg">
-                  <div className=" text-xl font-semibold text-mainGreen">
-                    Tháng 11/2023
-                  </div>
-                  <p className="mt-2 text-sm md:text-base text-justify ">
-                    Tháng 1 đầu xuân năm nay, team Nuôi Cây đã cùng các chú bộ
-                    đội và người dân địa phương cùng nhau phối hợp dọp dẹp và
-                    cắt bỏ các cây cỏ dại, tạo điều kiện để trồng cây tại khu
-                    vực đó
-                  </p>
+            <div className="flex justify-end order-first items-center col-span-5 my-6 ">
+              <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg border-2 border-mainGreen">
+                <div className=" text-xl font-semibold text-mainGreen">
+                  Tháng 11/2023
                 </div>
+                <p className="mt-2 text-sm md:text-base text-justify ">
+                  Tháng 1 đầu xuân năm nay, team Nuôi Cây đã cùng các chú bộ đội
+                  và người dân địa phương cùng nhau phối hợp dọp dẹp và cắt bỏ
+                  các cây cỏ dại, tạo điều kiện để trồng cây tại khu vực đó
+                </p>
               </div>
             </div>
           </div>
