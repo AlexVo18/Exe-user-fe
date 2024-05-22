@@ -94,3 +94,52 @@
 .slide_right:hover {
   box-shadow: inset 400px 0 0 0 #59471f;
 }
+
+.round-bottom {
+  background-color: #F2E5C5;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  /*below show how it works*/
+}
+.round-bottom::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 100px;
+  background-color: #5C822D;
+  border-radius: 100%;
+  transform-origin: bottom;
+  transform: translateX(-50%) scale(2);
+}
+
+.round-top {
+  background-color: white;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  /*below show how it works*/
+}
+.round-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100px;
+  background-color: #5C822D;
+  border-radius: 100%;
+  transform-origin: top;
+  transform: translateX(-50%) scale(2);
+}
