@@ -12,15 +12,15 @@ const UpdateList = () => {
           <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 mt-5 gap-2">
             <div className="flex justify-end items-center col-span-5 my-2">
               <img
-                src="src\assets\Ex.svg"
+                src="src\assets\images\Ex.svg"
                 alt="Logo Img"
                 className="w-60"
               />
             </div>
             <div className="col-span-1 flex justify-center">
               <div className="flex justify-center items-center">
-                <Separator className="bg-black w-0.5" orientation="vertical" />
-                <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-black"></div>
+                <Separator className="bg-mainBrown w-0.5" orientation="vertical" />
+                <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
               </div>
             </div>
             <div className="flex justify-start items-center col-span-5 my-6">
@@ -39,15 +39,15 @@ const UpdateList = () => {
           <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 gap-2 ">
             <div className="flex justify-start order-last items-center col-span-5 my-2 ">
               <img
-                src="src\assets\Ex.svg"
+                src="src\assets\images\Ex.svg"
                 alt="Logo Img"
                 className=" w-60"
               />
             </div>
             <div className="col-span-1 flex justify-center">
               <div className="flex justify-center items-center">
-                <Separator className="bg-black w-0.5" orientation="vertical" />
-                <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-black"></div>
+                <Separator className="bg-mainBrown w-0.5" orientation="vertical" />
+                <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
               </div>
             </div>
             <div className="flex justify-end order-first items-center col-span-5 my-6 ">
@@ -55,10 +55,11 @@ const UpdateList = () => {
                 <div className=" text-xl font-semibold text-mainGreen">
                   Tháng 11/2023
                 </div>
-                <p className="mt-2 text-sm md:text-base text-justify ">
+                {/* 150 chars */}
+                <p className="mt-2 text-sm md:text-base text-justify "> 
                   Tháng 1 đầu xuân năm nay, team Nuôi Cây đã cùng các chú bộ đội
                   và người dân địa phương cùng nhau phối hợp dọp dẹp và cắt bỏ
-                  các cây cỏ dại, tạo điều kiện để trồng cây tại khu vực đó
+                  các cây cỏ
                 </p>
               </div>
             </div>

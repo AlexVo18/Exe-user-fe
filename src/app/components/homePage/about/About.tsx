@@ -5,7 +5,7 @@ const About = () => {
         <div className="grid grid-cols-2 xl:mx-40 lg:mx-20 my-10 gap-2">
           <div className="flex justify-center items-center">
             <img
-              src="src\assets\Logo_With_Name.svg"
+              src="src\assets\images\Logo_With_Name.svg"
               alt="Logo Img"
               className="md:w-60 w-52 sm:w-40"
             />

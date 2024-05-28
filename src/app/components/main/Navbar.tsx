@@ -1,7 +1,7 @@
 import { cn } from "@/app/lib/utils";
-import { MenuIcon, Package2Icon } from "lucide-react";
-import React, { useState } from "react";
-import { Link, LinkProps, To } from "react-router-dom";
+import { MenuIcon } from "lucide-react";
+import React, { startTransition } from "react";
+import { Link, LinkProps, Navigate, useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,7 +13,18 @@ import {
 import { Button } from "../ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Separator } from "../ui/separator";
-import DonateButton from "../homePage/button/DonateButton";
+import DonateButton from "../button/DonateButton";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 interface ListItemProps extends LinkProps {
   className?: string;
@@ -37,6 +48,8 @@ const Navbar = () => {
       href: "/news/life-style",
     },
   ];
+
+  const navigate = useNavigate()
 
   const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
     ({ className, title, children, to, ...props }, ref) => {
@@ -66,7 +79,7 @@ const Navbar = () => {
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 pt-2 pb-2 z-10">
       <nav className="hidden flex-col justify-between gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm w-full">
         <Link to={"/"}>
-          <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
+          <img src="src\assets\images\Logo_With_Name.svg" alt="Logo.img" />
         </Link>
         <NavigationMenu className="font-semibold">
           <NavigationMenuList>
@@ -101,13 +114,24 @@ const Navbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-
             <NavigationMenuItem>
               <Link to={"/sponsor"} className="ml-4">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
                   TRI ÂN
                 </NavigationMenuLink>
               </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <div className="ml-4 cursor-pointer" onClick={(e) => {
+                e.preventDefault()
+                startTransition(() => {
+                  navigate("/login")
+                })
+              }}>
+                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+                  ĐĂNG NHẬP
+                </NavigationMenuLink>
+              </div>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <div className="ml-4">

@@ -1,10 +1,10 @@
-import DonateButton from "../button/DonateButton";
+import DonateButton from "../../button/DonateButton";
 
 const Banner = () => {
   return (
     <div className="h-[600px]">
       <img
-        src="src\assets\Banner.jpg"
+        src="src\assets\images\Banner.jpg"
         alt="Banner.svg"
         className="w-full object-cover h-[600px] absolute -z-10"
       />
