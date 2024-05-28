@@ -10,7 +10,7 @@ module.exports = {
   prefix: "",
   theme: {
     screens: {
-      xs: "500px",
+      xs: "400px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
@@ -29,6 +29,8 @@ module.exports = {
       colors: {
         mainGreen: "#5C822D",
         mainBrown: "#59471F",
+        mainSkin: "#F2E5C5",
+        mainLighterSkin: "#f8f2e2 ",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

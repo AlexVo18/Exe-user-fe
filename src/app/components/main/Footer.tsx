@@ -20,7 +20,7 @@ const Footer = () => {
             <div className="flex gap-2 mt-2 text-mainBrown">
               <Link
                 to={
-                  "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+                  "https://www.facebook.com/people/Nu%C3%B4i-C%C3%A2y/61559682431421/"
                 }
                 target="_blank"
                 className="rounded-full bg-white p-2"
@@ -39,7 +39,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="text-white flex flex-col">
-            <div className="text-lg font-bold">VỀ CHÚNG TÔI</div>
+            <div className="text-lg font-bold">THÔNG TIN</div>
             <Separator className="my-2" />
             <div className="gap-1 flex flex-col">
               <Link

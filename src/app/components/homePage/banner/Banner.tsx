@@ -1,17 +1,17 @@
-import DonateButton from "../button/DonateButton";
+import DonateButton from "../../button/DonateButton";
 
 const Banner = () => {
   return (
     <div className="h-[600px]">
       <img
-        src="src\assets\Banner.jpg"
+        src="src\assets\images\Banner.jpg"
         alt="Banner.svg"
         className="w-full object-cover h-[600px] absolute -z-10"
       />
       <div className="grid md:grid-cols-2 z-10 text-white h-full">
         <div className="flex flex-col items-center justify-center">
-          <div className="lg:mx-20 xs:mx-10">
-            <div className="text-4xl font-semibold cursor-default md:text-start text-center">
+          <div className="lg:mx-20 xs:mx-10 cursor-default">
+            <div className="text-4xl font-semibold md:text-start text-center">
               ĐỒNG HÀNH CÙNG NUÔI CÂY
             </div>
             <div className="mt-6 text-xl leading-relaxed text-justify">
@@ -19,7 +19,7 @@ const Banner = () => {
               tốt đẹp hơn. Hãy cùng Nuôi Cây chung tay góp phần tạo tên 1 Việt
               Nam xanh hơn.
             </div>
-            <div className="mt-6">
+            <div className="flex mt-6 md:justify-start justify-center">
               <DonateButton
                 title="QUYÊN GÓP"
                 textColor="white"
