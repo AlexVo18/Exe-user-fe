@@ -49,7 +49,7 @@ const Navbar = () => {
     },
   ];
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
     ({ className, title, children, to, ...props }, ref) => {
@@ -122,16 +122,11 @@ const Navbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <div className="ml-4 cursor-pointer" onClick={(e) => {
-                e.preventDefault()
-                startTransition(() => {
-                  navigate("/login")
-                })
-              }}>
+              <Link to={"/login"} className="ml-4 cursor-pointer">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
                   ĐĂNG NHẬP
                 </NavigationMenuLink>
-              </div>
+              </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <div className="ml-4">
