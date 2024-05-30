@@ -1,28 +1,11 @@
-import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/app/components/ui/pagination";
-import { Separator } from "@/app/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -32,26 +15,10 @@ import {
   TableRow,
 } from "@/app/components/ui/table";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/app/components/ui/tabs";
-import {
-  Activity,
   ArrowUpRight,
   Calendar,
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  CreditCard,
   DollarSign,
-  File,
-  ListFilter,
-  MoreVertical,
   TreeDeciduous,
-  Truck,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 

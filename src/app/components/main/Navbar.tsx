@@ -1,7 +1,7 @@
 import { cn } from "@/app/lib/utils";
 import { MenuIcon } from "lucide-react";
-import React, { startTransition } from "react";
-import { Link, LinkProps, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, LinkProps } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,20 +11,17 @@ import {
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
 import { Button } from "../ui/button";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTrigger,
+} from "../ui/sheet";
 import { Separator } from "../ui/separator";
 import DonateButton from "../button/DonateButton";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
+import { Accordion, AccordionContent, AccordionTrigger } from "../ui/accordion";
+import { AccordionItem } from "@radix-ui/react-accordion";
 
 interface ListItemProps extends LinkProps {
   className?: string;
@@ -155,7 +152,7 @@ const Navbar = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <nav className="grid gap-2 text-lg font-medium">
+            <nav className="grid gap-2 text-base font-semibold">
               <SheetClose asChild>
                 <Link
                   className="text-muted-foreground hover:text-mainBrown transition-colors mt-2"
@@ -174,14 +171,49 @@ const Navbar = () => {
                 </Link>
               </SheetClose>
               <Separator />
-              <SheetClose asChild>
-                <Link
+              <SheetDescription asChild>
+                {/* <Link
                   className="text-muted-foreground hover:text-mainBrown transition-colors"
                   to={"/news"}
                 >
                   TIN TỨC
-                </Link>
-              </SheetClose>
+                </Link> */}
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="text-muted-foreground hover:text-mainBrown transition-colors font-semibold p-0 text-base hover:no-underline">
+                      TIN TỨC
+                    </AccordionTrigger>
+                    <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
+                      <div>
+                        <Link
+                          to={"/news"}
+                          className="text-muted-foreground hover:text-mainBrown transition-colors "
+                        >
+                          Cập nhật hằng tháng
+                        </Link>
+                      </div>
+                      <Separator />
+                      <div>
+                        <Link
+                          to={"/news"}
+                          className="text-muted-foreground hover:text-mainBrown transition-colors "
+                        >
+                          Truyền thông
+                        </Link>
+                      </div>
+                      <Separator />
+                      <div>
+                        <Link
+                          to={"/news"}
+                          className="text-muted-foreground hover:text-mainBrown transition-colors "
+                        >
+                          Nét sống xanh
+                        </Link>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </SheetDescription>
               <Separator />
               <SheetClose asChild>
                 <Link

@@ -1,15 +1,12 @@
 import {
-  Bell,
   Home,
   Newspaper,
   Package,
-  Package2,
   ShoppingCart,
   TreeDeciduous,
   Users,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "../ui/button";
 
 const Sidebar = () => {
   const currentUrl = useLocation();
@@ -59,7 +56,7 @@ const Sidebar = () => {
             <Users className="h-4 w-4" />
             Người dùng
           </Link>
-          <Link to={"user"} className={getAcitveLink("user")}>
+          <Link to={" "} className={getAcitveLink("trees")}>
             <TreeDeciduous className="h-4 w-4" />
             Cây trồng
           </Link>
@@ -67,7 +64,7 @@ const Sidebar = () => {
             <ShoppingCart className="h-4 w-4" />
             Giao dịch{" "}
           </Link>
-          <Link to={""} className={getAcitveLink("news")}>
+          <Link to={"news"} className={getAcitveLink("news")}>
             <Newspaper className="h-4 w-4" />
             Tin tức
           </Link>
