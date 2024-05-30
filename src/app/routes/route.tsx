@@ -4,7 +4,6 @@ import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
 import { Suspense, lazy } from "react";
 
-
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 const Home = lazy(() => import("../pages/Users/homePage/Home"));
 const About = lazy(() => import("../pages/Users/aboutPage/About"));

@@ -34,9 +34,7 @@ const Billboard = () => {
               </div>
               <div className="bg-white rounded-2xl w-full px-5 pb-2 pt-5 shadow mb-3">
                 <div className="flex justify-between">
-                  <p className="text-mainBrown font-bold text-xl">
-                    Sứ Giả Khe Nứt
-                  </p>
+                  <p className="text-mainBrown font-bold text-xl">ThangLV</p>
                   <div className="bg-mainGreen rounded-full text-white px-4 py-1 text-sm text-center">
                     4 cây
                   </div>
