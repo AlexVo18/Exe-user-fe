@@ -49,8 +49,6 @@ const Navbar = () => {
     },
   ];
 
-  const navigate = useNavigate();
-
   const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
     ({ className, title, children, to, ...props }, ref) => {
       return (
@@ -143,7 +141,7 @@ const Navbar = () => {
       </nav>
       <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
-          <img src="src\assets\Logo_With_Name.svg" alt="Logo.img" />
+          <img src="src\assets\images\Logo_With_Name.svg" alt="Logo.img" />
         </Link>
         <Sheet>
           <SheetTrigger asChild>

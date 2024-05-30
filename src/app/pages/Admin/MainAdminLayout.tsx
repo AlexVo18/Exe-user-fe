@@ -1,7 +1,5 @@
 import AdminNavBar from "@/app/components/main/AdminNavBar";
 import Sidebar from "@/app/components/main/Sidebar";
-import { Button } from "@/app/components/ui/button";
-import React from "react";
 import { Outlet } from "react-router-dom";
 
 const MainAdminLayout = () => {

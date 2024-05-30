@@ -12,7 +12,7 @@ const About = () => {
         </div>
         <div className="flex justify-center items-center">
           <img
-            src="src\assets\Logo_With_Name.svg"
+            src="src\assets\images\Logo_With_Name.svg"
             alt="Logo Img"
             className="w-60"
           />
