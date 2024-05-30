@@ -4,7 +4,7 @@ const LoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-[100vh] w-full ">
       <img
-        src="public\images\Login_Background.jpg"
+        src="images/Login_Background.jpg"
         alt=""
         className="object-cover absolute -z-10 h-[100vh] w-full"
       />

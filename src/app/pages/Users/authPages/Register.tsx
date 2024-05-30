@@ -67,7 +67,7 @@ const Register = () => {
           className="w-20 cursor-pointer"
         >
           <img
-            src="public\images\Logo_With_Name.svg"
+            src="images/Logo_With_Name.svg"
             alt="Logo.img"
             className="w-full"
           />

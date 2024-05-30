@@ -11,7 +11,7 @@ const UpdateList = () => {
           <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 mt-5 gap-2">
             <div className="flex justify-end items-center col-span-5 my-2">
               <img
-                src="public\images\Ex.svg"
+                src="images/Ex.svg"
                 alt="Logo Img"
                 className="w-60"
               />
@@ -38,7 +38,7 @@ const UpdateList = () => {
           <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 gap-2 ">
             <div className="flex justify-start order-last items-center col-span-5 my-2 ">
               <img
-                src="public\images\Ex.svg"
+                src="images/Ex.svg"
                 alt="Logo Img"
                 className=" w-60"
               />

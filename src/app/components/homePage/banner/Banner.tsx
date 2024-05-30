@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div className="h-[600px]">
       <img
-        src="public\images\Banner.jpg"
+        src="images/Banner.jpg"
         alt="Banner.svg"
         className="w-full object-cover h-[600px] absolute -z-10"
       />
