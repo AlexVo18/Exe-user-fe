@@ -10,7 +10,7 @@ const Login = () => {
       <CardHeader className="flex items-center justify-center px-40">
         <Link to={"/"} className="w-20 cursor-pointer">
           <img
-            src="src\assets\images\Logo_With_Name.svg"
+            src="public\images\Logo_With_Name.svg"
             alt="Logo.img"
             className="w-full"
           />
