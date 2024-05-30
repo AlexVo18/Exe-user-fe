@@ -1,5 +1,4 @@
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
-import React from "react";
 import { Separator } from "../ui/separator";
 import { Link } from "react-router-dom";
 

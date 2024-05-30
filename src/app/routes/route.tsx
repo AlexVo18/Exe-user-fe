@@ -1,7 +1,8 @@
-import { Route, Routes, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
+import AdminNewsLayout from "../pages/Admin/AdminNewsLayout";
 import { Suspense, lazy } from "react";
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
@@ -11,12 +12,14 @@ const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
-const Loading = lazy(() => import("../pages/loadingPage/Loading"));
+// const Loading = lazy(() => import("../pages/loadingPage/Loading"));
 
-const Login = lazy(() => import("../pages/authPages/Login"));
-const ForgotPassword = lazy(() => import("../pages/authPages/ForgotPassword"));
-const Recover = lazy(() => import("../pages/authPages/Recover"));
-const Register = lazy(() => import("../pages/authPages/Register"));
+const Login = lazy(() => import("../pages/Users/authPages/Login"));
+const ForgotPassword = lazy(
+  () => import("../pages/Users/authPages/ForgotPassword")
+);
+const Recover = lazy(() => import("../pages/Users/authPages/Recover"));
+const Register = lazy(() => import("../pages/Users/authPages/Register"));
 
 const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
 import UserPage from "../pages/Admin/userPage/UserPage";
@@ -31,7 +34,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <Home />
           </Suspense>
         ),
@@ -39,7 +42,7 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <About />
           </Suspense>
         ),
@@ -47,7 +50,7 @@ export const router = createBrowserRouter([
       {
         path: "/news/:type",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <News />
           </Suspense>
         ),
@@ -55,7 +58,7 @@ export const router = createBrowserRouter([
       {
         path: "/sponsor",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <Sponsor />
           </Suspense>
         ),
@@ -63,7 +66,7 @@ export const router = createBrowserRouter([
       {
         path: "/packs",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <Packs />
           </Suspense>
         ),
@@ -71,8 +74,16 @@ export const router = createBrowserRouter([
       {
         path: "/donation",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <Donation />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/loading",
+        element: (
+          <Suspense fallback={<></>}>
+            <></>
           </Suspense>
         ),
       },
@@ -81,7 +92,7 @@ export const router = createBrowserRouter([
   {
     path: "login",
     element: (
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <LoginLayout>
           <Login />
         </LoginLayout>
@@ -91,7 +102,7 @@ export const router = createBrowserRouter([
   {
     path: "register",
     element: (
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <LoginLayout>
           <Register />
         </LoginLayout>
@@ -101,7 +112,7 @@ export const router = createBrowserRouter([
   {
     path: "forgot",
     element: (
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <LoginLayout>
           <ForgotPassword />
         </LoginLayout>
@@ -111,7 +122,7 @@ export const router = createBrowserRouter([
   {
     path: "recover",
     element: (
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<></>}>
         <LoginLayout>
           <Recover />
         </LoginLayout>
@@ -125,7 +136,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <Dashboard />
           </Suspense>
         ),
@@ -133,10 +144,14 @@ export const router = createBrowserRouter([
       {
         path: "user",
         element: (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<></>}>
             <UserPage />
           </Suspense>
         ),
+      },
+      {
+        path: "news",
+        element: <AdminNewsLayout />,
       },
     ],
   },

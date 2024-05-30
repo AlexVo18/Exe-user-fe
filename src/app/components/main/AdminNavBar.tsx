@@ -1,16 +1,12 @@
-import React from "react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import {
   Badge,
   CircleUser,
   Home,
-  LineChart,
   Menu,
   Newspaper,
   Package,
-  Package2,
-  Search,
   ShoppingCart,
   Users,
 } from "lucide-react";

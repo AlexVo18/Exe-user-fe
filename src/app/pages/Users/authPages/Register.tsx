@@ -9,7 +9,7 @@ import {
 import { Label } from "@/app/components/ui/label";
 import { toast } from "@/app/components/ui/use-toast";
 import useCountdown from "@/app/hooks/useCountdown";
-import React, { startTransition, useEffect, useRef, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
