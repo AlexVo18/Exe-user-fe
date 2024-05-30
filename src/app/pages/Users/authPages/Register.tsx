@@ -49,7 +49,7 @@ const Register = () => {
     e.preventDefault();
     setOtpInput(true);
     setIsDisabled(false);
-    setOtp("")
+    setOtp("");
     setIsButtonDisabled(true);
     start(60);
   };
@@ -67,7 +67,7 @@ const Register = () => {
           className="w-20 cursor-pointer"
         >
           <img
-            src="src\assets\images\Logo_With_Name.svg"
+            src="public\images\Logo_With_Name.svg"
             alt="Logo.img"
             className="w-full"
           />
