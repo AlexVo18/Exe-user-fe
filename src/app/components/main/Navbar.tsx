@@ -130,6 +130,7 @@ const Navbar = () => {
                   textColor="white"
                   bgColor="bg-mainGreen"
                   link={"/donation"}
+                  isDonate={true}
                 />
               </div>
             </NavigationMenuItem>
@@ -239,6 +240,7 @@ const Navbar = () => {
                     textColor="white"
                     bgColor="bg-mainGreen"
                     link={"/donation"}
+                    isDonate={true}
                   />
                 </Link>
               </SheetClose>

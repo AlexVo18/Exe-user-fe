@@ -23,6 +23,7 @@ const Register = lazy(() => import("../pages/Users/authPages/Register"));
 
 const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
 import UserPage from "../pages/Admin/userPage/UserPage";
+import Error from "../pages/Users/errorPage/Error";
 
 // ********************************
 
@@ -126,6 +127,14 @@ export const router = createBrowserRouter([
         <LoginLayout>
           <Recover />
         </LoginLayout>
+      </Suspense>
+    ),
+  },
+  {
+    path: "error",
+    element: (
+      <Suspense fallback={<></>}>
+        <Error />
       </Suspense>
     ),
   },

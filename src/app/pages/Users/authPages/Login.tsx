@@ -1,10 +1,30 @@
+import User from "@/app/api/APIs/user";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/app/components/ui/card";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  const handleOnSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    console.log(username, password);
+    if (username !== undefined && password !== undefined) {
+      const response = await User.login({ username, password });
+      if (response) {
+        console.log(response);
+      }
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <Card className="mx-auto max-w-sm bg-opacity-90">
       <CardHeader className="flex items-center justify-center px-40">
@@ -20,13 +40,27 @@ const Login = () => {
         <div className="grid gap-4">
           <div className="grid gap-2 text-mainBrown">
             <Label htmlFor="username">Tên Đăng Nhập</Label>
-            <Input id="username" type="text" required />
+            <Input
+              id="username"
+              type="text"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              required
+            />
           </div>
           <div className="grid gap-2 text-mainBrown">
             <div className="flex items-center">
               <Label htmlFor="password">Mật Khẩu</Label>
             </div>
-            <Input id="password" type="password" required />
+            <Input
+              id="password"
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            />
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
@@ -41,6 +75,7 @@ const Login = () => {
           <Button
             type="submit"
             className="w-full bg-mainGreen hover:bg-mainBrown"
+            onClick={(e) => handleOnSubmit(e)}
           >
             Đăng Nhập
           </Button>
