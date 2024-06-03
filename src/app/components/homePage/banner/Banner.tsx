@@ -26,6 +26,7 @@ const Banner = () => {
                 bgColor="bg-mainGreen"
                 link={"/donation"}
                 size="big"
+                isDonate={true}
               />
             </div>
           </div>

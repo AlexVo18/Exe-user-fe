@@ -6,7 +6,7 @@ import { Label } from "@/app/components/ui/label";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../loadingPage/Loading";
-import { Eye, EyeOff, X } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useFormik } from "formik";
 import { ErrorMessageLogin } from "@/app/constants/errorMessages";
 import { LoginData, UserData } from "@/app/models/auth.models";

@@ -1,19 +1,5 @@
 import { RecentTree } from "@/app/models/tree.models";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Table } from "lucide-react";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table";
+import { TableCell, TableRow } from "../ui/table";
 
 interface Props {
   recentTreeList: RecentTree[];

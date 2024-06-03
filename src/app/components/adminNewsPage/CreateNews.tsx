@@ -12,7 +12,6 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useFormik } from "formik";
 import {
   Select,
   SelectContent,
@@ -21,13 +20,8 @@ import {
   SelectValue,
 } from "../ui/select";
 
-// const validate = (value) {
-
-// }
-
 const CreateNews = () => {
   const [value, setValue] = useState();
-  const [ex, setEx] = useState();
   const [picture, setPicture] = useState<string | null>(null);
 
   const setFileToBase = (file: Blob) => {

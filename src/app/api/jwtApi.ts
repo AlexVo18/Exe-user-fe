@@ -1,7 +1,4 @@
-import axios, { AxiosError } from "axios";
-import { jwtDecode } from "jwt-decode";
-import baseApi from "./baseApi";
-import { router } from "../routes/route";
+import axios from "axios";
 
 const baseURL = "https://nuoicay.azurewebsites.net";
 

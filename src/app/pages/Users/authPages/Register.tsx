@@ -8,7 +8,7 @@ import {
 } from "@/app/components/ui/input-otp";
 import { Label } from "@/app/components/ui/label";
 import { toast } from "@/app/components/ui/use-toast";
-import { toastTop } from "@/app/constants/toastTop";
+import { toastTop } from "@/app/constants/cssContstants";
 import useCountdown from "@/app/hooks/useCountdown";
 import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
