@@ -13,7 +13,7 @@ const Billboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     try {
-      handleGetDonationList();
+      getDonationList();
     } catch (error) {
       customToast({
         icon: <WarningIcon />,
@@ -22,7 +22,7 @@ const Billboard = () => {
       });
     }
   }, []);
-  const handleGetDonationList = async () => {
+  const getDonationList = async () => {
     try {
       const responseTopList = await Donation.getTopDonations();
       const responseNewList = await Donation.getNewestDonations();

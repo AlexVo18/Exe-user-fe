@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { toastTop } from "@/app/constants/toastTop";
+import { toastTop } from "@/app/constants/cssContstants";
 import { toast } from "../components/ui/use-toast";
 import ToastDescription from "../components/toast/ToastDescription";
 

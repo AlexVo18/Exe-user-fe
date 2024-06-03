@@ -11,9 +11,9 @@ const MainAdminLayout = ({ children }: Props) => {
       <div className="hidden border-r bg-muted/40 md:block">
         <Sidebar />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         <AdminNavBar />
-        {children}
+        <div className="relative">{children}</div>
       </div>
     </div>
   );

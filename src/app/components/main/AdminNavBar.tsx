@@ -10,7 +10,7 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -25,8 +25,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useContext } from "react";
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 const AdminNavBar = () => {
+  const { logout } = useContext(AuthContext);
+  const currentUrl = useLocation();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logout();
+    if (
+      currentUrl.pathname.includes("donation") ||
+      currentUrl.pathname.includes("admin")
+    ) {
+      navigate("/");
+    }
+  };
+
   return (
     <header className="flex h-14 items-center justify-between md:justify-end gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -116,8 +131,11 @@ const AdminNavBar = () => {
               <Link to={"/"}>Về Trang Chính</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link to={"/"}>Thoát</Link>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => handleLogOut()}
+            >
+              <div>Thoát</div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

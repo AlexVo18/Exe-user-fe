@@ -1,5 +1,12 @@
 import { cn } from "@/app/lib/utils";
-import { LogOut, MenuIcon, Settings, TreeDeciduous, User } from "lucide-react";
+import {
+  LogOut,
+  MenuIcon,
+  Settings,
+  TreeDeciduous,
+  User,
+  UserCog,
+} from "lucide-react";
 import React, { useContext } from "react";
 import { Link, LinkProps, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -150,6 +157,14 @@ const Navbar = () => {
                         <div>{userInfo.username}</div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
+                      {userInfo.roleID === 1 ? (
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <UserCog className="mr-2" size={16} />
+                          <Link to={"/admin"}>Sang Admin</Link>
+                        </DropdownMenuItem>
+                      ) : (
+                        <></>
+                      )}
                       <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
                         <Settings className="mr-2" size={16} />
                         <Link to={""}>Cài đặt</Link>
