@@ -1,6 +1,6 @@
 import { cn } from "@/app/lib/utils";
 import { MenuIcon } from "lucide-react";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, LinkProps } from "react-router-dom";
 import {
   NavigationMenu,
@@ -22,6 +22,7 @@ import { Separator } from "../ui/separator";
 import DonateButton from "../button/DonateButton";
 import { Accordion, AccordionContent, AccordionTrigger } from "../ui/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 interface ListItemProps extends LinkProps {
   className?: string;
@@ -31,6 +32,7 @@ interface ListItemProps extends LinkProps {
 }
 
 const Navbar = () => {
+  const { userInfo } = useContext(AuthContext);
   const newsType: { title: string; href: string }[] = [
     {
       title: "Cập nhật hằng tháng",
@@ -117,11 +119,15 @@ const Navbar = () => {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to={"/login"} className="ml-4 cursor-pointer">
-                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
-                  ĐĂNG NHẬP
-                </NavigationMenuLink>
-              </Link>
+              {userInfo ? (
+                <div>{userInfo.username}</div>
+              ) : (
+                <Link to={"/login"} className="ml-4 cursor-pointer">
+                  <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+                    ĐĂNG NHẬP
+                  </NavigationMenuLink>
+                </Link>
+              )}
             </NavigationMenuItem>
             <NavigationMenuItem>
               <div className="ml-4">

@@ -5,7 +5,7 @@ export interface UserData {
   username: string;
   phoneNumber: string;
   roleID: number;
-  token: string;
+  token?: string;
   status: number;
 }
 

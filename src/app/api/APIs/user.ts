@@ -13,7 +13,7 @@ const User = {
   login: (input: LoginData) =>
     requests.baseApiPost("/login", {
       username: input.username,
-      pasword: input.password,
+      password: input.password,
     }),
 };
 

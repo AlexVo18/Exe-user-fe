@@ -8,6 +8,7 @@ import {
 } from "@/app/components/ui/input-otp";
 import { Label } from "@/app/components/ui/label";
 import { toast } from "@/app/components/ui/use-toast";
+import { toastTop } from "@/app/constants/toastTop";
 import useCountdown from "@/app/hooks/useCountdown";
 import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -34,8 +35,7 @@ const Register = () => {
       toast({
         duration: 2000,
         description: "Works",
-        className:
-          "top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4",
+        className: toastTop,
       });
     }
   };
