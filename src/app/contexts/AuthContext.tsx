@@ -25,15 +25,14 @@ export const AuthContext = createContext<AuthContextType>({
 const AuthProvider = ({ children }: Props) => {
   const [userInfo, setUserInfo] = useState<UserData | undefined>();
   const [token, setToken] = useState<string | undefined>();
-  const [userLoading, setUserLoading] = useState<boolean>(false);
+  const [userLoading, setUserLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getLocalData = async () => {
       try {
-        setUserLoading(true);
         const storageToken = localStorage.getItem("access_token");
         const storageUser = localStorage.getItem("user");
-        console.log("token:", storageToken)
+        console.log("storageUser:", storageUser);
         if (checkIsTokenExp(storageToken)) {
           logout();
         } else {
@@ -60,7 +59,6 @@ const AuthProvider = ({ children }: Props) => {
   const checkIsTokenExp = (token: string | null) => {
     if (token) {
       const decodedToken = jwtDecode(token) as { exp: number };
-      console.log("check status:", decodedToken.exp < Date.now() / 1000);
       return decodedToken.exp < Date.now() / 1000;
     }
     return false;

@@ -1,4 +1,4 @@
-import { Check, X } from "lucide-react";
+import { Check, CircleAlert, X } from "lucide-react";
 
 export const ErrorIcon = () => (
   <X
@@ -10,6 +10,13 @@ export const ErrorIcon = () => (
 export const SuccessIcon = () => (
   <Check
     className="text-white rounded-full bg-green-400 p-1 font-bold text-4xl"
+    size={26}
+  />
+);
+
+export const WarningIcon = () => (
+  <CircleAlert
+    className="text-white rounded-full bg-red-600 p-1 font-bold text-4xl"
     size={26}
   />
 );
