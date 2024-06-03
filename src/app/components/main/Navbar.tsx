@@ -1,7 +1,14 @@
 import { cn } from "@/app/lib/utils";
-import { MenuIcon } from "lucide-react";
-import React from "react";
-import { Link, LinkProps } from "react-router-dom";
+import {
+  LogOut,
+  MenuIcon,
+  Settings,
+  TreeDeciduous,
+  User,
+  UserCog,
+} from "lucide-react";
+import React, { useContext } from "react";
+import { Link, LinkProps, useLocation, useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,6 +29,15 @@ import { Separator } from "../ui/separator";
 import DonateButton from "../button/DonateButton";
 import { Accordion, AccordionContent, AccordionTrigger } from "../ui/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
+import { AuthContext } from "@/app/contexts/AuthContext";
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 interface ListItemProps extends LinkProps {
   className?: string;
@@ -31,6 +47,9 @@ interface ListItemProps extends LinkProps {
 }
 
 const Navbar = () => {
+  const { userInfo, logout } = useContext(AuthContext);
+  const currentUrl = useLocation();
+  const navigate = useNavigate();
   const newsType: { title: string; href: string }[] = [
     {
       title: "Cập nhật hằng tháng",
@@ -45,6 +64,12 @@ const Navbar = () => {
       href: "/news/life-style",
     },
   ];
+  const handleLogOut = () => {
+    logout();
+    if (currentUrl.pathname.includes("donation")) {
+      navigate("/");
+    }
+  };
 
   const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
     ({ className, title, children, to, ...props }, ref) => {
@@ -116,23 +141,69 @@ const Navbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to={"/login"} className="ml-4 cursor-pointer">
-                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
-                  ĐĂNG NHẬP
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <div className="ml-4">
-                <DonateButton
-                  title="QUYÊN GÓP"
-                  textColor="white"
-                  bgColor="bg-mainGreen"
-                  link={"/donation"}
-                />
-              </div>
-            </NavigationMenuItem>
+
+            {userInfo ? (
+              <>
+                <NavigationMenuItem>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <div className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold ml-4 cursor-pointer">
+                        TÀI KHOẢN
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-32">
+                      <DropdownMenuLabel className="flex items-center">
+                        <User className="mr-2" size={16} />
+                        <div>{userInfo.username}</div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      {userInfo.roleID === 1 ? (
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <UserCog className="mr-2" size={16} />
+                          <Link to={"/admin"}>Sang Admin</Link>
+                        </DropdownMenuItem>
+                      ) : (
+                        <></>
+                      )}
+                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                        <Settings className="mr-2" size={16} />
+                        <Link to={""}>Cài đặt</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                        <TreeDeciduous className="mr-2" size={16} />
+                        <Link to={""}>Xem Cây</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer"
+                        onClick={() => handleLogOut()}
+                      >
+                        <LogOut className="mr-2" size={16} />
+                        <div>Thoát</div>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <div className="ml-4">
+                    <DonateButton
+                      title="QUYÊN GÓP"
+                      textColor="white"
+                      bgColor="bg-mainGreen"
+                      link={"/donation"}
+                      isDonate={true}
+                    />
+                  </div>
+                </NavigationMenuItem>
+              </>
+            ) : (
+              <NavigationMenuItem>
+                <Link to={"/login"} className="ml-4 cursor-pointer">
+                  <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+                    ĐĂNG NHẬP
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
@@ -172,12 +243,6 @@ const Navbar = () => {
               </SheetClose>
               <Separator />
               <SheetDescription asChild>
-                {/* <Link
-                  className="text-muted-foreground hover:text-mainBrown transition-colors"
-                  to={"/news"}
-                >
-                  TIN TỨC
-                </Link> */}
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
                     <AccordionTrigger className="text-muted-foreground hover:text-mainBrown transition-colors font-semibold p-0 text-base hover:no-underline">
@@ -239,6 +304,7 @@ const Navbar = () => {
                     textColor="white"
                     bgColor="bg-mainGreen"
                     link={"/donation"}
+                    isDonate={true}
                   />
                 </Link>
               </SheetClose>

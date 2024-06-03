@@ -23,6 +23,9 @@ const Register = lazy(() => import("../pages/Users/authPages/Register"));
 
 const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
 import UserPage from "../pages/Admin/userPage/UserPage";
+import Error from "../pages/Users/errorPage/Error";
+import ProtectedRoute from "./ProtectedRoute";
+import roles from "../constants/role";
 
 // ********************************
 
@@ -130,8 +133,22 @@ export const router = createBrowserRouter([
     ),
   },
   {
+    path: "error",
+    element: (
+      <Suspense fallback={<></>}>
+        <Error />
+      </Suspense>
+    ),
+  },
+  {
     path: "admin",
-    element: <MainAdminLayout />,
+    element: (
+      <MainAdminLayout>
+        <Suspense fallback={<></>}>
+          <ProtectedRoute allowedRoles={[roles.ADMIN]} />
+        </Suspense>
+      </MainAdminLayout>
+    ),
     children: [
       {
         index: true,
