@@ -58,4 +58,7 @@ export const ErrorMessageCreateNews = {
     required: "Thumbnail đang trống",
     invalid: "Dữ liệu vừa gửi không phải hình ảnh",
   },
+  type: {
+    required: "Thể loại tin tức đang trống",
+  },
 };

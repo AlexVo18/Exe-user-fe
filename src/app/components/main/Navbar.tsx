@@ -97,6 +97,7 @@ const Navbar = () => {
   );
   return (
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 pt-2 pb-2 z-10">
+      {/* Navbar thường */}
       <nav className="hidden flex-col justify-between gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm w-full">
         <Link to={"/"}>
           <img src="images/Logo_With_Name.svg" alt="Logo.img" />
@@ -134,14 +135,13 @@ const Navbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <Link to={"/sponsor"} className="ml-4">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
                   TRI ÂN
                 </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem>
-
+            </NavigationMenuItem> */}
             {userInfo ? (
               <>
                 <NavigationMenuItem>
@@ -207,6 +207,8 @@ const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
+
+      {/* Navbar mobile */}
       <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
           <img src="images/Logo_With_Name.svg" alt="Logo.img" />
@@ -289,16 +291,64 @@ const Navbar = () => {
                 </Link>
               </SheetClose>
               <Separator />
-              <SheetClose asChild>
+              {/* <SheetClose asChild>
                 <Link
                   className="text-muted-foreground hover:text-mainBrown transition-colors"
                   to={"/packs"}
                 >
                   TRI ÂN
                 </Link>
-              </SheetClose>
+              </SheetClose> */}
+              {userInfo ? (
+                <SheetDescription asChild>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-muted-foreground hover:text-mainBrown transition-colors font-semibold p-0 text-base hover:no-underline">
+                        TIN TỨC
+                      </AccordionTrigger>
+                      <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
+                        <SheetClose asChild>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Cập nhật hằng tháng
+                          </Link>
+                        </SheetClose>
+                        <Separator />
+                        <SheetClose asChild>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Truyền thông
+                          </Link>
+                        </SheetClose>
+                        <Separator />
+                        <SheetClose asChild>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Nét sống xanh
+                          </Link>
+                        </SheetClose>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </SheetDescription>
+              ) : (
+                <SheetClose asChild>
+                  <Link
+                    className="text-muted-foreground hover:text-mainBrown transition-colors"
+                    to={"/login"}
+                  >
+                    ĐĂNG NHẬP
+                  </Link>
+                </SheetClose>
+              )}
               <SheetClose asChild className="flex justify-center">
-                <Link to={"/donation"}>
+                <SheetClose >
                   <DonateButton
                     title="QUYÊN GÓP"
                     textColor="white"
@@ -306,7 +356,7 @@ const Navbar = () => {
                     link={"/donation"}
                     isDonate={true}
                   />
-                </Link>
+                </SheetClose>
               </SheetClose>
             </nav>
           </SheetContent>

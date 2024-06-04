@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
-import AdminNewsLayout from "../pages/Admin/AdminNewsLayout";
-import { Suspense, lazy } from "react";
+import AdminNewsLayout from "../pages/Admin/newsPage/AdminNewsLayout";
+
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 const Home = lazy(() => import("../pages/Users/homePage/Home"));

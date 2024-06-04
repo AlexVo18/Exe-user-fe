@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import DonateButton from "../../button/DonateButton";
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 const Banner = () => {
+  const { userInfo } = useContext(AuthContext);
   return (
     <div className="h-[600px]">
       <img
@@ -24,7 +27,7 @@ const Banner = () => {
                 title="QUYÊN GÓP"
                 textColor="white"
                 bgColor="bg-mainGreen"
-                link={"/donation"}
+                link={userInfo ? "/donation" : "/login"}
                 size="big"
                 isDonate={true}
               />
