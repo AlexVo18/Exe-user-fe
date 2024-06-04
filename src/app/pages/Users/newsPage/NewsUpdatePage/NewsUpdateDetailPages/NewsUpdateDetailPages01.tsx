@@ -1,7 +1,7 @@
 import Billboard from "@/app/components/homePage/billboard/Billboard"
 
 
-function DetailPages01() {
+function NewsUpdateDetailPages01() {
     return (
 
         <div className="">
@@ -42,4 +42,4 @@ function DetailPages01() {
     )
 }
 
-export default DetailPages01
+export default NewsUpdateDetailPages01

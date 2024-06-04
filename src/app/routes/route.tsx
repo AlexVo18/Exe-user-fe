@@ -12,7 +12,7 @@ const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
-const DetailPage = lazy(() => import("../pages/Users/newsPage/NewsUpdatePage/NewsUpdateDetailPages/NewsUpdateDetailPage"));
+const DetailPage = lazy(() => import("../pages/Users/newsPage/RouteNewsUpdate"));
 
 // const Loading = lazy(() => import("../pages/loadingPage/Loading"));
 

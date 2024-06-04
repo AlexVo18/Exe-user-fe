@@ -1,7 +1,7 @@
 import Billboard from "@/app/components/homePage/billboard/Billboard"
 
 
-function DetailPages02() {
+function NewsUpdateDetailPages02() {
     return (
         <div className="">
             <div className=" my-20 flex flex-col md:flex-row justify-center overflow-hidden ">
@@ -65,4 +65,4 @@ function DetailPages02() {
     )
 }
 
-export default DetailPages02
+export default NewsUpdateDetailPages02

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import NewLifeStylePage from "./NewsLifeStylePage/NewLifeStylePage";
 import NewsUpdatePage from "./NewsUpdatePage/NewsUpdatePage";
 import NewsMediaPage from "./NewsMediaPage/NewsMediaPage";
+import ErrorComponent from "./ErrorComponent";
 
 
 const News = () => {
@@ -15,7 +16,7 @@ const News = () => {
     case 'life-style':
       return <NewLifeStylePage />;
     default:
-      return <h1>Unknown news type</h1>;
+      return <ErrorComponent />;
   }
 }
 

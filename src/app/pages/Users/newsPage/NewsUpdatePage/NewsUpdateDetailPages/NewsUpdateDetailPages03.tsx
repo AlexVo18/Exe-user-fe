@@ -1,6 +1,6 @@
 import Billboard from "@/app/components/homePage/billboard/Billboard"
 
-function DetaiPages03() {
+function NewsUpdateDetailPages03() {
     return (
         <div className="">
             <div className="my-20 flex flex-col md:flex-row justify-center overflow-hidden ">
@@ -50,4 +50,4 @@ function DetaiPages03() {
     )
 }
 
-export default DetaiPages03
+export default NewsUpdateDetailPages03
