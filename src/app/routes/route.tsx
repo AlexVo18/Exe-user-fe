@@ -12,6 +12,8 @@ const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
+const DetailPage = lazy(() => import("../pages/Users/newsPage/NewsUpdatePage/NewsUpdateDetailPages/NewsUpdateDetailPage"));
+
 // const Loading = lazy(() => import("../pages/loadingPage/Loading"));
 
 const Login = lazy(() => import("../pages/Users/authPages/Login"));
@@ -52,6 +54,13 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<></>}>
             <News />
+          </Suspense>
+        ),
+      }, {
+        path: "/news/:type/:id",
+        element: (
+          <Suspense fallback={<></>}>
+            <DetailPage />
           </Suspense>
         ),
       },

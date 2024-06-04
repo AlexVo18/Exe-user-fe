@@ -1,21 +1,23 @@
 import { Separator } from "../../../../components/ui/separator";
-import React from 'react';
-import SlideNewsPages from "../SlideNewsPages";
-interface News {
-  id: number;
-  title: string;
-  content: string;
+import { Link } from 'react-router-dom';
+
+import React, { useEffect, useState } from 'react'; interface News {
+  newsID: number;
+  newsTitle: string;
+  newsSummary: string;
+  thumbnail: string;
+  newsDescription: string;
+  dateCreate: string;
+  details: string;
 }
 const NewsUpdatePage: React.FC = () => {
-  const newsUpdates: News[] = [
-    { id: 1, title: 'News 1', content: 'This is news 1' },
-    { id: 2, title: 'News 2', content: 'This is news 2' },
-    { id: 3, title: 'News 3', content: 'This is news 3' },
-    { id: 4, title: 'News 4', content: 'This is news 4' },
-    { id: 5, title: 'News 5', content: 'This is news 5' },
-    { id: 6, title: 'News 6', content: 'This is news 6' },
-    { id: 7, title: 'News 7', content: 'This is news 7' },
-  ];
+  const [newsUpdates, setNewsUpdates] = useState<News[]>([]);
+  useEffect(() => {
+    fetch('https://nuoicay.azurewebsites.net/api/home/news/type/1')
+      .then(response => response.json())
+      .then(data => setNewsUpdates(data));
+  }, []);
+
   return (
     <div className="mt-auto">
       <div className='container mx-auto'>
@@ -24,49 +26,48 @@ const NewsUpdatePage: React.FC = () => {
         </div>
         <div className="mx-30 lg:mx-24  border-t border-gray-400"></div>
         {/* //News heading */}
-        <div className="grid grid-cols-1 lg:grid-cols-2  xl:mx-40 lg:mx-30 ">
-
-          <div className="row-span-1 lg:row-span-2  lg:border-r-2 border-gray-300  mt-6 gap-6 pr-0 lg:pr-3 ">
-            <img src="https://btnmt.1cdn.vn/thumbs/900x600/2024/05/30/anh-2.jpg" alt="anh"
-              className="inline object-cover w-full min-h-10" />
-            <Separator />
-            <p className="text-2xl text-center  hover:text-green-500 font-semibold text-size">Bình Thuận: Tăng cường quản lý bảo vệ rừng</p>
-            <p>(TN&MT) – Cơ quan chức năng trên địa bàn tỉnh Bình Thuận đã triển khai thực hiện nhiều biện pháp ngăn chặn, xử lý tình trạng phá rừng nhằm góp phần nâng cao hiệu quả trong công tác quản lý.</p>
+        <div className="grid grid-cols-1 lg:grid-flow-row-dense lg:grid-cols-3 lg:grid-rows-2 gap-4 xl:mx-40 lg:mx-30 ">
+          <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:border-r-2 border-gray-300 mt-6 gap-6 pr-0 lg:pr-3 pb-0 lg:pb-10">
+            <Link to="Binh-Thuan-tang-cuong-quan-ly-bao-ve-rung">
+              <img src="https://btnmt.1cdn.vn/thumbs/900x600/2024/05/30/anh-2.jpg" alt="anh"
+                className="inline object-cover w-full min-h-10" />
+              <Separator />
+              <p className="text-2xl text-center hover:text-green-500 font-semibold ">Bình Thuận: Tăng cường quản lý bảo vệ rừng</p>
+              <p className="mt-2">(TN&MT) – Cơ quan chức năng trên địa bàn tỉnh Bình Thuận đã triển khai thực hiện nhiều biện pháp ngăn chặn, xử lý tình trạng phá rừng nhằm góp phần nâng cao hiệu quả trong công tác quản lý.</p>
+            </Link>
           </div>
-          <div className="mt-6 pl-0 lg:pl-3">
-            <h2 className="text-2xl font-semibold">img</h2>
-            <Separator />
-            <p className="text-lg">content</p>
-          </div>
-          <div className="border-2 border-gray-400 p-10 mt-6">
-            <h2 className="text-2xl font-semibold">img</h2>
-            <Separator />
-            <p className="text-lg">content</p>
-          </div>
-
+          <Link to="Lang-Son-quan-ly-bao-ve-tai-nguyen-rung-tao-sinh-ke-ben-vung">
+            <div className="mt-6">
+              <img src="https://btnmt.1cdn.vn/thumbs/540x360/2024/05/23/20240522_081400.jpg" alt="anh" className="inline object-cover w-full min-h-10" />
+              <h2 className="text-xl hover:text-green-500 font-semibold">Lạng Sơn: Quản lý, bảo vệ tài nguyên rừng, tạo sinh kế bền vững</h2>
+            </div>
+          </Link>
+          <Link to="bao-yen-lao-cai-quan-ly-rung-ben-vung-huong-den-khai-thac-tin-chi-carbon">
+            <div className="mt-2">
+              <img src="https://btnmt.1cdn.vn/thumbs/540x360/2024/05/10/rung-3.jpg" alt="anh" className="inline object-cover w-full min-h-10" />
+              <h2 className="text-xl hover:text-green-500 font-semibold">Bảo Yên(Lào Cai): Quản lý rừng bền vững hướng đến khai thác tín chỉ carbon</h2>
+            </div>
+          </Link>
         </div>
 
         <div className="mx-30 lg:mx-24  border-t border-gray-400"></div>
         {/* //OrderNews */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:mx-40 lg:mx-30 my-10 gap-2">
-          {newsUpdates.map((news, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-4 xl:mx-40 lg:mx-30 my-10 gap-2">
+          {newsUpdates.map(news => (
             <div
-              key={news.id}
-              className={`border-2 border-gray-400 p-5 '}`}
+              key={news.newsID}
+              className={` p-5 '}`}
             >
-              <h2 className="text-2xl font-semibold">{news.title}</h2>
+              <img src={news.thumbnail} alt="anh" />
+              <h2 className="text-2xl font-semibold">{news.newsTitle}</h2>
               <Separator />
-              <p className="text-lg">{news.content}</p>
+              <p className="text-lg">{news.newsSummary}</p>
             </div>
           ))}
         </div>
-        {/* SlideNews */}
-        <div className="flex flex-wrap">
-          <SlideNewsPages newsUpdates={newsUpdates} />
-        </div>
       </div>
 
-    </div>
+    </div >
   );
 }
 
