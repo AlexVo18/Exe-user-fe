@@ -32,14 +32,14 @@ const NewsMediaPage: React.FC = () => {
     }, []);
 
     return (
-        <div className='m-auto'>
+        <div className='mx-0 lg:mx-auto'>
             <div className="text-4xl font-semibold text-center text-mainBrown mt-10 mb-10">
                 TRUYỀN THÔNG
             </div>
             <div className="mx-30 lg:mx-24  border-t border-gray-400"></div>
             {/* //News heading */}
-            <div className="grid grid-cols-1 lg:grid-flow-row-dense lg:grid-cols-3 lg:grid-rows-2 gap-4 xl:mx-40 lg:mx-30 ">
-                <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:border-r-2 border-gray-300 mt-6 gap-6 pr-0 lg:pr-3 pb-0 lg:pb-10">
+            <div className="grid grid-cols-1 lg:grid-flow-row-dense lg:grid-cols-3 lg:grid-rows-2 gap-4 mx:auto xl:mx-40 lg:mx-30  ">
+                <div className="row-span-1 lg:row-span-2 lg:col-span-2 lg:border-r-2 border-gray-300 mx-2 mt-6 gap-6 pr-0 lg:pr-3 pb-0 lg:pb-10">
                     <Link to="rung-xanh-len-voi-muc-tieu-trong-25ha-rung-noi-Hoa_Binh-Son-La">
                         <img src="https://btnmt.1cdn.vn/thumbs/540x360/2024/06/03/dai-dien-cac-doanh-nghiep-tai-tro-trao-tang-cay-bieu-trung-cho-dia-phuong.jpg" alt="anh"
                             className="inline object-cover w-full min-h-10" />
@@ -49,20 +49,20 @@ const NewsMediaPage: React.FC = () => {
                     </Link>
                 </div>
                 <Link to="thuc-day-hanh-dong-vi-khong-khi-sach-thanh-pho-xanh-tai-Ha-Noi">
-                    <div className="mt-6">
+                    <div className="mx-2 mt-2">
                         <img src="https://btnmt.1cdn.vn/2024/06/03/toa-dam-khong-khi-sach-ha-noi1.jpg" alt="anh" className="inline object-cover w-full min-h-10" />
                         <h2 className="text-xl mt-2 hover:text-green-500 font-semibold">Thúc đẩy hành động vì không khí sạch, thành phố xanh tại Hà Nội</h2>
                     </div>
                 </Link>
                 <Link to="thuc-day-vai-tro-luc-luong-phi-chinh-thuc-trong-thuc-hien-EPR">
-                    <div className="mt-2">
+                    <div className="mx-2 mt-2">
                         <img src="https://btnmt.1cdn.vn/2024/03/08/f0370c3933449f1ac655.jpg" alt="anh" className="inline object-cover w-full min-h-10" />
                         <h2 className="text-xl mt-2 hover:text-green-500 font-semibold">Thúc đẩy vai trò của lực lượng phi chính thức trong thực hiện EPR</h2>
                     </div>
                 </Link>
             </div>
 
-            <div className="mx-30 lg:mx-24  border-t border-gray-400"></div>
+            <div className="invisible lg:visible mx-30 lg:mx-24  border-t border-gray-400 mb-0 lg:mb-20"></div>
             {/* //OrderNews */}
 
             {/* <div className="grid grid-cols-1 lg:grid-cols-4 xl:mx-40 lg:mx-30 my-10 gap-2">
@@ -80,21 +80,6 @@ const NewsMediaPage: React.FC = () => {
                 ))}
             </div> */}
 
-            <div>
-                <NewsUpdatePageComponents />
-            </div>
-            <div>
-                <NewsLifeStylePageComponents />
-            </div>
-            <div className="my-5">
-                <NewsMediaPageComponents />
-            </div>
-
-            <div className=" flex justify-center items-center mx-44 my-10 border rounded-3xl  bg-lime-400 py-5">
-                <div >
-                    <Billboard />
-                </div>
-            </div>
         </div>
 
     );

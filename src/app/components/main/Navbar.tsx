@@ -186,7 +186,7 @@ const Navbar = () => {
                     <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
                       <div>
                         <Link
-                          to={"/news"}
+                          to={"/news/update"}
                           className="text-muted-foreground hover:text-mainBrown transition-colors "
                         >
                           Cập nhật hằng tháng
@@ -195,7 +195,7 @@ const Navbar = () => {
                       <Separator />
                       <div>
                         <Link
-                          to={"/news"}
+                          to={"/news/media"}
                           className="text-muted-foreground hover:text-mainBrown transition-colors "
                         >
                           Truyền thông
@@ -204,7 +204,7 @@ const Navbar = () => {
                       <Separator />
                       <div>
                         <Link
-                          to={"/news"}
+                          to={"/news/life-style"}
                           className="text-muted-foreground hover:text-mainBrown transition-colors "
                         >
                           Nét sống xanh
