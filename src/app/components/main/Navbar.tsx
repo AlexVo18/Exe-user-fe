@@ -66,7 +66,10 @@ const Navbar = () => {
   ];
   const handleLogOut = () => {
     logout();
-    if (currentUrl.pathname.includes("donation")) {
+    if (
+      currentUrl.pathname.includes("donation") ||
+      currentUrl.pathname.includes("tree")
+    ) {
       navigate("/");
     }
   };
@@ -158,21 +161,27 @@ const Navbar = () => {
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       {userInfo.roleID === 1 ? (
-                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                          <UserCog className="mr-2" size={16} />
-                          <Link to={"/admin"}>Sang Admin</Link>
-                        </DropdownMenuItem>
+                        <Link to={"/admin"}>
+                          <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                            <UserCog className="mr-2" size={16} />
+                            Sang Admin
+                          </DropdownMenuItem>
+                        </Link>
                       ) : (
                         <></>
                       )}
-                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                        <Settings className="mr-2" size={16} />
-                        <Link to={""}>Cài đặt</Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                        <TreeDeciduous className="mr-2" size={16} />
-                        <Link to={""}>Xem Cây</Link>
-                      </DropdownMenuItem>
+                      <Link to={""}>
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <Settings className="mr-2" size={16} />
+                          Cài đặt
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link to={"/tree"}>
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <TreeDeciduous className="mr-2" size={16} />
+                          Xem Cây
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem
                         className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer"
                         onClick={() => handleLogOut()}
@@ -348,7 +357,7 @@ const Navbar = () => {
                 </SheetClose>
               )}
               <SheetClose asChild className="flex justify-center">
-                <SheetClose >
+                <SheetClose>
                   <DonateButton
                     title="QUYÊN GÓP"
                     textColor="white"

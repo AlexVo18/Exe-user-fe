@@ -6,7 +6,7 @@ const Loading = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="flex justify-center items-center w-full bg-[rgba(255,255,255,0.5)] h-[100vh] absolute z-10">
+    <div className="flex justify-center items-center w-full bg-[rgba(255,255,255,0.5)] h-[100vh] absolute z-10 ">
       <Spinner color={"#5C822D"} />
     </div>
   );

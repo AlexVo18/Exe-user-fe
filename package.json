@@ -29,6 +29,7 @@
     "dotenv": "^16.4.5",
     "firebase": "^10.12.1",
     "formik": "^2.4.6",
+    "fslightbox-react": "^1.7.6",
     "input-otp": "^1.2.4",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.378.0",
@@ -43,6 +44,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/fslightbox-react": "^1.7.7",
     "@types/node": "^20.12.11",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

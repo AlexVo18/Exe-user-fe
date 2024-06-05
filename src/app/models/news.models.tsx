@@ -5,3 +5,12 @@ export interface CreateNewsData {
   type: number;
   thumbnail: File;
 }
+
+export interface NewsData {
+  newsID: number;
+  newsTitle: string;
+  newsSummary: string;
+  thumbnail: string;
+  newsDescription: string;
+  dateCreate: string;
+}

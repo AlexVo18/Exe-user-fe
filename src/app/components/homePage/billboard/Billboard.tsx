@@ -22,6 +22,7 @@ const Billboard = () => {
       });
     }
   }, []);
+  
   const getDonationList = async () => {
     try {
       const responseTopList = await Donation.getTopDonations();

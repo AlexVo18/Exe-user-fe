@@ -5,7 +5,6 @@ import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
 import AdminNewsLayout from "../pages/Admin/newsPage/AdminNewsLayout";
 
-
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 const Home = lazy(() => import("../pages/Users/homePage/Home"));
 const About = lazy(() => import("../pages/Users/aboutPage/About"));
@@ -27,6 +26,7 @@ import UserPage from "../pages/Admin/userPage/UserPage";
 import Error from "../pages/Users/errorPage/Error";
 import ProtectedRoute from "./ProtectedRoute";
 import roles from "../constants/role";
+import TreesView from "../pages/Users/treePage/TreesView";
 
 // ********************************
 
@@ -85,6 +85,22 @@ export const router = createBrowserRouter([
       },
       {
         path: "/loading",
+        element: (
+          <Suspense fallback={<></>}>
+            <></>
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tree",
+        element: (
+          <Suspense fallback={<></>}>
+            <TreesView />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tree/:id",
         element: (
           <Suspense fallback={<></>}>
             <></>

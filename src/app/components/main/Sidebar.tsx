@@ -30,7 +30,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex h-full max-h-screen flex-col gap-2">
+    <div className="sticky flex h-full max-h-screen flex-col gap-2 top-0">
       <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
         <Link to={"/admin"} className="flex items-center gap-2 font-semibold">
           <span className="">Nuôi Cây Admin</span> 

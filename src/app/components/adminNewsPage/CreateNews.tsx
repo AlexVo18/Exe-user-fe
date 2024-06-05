@@ -27,12 +27,10 @@ import { ErrorIcon, SuccessIcon } from "../toast/ToastIcons";
 import customToast from "@/app/utils/customToast";
 import Loading from "@/app/pages/loadingPage/Loading";
 import News from "@/app/api/APIs/news";
-import { useNavigate } from "react-router-dom";
 
 const CreateNews = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [picture, setPicture] = useState<string | null>(null);
-  const navigate = useNavigate();
   const validate = ErrorMessageCreateNews;
   const validationSchema = Yup.object().shape({
     newsTitle: Yup.string()
@@ -77,7 +75,7 @@ const CreateNews = () => {
       thumbnail: new File([""], "myFile.txt", { type: "text/plain" }),
     } as CreateNewsData,
     validationSchema,
-    onSubmit: async (values: CreateNewsData, { resetForm }) => {
+    onSubmit: async (values: CreateNewsData) => {
       setIsLoading(true);
       try {
         if (
@@ -136,7 +134,7 @@ const CreateNews = () => {
               <Button type="submit">Đăng Bài</Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent >
             <Card className="grid grid-cols-3 gap-6">
               <CardContent className="lg:col-span-1 col-span-3 mt-5">
                 <div className="grid gap-6">
