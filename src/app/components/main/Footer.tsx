@@ -1,8 +1,11 @@
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 const Footer = () => {
+  const { userInfo } = useContext(AuthContext);
   return (
     <footer className="mt-auto bg-mainGreen text-white">
       <div className="container mx-auto mt-10 mb-5">
@@ -65,18 +68,17 @@ const Footer = () => {
               >
                 Đồng hành nuôi cây
               </Link>
-              <Link
-                to={"/packs"}
-                className="hover:text-mainBrown transition-colors font-bold"
-              >
-                Tri ân
-              </Link>
-              <Link
-                to={"/donation"}
-                className="hover:text-mainBrown transition-colors font-bold"
-              >
-                Quyên góp
-              </Link>
+
+              {userInfo?.roleID === 1 ? (
+                <></>
+              ) : (
+                <Link
+                  to={"user/donation"}
+                  className="hover:text-mainBrown transition-colors font-bold"
+                >
+                  Quyên góp
+                </Link>
+              )}
             </div>
           </div>
           <div className="w-full bg-white rounded-3xl px-10 py-6 text-mainBrown flex flex-col gap-1 justify-center">

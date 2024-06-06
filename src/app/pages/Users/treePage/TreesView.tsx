@@ -301,7 +301,7 @@ const TreesView = () => {
                   title="QUYÊN GÓP"
                   textColor="white"
                   bgColor="bg-mainGreen"
-                  link={"/donation"}
+                  link={"/user/donation"}
                   isDonate={true}
                 />
               </div>

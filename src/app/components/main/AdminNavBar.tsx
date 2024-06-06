@@ -3,11 +3,14 @@ import { Button } from "../ui/button";
 import {
   Badge,
   CircleUser,
+  Eye,
   Home,
+  LogOut,
   Menu,
   Newspaper,
   Package,
   ShoppingCart,
+  TreeDeciduous,
   Users,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -42,8 +45,26 @@ const AdminNavBar = () => {
     }
   };
 
+  // CSS active tab dựa trên url của trang web
+  const getAcitveLink = (url: string) => {
+    const urlEnd = currentUrl.pathname.slice(-6).replace("/", "");
+    if (url === "") {
+      return `${
+        urlEnd === "admin"
+          ? "mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground cursor-pointer"
+          : "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer"
+      }`;
+    } else {
+      return `${
+        currentUrl.pathname.includes(url)
+          ? "mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground cursor-pointer"
+          : "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground cursor-pointer"
+      }`;
+    }
+  };
+
   return (
-    <header className=" flex h-14 items-center justify-between md:justify-end gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+    <header className=" flex h-14 items-center justify-between md:hidden md:justify-end gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -57,87 +78,42 @@ const AdminNavBar = () => {
               to={"/admin"}
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <img src="src\assets\images\Logo_With_Name.svg" alt="Logo.img" />
+              <span className="">Nuôi Cây Admin</span>
             </Link>
-            <Link
-              to={""}
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
+            <Link to={"/admin"} className={getAcitveLink("")}>
               <Home className="h-5 w-5" />
-              Dashboard
+              Bảng điều khiển
             </Link>
-            <Link
-              to={""}
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              Orders
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                6
-              </Badge>
-            </Link>
-            <Link
-              to={""}
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
-              <Package className="h-5 w-5" />
-              Products
-            </Link>
-            <Link
-              to={""}
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
+            <Link to={"user"} className={getAcitveLink("user")}>
               <Users className="h-5 w-5" />
-              Customers
+              Người dùng
             </Link>
-            <Link
-              to={""}
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
+            <Link to={""} className={getAcitveLink("trees")}>
+              <TreeDeciduous className="h-5 w-5" />
+              Cây trồng
+            </Link>
+            <Link to={""} className={getAcitveLink("order")}>
+              <ShoppingCart className="h-5 w-5" />
+              Giao dịch
+            </Link>
+            <Link to={"news"} className={getAcitveLink("news")}>
               <Newspaper className="h-5 w-5" />
-              Analytics
+              Tin tức
             </Link>
+            <Link to={"/"} className={getAcitveLink("home")}>
+              <Eye className="h-5 w-5" />
+              Qua trang chính
+            </Link>
+            <div
+              className={getAcitveLink("logout")}
+              onClick={() => handleLogOut()}
+            >
+              <LogOut className="h-5 w-5" />
+              Thoát
+            </div>
           </nav>
-          <div className="mt-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
         </SheetContent>
       </Sheet>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem>Tài Khoản</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Link to={"/"}>Về Trang Chính</Link>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={() => handleLogOut()}
-          >
-            <div>Thoát</div>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
     </header>
   );
 };

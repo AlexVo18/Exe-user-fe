@@ -12,6 +12,10 @@ import { toastTop } from "@/app/constants/cssContstants";
 import useCountdown from "@/app/hooks/useCountdown";
 import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { RegisterUserData } from "@/app/models/auth.models";
+import { ErrorMessageRegister } from "@/app/constants/errorMessages";
 
 const Register = () => {
   const [optInput, setOtpInput] = useState<boolean>(false);
@@ -20,6 +24,20 @@ const Register = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const { secondsLeft, start } = useCountdown();
   const navigate = useNavigate();
+  const validate = ErrorMessageRegister;
+  const validationSchema = Yup.object().shape({});
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      phoneNumber: "",
+      fullName: "",
+      password: "",
+    } as RegisterUserData,
+    validationSchema,
+    onSubmit: async (values: RegisterUserData) => {},
+  });
 
   useEffect(() => {
     if (secondsLeft === 0) {
@@ -54,6 +72,12 @@ const Register = () => {
     start(60);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === " ") {
+      event.preventDefault();
+    }
+  };
+
   return (
     <Card className="mx-auto max-w-sm bg-opacity-90">
       <CardHeader className="flex items-center justify-center px-40">
@@ -79,7 +103,12 @@ const Register = () => {
             <Label htmlFor="username">
               Tên Đăng Nhập <span className="text-red-500 ">*</span>
             </Label>
-            <Input id="username" type="text" required />
+            <Input
+              id="username"
+              type="text"
+              required
+              onKeyDown={handleKeyDown}
+            />
           </div>
           <div className="grid gap-2 text-mainBrown">
             <div className="flex items-center">
@@ -88,6 +117,10 @@ const Register = () => {
               </Label>
             </div>
             <Input id="password" type="password" required />
+
+            <div className="text-gray-400 text-sm">
+              Mật khẩu cần bắt đầu bằng chữ hoa và có ít nhất 1 dấu cách
+            </div>
           </div>
           <div className="grid gap-2 text-mainBrown">
             <div className="flex items-center">

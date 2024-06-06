@@ -13,7 +13,9 @@ const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
-const Loading = lazy(() => import("../pages/loadingPage/Loading"));
+const Error = lazy(() => import("../pages/Users/errorPage/Error"));
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
+const TreesView = lazy(() => import("../pages/Users/treePage/TreesView"));
 
 const Login = lazy(() => import("../pages/Users/authPages/Login"));
 const ForgotPassword = lazy(
@@ -24,10 +26,6 @@ const Register = lazy(() => import("../pages/Users/authPages/Register"));
 
 const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
 import UserPage from "../pages/Admin/userPage/UserPage";
-import Error from "../pages/Users/errorPage/Error";
-import ProtectedRoute from "./ProtectedRoute";
-
-import TreesView from "../pages/Users/treePage/TreesView";
 
 // ********************************
 
