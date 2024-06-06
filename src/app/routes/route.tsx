@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import roles from "../constants/role";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
@@ -12,7 +13,7 @@ const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
-// const Loading = lazy(() => import("../pages/loadingPage/Loading"));
+const Loading = lazy(() => import("../pages/loadingPage/Loading"));
 
 const Login = lazy(() => import("../pages/Users/authPages/Login"));
 const ForgotPassword = lazy(
@@ -25,7 +26,7 @@ const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
 import UserPage from "../pages/Admin/userPage/UserPage";
 import Error from "../pages/Users/errorPage/Error";
 import ProtectedRoute from "./ProtectedRoute";
-import roles from "../constants/role";
+
 import TreesView from "../pages/Users/treePage/TreesView";
 
 // ********************************
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/about",
+        path: "about",
         element: (
           <Suspense fallback={<></>}>
             <About />
@@ -52,7 +53,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/news/:type",
+        path: "news/:type",
         element: (
           <Suspense fallback={<></>}>
             <News />
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/sponsor",
+        path: "sponsor",
         element: (
           <Suspense fallback={<></>}>
             <Sponsor />
@@ -68,7 +69,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/packs",
+        path: "packs",
         element: (
           <Suspense fallback={<></>}>
             <Packs />
@@ -76,36 +77,30 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/donation",
+        path: "user",
         element: (
           <Suspense fallback={<></>}>
-            <Donation />
+            <ProtectedRoute allowedRoles={[roles.NORMAL]} />
           </Suspense>
         ),
-      },
-      {
-        path: "/loading",
-        element: (
-          <Suspense fallback={<></>}>
-            <></>
-          </Suspense>
-        ),
-      },
-      {
-        path: "/tree",
-        element: (
-          <Suspense fallback={<></>}>
-            <TreesView />
-          </Suspense>
-        ),
-      },
-      {
-        path: "/tree/:id",
-        element: (
-          <Suspense fallback={<></>}>
-            <></>
-          </Suspense>
-        ),
+        children: [
+          {
+            path: "donation",
+            element: (
+              <Suspense fallback={<></>}>
+                <Donation />
+              </Suspense>
+            ),
+          },
+          {
+            path: "tree",
+            element: (
+              <Suspense fallback={<></>}>
+                <TreesView />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },
@@ -150,14 +145,6 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "error",
-    element: (
-      <Suspense fallback={<></>}>
-        <Error />
-      </Suspense>
-    ),
-  },
-  {
     path: "admin",
     element: (
       <MainAdminLayout>
@@ -188,5 +175,14 @@ export const router = createBrowserRouter([
         element: <AdminNewsLayout />,
       },
     ],
+  },
+  // Bắt route lỗi
+  {
+    path: "*",
+    element: (
+      <Suspense fallback={<></>}>
+        <Error />
+      </Suspense>
+    ),
   },
 ]);

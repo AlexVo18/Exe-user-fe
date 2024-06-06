@@ -17,8 +17,7 @@ const ProtectedRoute = ({ allowedRoles }: Props) => {
     // Chưa đăng nhập chuyển đến trang login
     return <Navigate to="/login" replace />;
   }
-  console.log(allowedRoles)
-  console.log(allowedRoles.includes(userInfo.roleID));
+  
   // Check role
   if (!allowedRoles.includes(userInfo.roleID)) {
     // Chuyển đến trang error
