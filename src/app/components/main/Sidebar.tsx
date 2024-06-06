@@ -4,7 +4,6 @@ import {
   Home,
   LogOut,
   Newspaper,
-  Package,
   ShoppingCart,
   TreeDeciduous,
   Users,

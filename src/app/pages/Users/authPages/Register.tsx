@@ -14,7 +14,7 @@ import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { RegisterUserData } from "@/app/models/auth.models";
+import { RegisterInput, RegisterUserData } from "@/app/models/auth.models";
 import { ErrorMessageRegister } from "@/app/constants/errorMessages";
 
 const Register = () => {
@@ -22,26 +22,47 @@ const Register = () => {
   const [otp, setOtp] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  // const [password, setPassword] = useState<string>("");
   const { secondsLeft, start } = useCountdown();
   const navigate = useNavigate();
   const validate = ErrorMessageRegister;
-  const validationSchema = Yup.object().shape({});
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .required(validate.username.required)
+      .min(5, validate.username.length),
+    email: Yup.string()
+      .required(validate.email.required)
+      .matches(/\.com$/, validate.email.invalidFormat),
+    password: Yup.string()
+      .required(validate.password.required)
+      .min(6, validate.password.length)
+      .matches(/^(?=.*[A-Z])(?=.*\s)/, validate.password.invalidFormat),
+    firstName: Yup.string().required(validate.firstName.required),
+    lastName: Yup.string().required(validate.lastName.required),
+    phoneNumber: Yup.string()
+      .required(validate.phoneNumber.required)
+      .length(10, validate.phoneNumber.length),
+  });
 
   const formik = useFormik({
     initialValues: {
       username: "",
       email: "",
       phoneNumber: "",
-      fullName: "",
+      firstName: "",
+      lastName: "",
       password: "",
-    } as RegisterUserData,
+    } as RegisterInput,
     validationSchema,
-    onSubmit: async (values: RegisterUserData) => {},
+    onSubmit: async (values: RegisterUserData) => {
+      console.log(values);
+    },
   });
 
   useEffect(() => {
     if (secondsLeft === 0) {
       setIsButtonDisabled(false);
+      formik.submitForm
     }
   }, [secondsLeft]);
 

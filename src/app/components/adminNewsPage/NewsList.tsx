@@ -1,4 +1,3 @@
-import { Badge } from "@/app/components/ui/badge";
 import { Button } from "@/app/components/ui/button";
 import {
   Card,

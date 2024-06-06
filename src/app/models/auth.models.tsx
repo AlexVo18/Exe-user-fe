@@ -13,7 +13,16 @@ export interface RegisterUserData {
   username: string;
   email: string;
   phoneNumber: string;
-  fullName: string;
+  fullName?: string;
+  password: string;
+}
+
+export interface RegisterInput {
+  username: string;
+  email: string;
+  phoneNumber: string;
+  firstName: string;
+  lastName: string;
   password: string;
 }
 

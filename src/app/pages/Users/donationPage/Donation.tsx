@@ -7,8 +7,8 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 
 const Donation = () => {
-  const [amount, setAmount] = useState<number>(1);
-  const handleSetAmount = () => {};
+  const [amount] = useState<number>(1);
+  // const handleSetAmount = () => {};
   return (
     <main className="mt-auto ">
       <div className="container mx-auto flex justify-center ">

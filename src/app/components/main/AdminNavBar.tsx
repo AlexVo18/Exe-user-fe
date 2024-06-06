@@ -1,33 +1,16 @@
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import {
-  Badge,
-  CircleUser,
   Eye,
   Home,
   LogOut,
   Menu,
   Newspaper,
-  Package,
   ShoppingCart,
   TreeDeciduous,
   Users,
 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
 import { useContext } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
 

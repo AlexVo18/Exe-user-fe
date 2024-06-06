@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   Card,
   CardContent,
@@ -134,7 +134,7 @@ const CreateNews = () => {
               <Button type="submit">Đăng Bài</Button>
             </div>
           </CardHeader>
-          <CardContent >
+          <CardContent>
             <Card className="grid grid-cols-3 gap-6">
               <CardContent className="lg:col-span-1 col-span-3 mt-5">
                 <div className="grid gap-6">
