@@ -17,7 +17,7 @@ export const ErrorMessageRegister = {
     length: "Tên đăng nhập cần tối thiểu 5 kí tự",
   },
   email: {
-    require: "Email đang trống",
+    required: "Email đang trống",
     invalidFormat: "Email không đúng định dạng",
   },
   password: {
@@ -57,5 +57,8 @@ export const ErrorMessageCreateNews = {
   thumbnail: {
     required: "Thumbnail đang trống",
     invalid: "Dữ liệu vừa gửi không phải hình ảnh",
+  },
+  type: {
+    required: "Thể loại tin tức đang trống",
   },
 };

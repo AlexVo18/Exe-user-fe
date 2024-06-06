@@ -32,6 +32,7 @@ import SummaryCard from "@/app/components/adminDashboard/SummaryCard";
 import { RecentTree } from "@/app/models/tree.models";
 import Tree from "@/app/api/APIs/tree";
 import RecentPlantList from "@/app/components/adminDashboard/RecentPlantList";
+import AdminNavBar from "@/app/components/main/AdminNavBar";
 
 const defaultProfit: Profit = {
   totalProfit: 0,
@@ -80,6 +81,9 @@ const Dashboard = () => {
 
   return (
     <>
+      <div className="sticky top-0">
+        <AdminNavBar />
+      </div>
       {isLoading && <Loading />}
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
@@ -182,7 +186,7 @@ const Dashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                  <RecentPlantList recentTreeList={recentTreeList} />
+                    <RecentPlantList recentTreeList={recentTreeList} />
                   </TableBody>
                 </Table>
               </CardContent>

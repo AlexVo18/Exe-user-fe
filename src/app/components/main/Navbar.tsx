@@ -66,7 +66,10 @@ const Navbar = () => {
   ];
   const handleLogOut = () => {
     logout();
-    if (currentUrl.pathname.includes("donation")) {
+    if (
+      currentUrl.pathname.includes("donation") ||
+      currentUrl.pathname.includes("tree")
+    ) {
       navigate("/");
     }
   };
@@ -97,6 +100,7 @@ const Navbar = () => {
   );
   return (
     <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 pt-2 pb-2 z-10">
+      {/* Navbar thường */}
       <nav className="hidden flex-col justify-between gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm w-full">
         <Link to={"/"}>
           <img src="images/Logo_With_Name.svg" alt="Logo.img" />
@@ -134,14 +138,13 @@ const Navbar = () => {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            {/* <NavigationMenuItem>
               <Link to={"/sponsor"} className="ml-4">
                 <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
                   TRI ÂN
                 </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem>
-
+            </NavigationMenuItem> */}
             {userInfo ? (
               <>
                 <NavigationMenuItem>
@@ -158,21 +161,29 @@ const Navbar = () => {
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       {userInfo.roleID === 1 ? (
-                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                          <UserCog className="mr-2" size={16} />
-                          <Link to={"/admin"}>Sang Admin</Link>
-                        </DropdownMenuItem>
+                        <Link to={"/admin"}>
+                          <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                            <UserCog className="mr-2" size={16} />
+                            Sang Admin
+                          </DropdownMenuItem>
+                        </Link>
                       ) : (
-                        <></>
+                        <>
+                          <Link to={""}>
+                            <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                              <Settings className="mr-2" size={16} />
+                              Cài đặt
+                            </DropdownMenuItem>
+                          </Link>
+                          <Link to={"/tree"}>
+                            <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                              <TreeDeciduous className="mr-2" size={16} />
+                              Xem Cây
+                            </DropdownMenuItem>
+                          </Link>
+                        </>
                       )}
-                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                        <Settings className="mr-2" size={16} />
-                        <Link to={""}>Cài đặt</Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
-                        <TreeDeciduous className="mr-2" size={16} />
-                        <Link to={""}>Xem Cây</Link>
-                      </DropdownMenuItem>
+
                       <DropdownMenuItem
                         className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer"
                         onClick={() => handleLogOut()}
@@ -183,17 +194,21 @@ const Navbar = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <div className="ml-4">
-                    <DonateButton
-                      title="QUYÊN GÓP"
-                      textColor="white"
-                      bgColor="bg-mainGreen"
-                      link={"/donation"}
-                      isDonate={true}
-                    />
-                  </div>
-                </NavigationMenuItem>
+                {userInfo.roleID === 2 ? (
+                  <NavigationMenuItem>
+                    <div className="ml-4">
+                      <DonateButton
+                        title="QUYÊN GÓP"
+                        textColor="white"
+                        bgColor="bg-mainGreen"
+                        link={"/user/donation"}
+                        isDonate={true}
+                      />
+                    </div>
+                  </NavigationMenuItem>
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <NavigationMenuItem>
@@ -207,110 +222,190 @@ const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
+
+      {/* Navbar mobile */}
       <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
           <img src="images/Logo_With_Name.svg" alt="Logo.img" />
         </Link>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              className="shrink-0 lg:hidden border-none hover:bg-transparent"
-              size="icon"
-              variant="outline"
-            >
-              <MenuIcon className="h-5 w-5 text-mainBrown" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <nav className="grid gap-2 text-base font-semibold">
-              <SheetClose asChild>
-                <Link
-                  className="text-muted-foreground hover:text-mainBrown transition-colors mt-2"
-                  to={"/"}
-                >
-                  TRANG CHỦ
-                </Link>
-              </SheetClose>
-              <Separator />
-              <SheetClose asChild>
-                <Link
-                  className="text-muted-foreground hover:text-mainBrown transition-colors"
-                  to={"/about"}
-                >
-                  VỀ CHÚNG TÔI
-                </Link>
-              </SheetClose>
-              <Separator />
-              <SheetDescription asChild>
-                <Accordion type="single" collapsible>
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger className="text-muted-foreground hover:text-mainBrown transition-colors font-semibold p-0 text-base hover:no-underline">
-                      TIN TỨC
-                    </AccordionTrigger>
-                    <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
-                      <div>
-                        <Link
-                          to={"/news"}
-                          className="text-muted-foreground hover:text-mainBrown transition-colors "
-                        >
-                          Cập nhật hằng tháng
-                        </Link>
-                      </div>
-                      <Separator />
-                      <div>
-                        <Link
-                          to={"/news"}
-                          className="text-muted-foreground hover:text-mainBrown transition-colors "
-                        >
-                          Truyền thông
-                        </Link>
-                      </div>
-                      <Separator />
-                      <div>
-                        <Link
-                          to={"/news"}
-                          className="text-muted-foreground hover:text-mainBrown transition-colors "
-                        >
-                          Nét sống xanh
-                        </Link>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </SheetDescription>
-              <Separator />
-              <SheetClose asChild>
-                <Link
-                  className="text-muted-foreground hover:text-mainBrown transition-colors"
-                  to={"/sponsor"}
-                >
-                  ĐỒNG HÀNH NUÔI CÂY
-                </Link>
-              </SheetClose>
-              <Separator />
-              <SheetClose asChild>
+        <div className="flex items-center gap-2">
+          {userInfo ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold ml-4 cursor-pointer">
+                    TÀI KHOẢN
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-32">
+                  <DropdownMenuLabel className="flex items-center">
+                    <User className="mr-2" size={16} />
+                    <div>{userInfo.username}</div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {userInfo.roleID === 1 ? (
+                    <Link to={"/admin"}>
+                      <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                        <UserCog className="mr-2" size={16} />
+                        Sang Admin
+                      </DropdownMenuItem>
+                    </Link>
+                  ) : (
+                    <>
+                      <Link to={""}>
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <Settings className="mr-2" size={16} />
+                          Cài đặt
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link to={"/tree"}>
+                        <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
+                          <TreeDeciduous className="mr-2" size={16} />
+                          Xem Cây
+                        </DropdownMenuItem>
+                      </Link>
+                    </>
+                  )}
+
+                  <DropdownMenuItem
+                    className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer"
+                    onClick={() => handleLogOut()}
+                  >
+                    <LogOut className="mr-2" size={16} />
+                    <div>Thoát</div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {userInfo.roleID === 2 ? (
+                <NavigationMenu className="font-semibold ml-4">
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <DonateButton
+                        title="QUYÊN GÓP"
+                        textColor="white"
+                        bgColor="bg-mainGreen"
+                        link={"/user/donation"}
+                        isDonate={true}
+                      />
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              ) : (
+                <></>
+              )}
+            </>
+          ) : (
+            <Link to={"/login"} className="ml-4 cursor-pointer">
+              <div className="text-muted-foreground transition-colors hover:text-mainBrown">
+                ĐĂNG NHẬP
+              </div>
+            </Link>
+          )}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                className="shrink-0 lg:hidden border-none hover:bg-transparent"
+                size="icon"
+                variant="outline"
+              >
+                <MenuIcon className="h-5 w-5 text-mainBrown" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <nav className="grid gap-2 text-base font-semibold">
+                <SheetClose asChild>
+                  <Link
+                    className="text-muted-foreground hover:text-mainBrown transition-colors mt-2"
+                    to={"/"}
+                  >
+                    TRANG CHỦ
+                  </Link>
+                </SheetClose>
+                <Separator />
+                <SheetClose asChild>
+                  <Link
+                    className="text-muted-foreground hover:text-mainBrown transition-colors"
+                    to={"/about"}
+                  >
+                    VỀ CHÚNG TÔI
+                  </Link>
+                </SheetClose>
+                <Separator />
+                <SheetDescription asChild>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-muted-foreground hover:text-mainBrown transition-colors font-semibold p-0 text-base hover:no-underline">
+                        TIN TỨC
+                      </AccordionTrigger>
+                      <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
+                        <div>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Cập nhật hằng tháng
+                          </Link>
+                        </div>
+                        <Separator />
+                        <div>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Truyền thông
+                          </Link>
+                        </div>
+                        <Separator />
+                        <div>
+                          <Link
+                            to={"/news"}
+                            className="text-muted-foreground hover:text-mainBrown transition-colors "
+                          >
+                            Nét sống xanh
+                          </Link>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </SheetDescription>
+                <Separator />
+                <SheetClose asChild>
+                  <Link
+                    className="text-muted-foreground hover:text-mainBrown transition-colors"
+                    to={"/sponsor"}
+                  >
+                    ĐỒNG HÀNH NUÔI CÂY
+                  </Link>
+                </SheetClose>
+                <Separator />
+                {/* <SheetClose asChild>
                 <Link
                   className="text-muted-foreground hover:text-mainBrown transition-colors"
                   to={"/packs"}
                 >
                   TRI ÂN
                 </Link>
-              </SheetClose>
-              <SheetClose asChild className="flex justify-center">
-                <Link to={"/donation"}>
-                  <DonateButton
-                    title="QUYÊN GÓP"
-                    textColor="white"
-                    bgColor="bg-mainGreen"
-                    link={"/donation"}
-                    isDonate={true}
-                  />
-                </Link>
-              </SheetClose>
-            </nav>
-          </SheetContent>
-        </Sheet>
+              </SheetClose> */}
+                {userInfo?.roleID === 1 ? (
+                  <></>
+                ) : (
+                  <SheetClose asChild className="flex justify-center">
+                    <SheetClose>
+                      <DonateButton
+                        title="QUYÊN GÓP"
+                        textColor="white"
+                        bgColor="bg-mainGreen"
+                        link={"/user/donation"}
+                        isDonate={true}
+                      />
+                    </SheetClose>
+                  </SheetClose>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

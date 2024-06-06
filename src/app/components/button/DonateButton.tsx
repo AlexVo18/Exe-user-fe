@@ -22,7 +22,7 @@ const DonateButton = ({
   icon,
 }: IProps) => {
   return (
-    <Link to={link || "/donation"}>
+    <Link to={link || "/user/donation"}>
       <Button
         className={`${bgColor} ${textColor} ${
           size === "big" ? "text-[16px] px-10 py-6" : "px-8 py-4"

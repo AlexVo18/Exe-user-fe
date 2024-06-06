@@ -12,18 +12,57 @@ import { toastTop } from "@/app/constants/cssContstants";
 import useCountdown from "@/app/hooks/useCountdown";
 import React, { startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { RegisterInput, RegisterUserData } from "@/app/models/auth.models";
+import { ErrorMessageRegister } from "@/app/constants/errorMessages";
 
 const Register = () => {
   const [optInput, setOtpInput] = useState<boolean>(false);
   const [otp, setOtp] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  // const [password, setPassword] = useState<string>("");
   const { secondsLeft, start } = useCountdown();
   const navigate = useNavigate();
+  const validate = ErrorMessageRegister;
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .required(validate.username.required)
+      .min(5, validate.username.length),
+    email: Yup.string()
+      .required(validate.email.required)
+      .matches(/\.com$/, validate.email.invalidFormat),
+    password: Yup.string()
+      .required(validate.password.required)
+      .min(6, validate.password.length)
+      .matches(/^(?=.*[A-Z])(?=.*\s)/, validate.password.invalidFormat),
+    firstName: Yup.string().required(validate.firstName.required),
+    lastName: Yup.string().required(validate.lastName.required),
+    phoneNumber: Yup.string()
+      .required(validate.phoneNumber.required)
+      .length(10, validate.phoneNumber.length),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      phoneNumber: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+    } as RegisterInput,
+    validationSchema,
+    onSubmit: async (values: RegisterUserData) => {
+      console.log(values);
+    },
+  });
 
   useEffect(() => {
     if (secondsLeft === 0) {
       setIsButtonDisabled(false);
+      formik.submitForm
     }
   }, [secondsLeft]);
 
@@ -54,6 +93,12 @@ const Register = () => {
     start(60);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === " ") {
+      event.preventDefault();
+    }
+  };
+
   return (
     <Card className="mx-auto max-w-sm bg-opacity-90">
       <CardHeader className="flex items-center justify-center px-40">
@@ -79,7 +124,12 @@ const Register = () => {
             <Label htmlFor="username">
               Tên Đăng Nhập <span className="text-red-500 ">*</span>
             </Label>
-            <Input id="username" type="text" required />
+            <Input
+              id="username"
+              type="text"
+              required
+              onKeyDown={handleKeyDown}
+            />
           </div>
           <div className="grid gap-2 text-mainBrown">
             <div className="flex items-center">
@@ -88,6 +138,10 @@ const Register = () => {
               </Label>
             </div>
             <Input id="password" type="password" required />
+
+            <div className="text-gray-400 text-sm">
+              Mật khẩu cần bắt đầu bằng chữ hoa và có ít nhất 1 dấu cách
+            </div>
           </div>
           <div className="grid gap-2 text-mainBrown">
             <div className="flex items-center">

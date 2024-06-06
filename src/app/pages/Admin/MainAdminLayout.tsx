@@ -1,4 +1,3 @@
-import AdminNavBar from "@/app/components/main/AdminNavBar";
 import Sidebar from "@/app/components/main/Sidebar";
 import { ReactNode } from "react";
 interface Props {
@@ -12,7 +11,6 @@ const MainAdminLayout = ({ children }: Props) => {
         <Sidebar />
       </div>
       <div className="flex flex-col ">
-        <AdminNavBar />
         <div className="relative">{children}</div>
       </div>
     </div>

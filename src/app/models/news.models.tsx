@@ -1,7 +1,16 @@
 export interface CreateNewsData {
   newsTitle: string;
-  newsSummery: string;
+  newsSummary: string;
   newsDescription: string;
-  type: string;
+  type: number;
+  thumbnail: File;
+}
+
+export interface NewsData {
+  newsID: number;
+  newsTitle: string;
+  newsSummary: string;
   thumbnail: string;
+  newsDescription: string;
+  dateCreate: string;
 }
