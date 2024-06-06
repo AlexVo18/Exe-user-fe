@@ -2,13 +2,8 @@ import React from "react";
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-[100vh] w-full ">
-      <img
-        src="images/Login_Background.jpg"
-        alt=""
-        className="object-cover absolute -z-10 h-[100vh] w-full"
-      />
-      <div className="flex justify-center items-center h-full ">{children}</div>
+    <div className="lg:h-screen w-full flex justify-center items-center bg-[url('images/Login_Background.jpg')]">
+      f<div className="flex justify-center items-center">{children}</div>
     </div>
   );
 };

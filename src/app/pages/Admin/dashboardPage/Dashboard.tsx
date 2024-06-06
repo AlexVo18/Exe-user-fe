@@ -36,7 +36,7 @@ import AdminNavBar from "@/app/components/main/AdminNavBar";
 
 const defaultProfit: Profit = {
   totalProfit: 0,
-  totalPant: 0,
+  totalPlant: 0,
 };
 
 const Dashboard = () => {

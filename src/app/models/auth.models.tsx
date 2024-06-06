@@ -14,7 +14,10 @@ export interface RegisterUserData {
   email: string;
   phoneNumber: string;
   fullName?: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
+  rePassword?: string
 }
 
 export interface RegisterInput {

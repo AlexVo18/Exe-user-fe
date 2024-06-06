@@ -85,7 +85,6 @@ const CreateNews = () => {
           values.thumbnail !== undefined &&
           values.type !== undefined
         ) {
-          console.log(values);
           const formData = new FormData();
           formData.append("NewsTitle", values.newsTitle);
           formData.append("NewsSummary", values.newsSummary);
