@@ -1,4 +1,4 @@
 export interface Profit {
   totalProfit: number;
-  totalPant: number;
+  totalPlant: number;
 }

@@ -27,14 +27,14 @@ const SummaryCard = ({ icon, data, type }: Props) => {
         <div className="text-2xl font-bold">
           {type === "total" || type === "monthly"
             ? formatVND(data?.totalProfit)
-            : calsTrees(data.totalProfit)}
+            : data.totalPlant}
         </div>
         <p className="text-xs text-muted-foreground">
           {type === "total"
             ? ` Dự án  nhận quyên góp được ${calsTrees(data.totalProfit)} cây`
             : type === "monthly"
             ? `Dự án tháng này đã nhận được ${calsTrees(data.totalProfit)} cây`
-            : `Dự án đã trồng được ${calsTrees(data.totalProfit)} cây`}
+            : `Trong đó, dự án hiện tại đã trồng được ${data.totalPlant} cây`}
         </p>
       </CardContent>
     </Card>

@@ -17,7 +17,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   userInfo: undefined,
   token: undefined,
-  userLoading: false,
+  userLoading: true,
   login: () => {},
   logout: () => {},
 });
@@ -32,7 +32,6 @@ const AuthProvider = ({ children }: Props) => {
       try {
         const storageToken = localStorage.getItem("access_token");
         const storageUser = localStorage.getItem("user");
-        console.log("storageUser:", storageUser);
         if (checkIsTokenExp(storageToken)) {
           logout();
         } else {
