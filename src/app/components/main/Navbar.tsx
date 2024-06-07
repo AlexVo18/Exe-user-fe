@@ -169,7 +169,7 @@ const Navbar = () => {
                         </Link>
                       ) : (
                         <>
-                          <Link to={""}>
+                          <Link to={"/user/profile"}>
                             <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
                               <Settings className="mr-2" size={16} />
                               Cài đặt
@@ -252,7 +252,7 @@ const Navbar = () => {
                     </Link>
                   ) : (
                     <>
-                      <Link to={""}>
+                      <Link to={"/user/profile"}>
                         <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
                           <Settings className="mr-2" size={16} />
                           Cài đặt
@@ -356,7 +356,7 @@ const Navbar = () => {
                 <SheetClose asChild>
                   <Link
                     className="text-muted-foreground hover:text-mainBrown transition-colors"
-                    to={"/sponsor"}
+                    to={"/packs"}
                   >
                     ĐỒNG HÀNH NUÔI CÂY
                   </Link>
@@ -365,7 +365,7 @@ const Navbar = () => {
                 {/* <SheetClose asChild>
                 <Link
                   className="text-muted-foreground hover:text-mainBrown transition-colors"
-                  to={"/packs"}
+                  to={"/sponsor"}
                 >
                   TRI ÂN
                 </Link>

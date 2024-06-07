@@ -13,6 +13,7 @@ export interface NewsData {
   thumbnail: string;
   newsDescription: string;
   dateCreate: string;
+  type: number;
 }
 
 export interface RecentUpdateData {

@@ -1,12 +1,12 @@
 import {
-  boughtBg,
-  boughtBtn,
-  cancelBg,
-  cancelBtn,
-  grownBg,
-  grownBtn,
-  plantedBg,
-  plantedBtn,
+  greyBg,
+  greyBtn,
+  redBg,
+  redBtn,
+  lightGreenBg,
+  lightGreenBtn,
+  orangeBg,
+  orangeBtn,
 } from "@/app/constants/cssContstants";
 
 interface Props {
@@ -18,23 +18,23 @@ const TreeStatus = ({ status }: Props) => {
     <div
       className={`inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full ${
         status === 1
-          ? boughtBg
+          ? greyBg
           : status === 2
-          ? plantedBg
+          ? orangeBg
           : status === 3
-          ? grownBg
-          : cancelBg
+          ? lightGreenBg
+          : redBg
       }`}
     >
       <span
         className={`w-3 h-3 me-1 rounded-full ${
           status === 1
-            ? boughtBtn
+            ? greyBtn
             : status === 2
-            ? plantedBtn
+            ? orangeBtn
             : status === 3
-            ? grownBtn
-            : cancelBtn
+            ? lightGreenBtn
+            : redBtn
         }`}
       ></span>
       {status === 1

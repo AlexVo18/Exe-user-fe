@@ -33,6 +33,9 @@ import { RecentTree } from "@/app/models/tree.models";
 import Tree from "@/app/api/APIs/tree";
 import RecentPlantList from "@/app/components/adminDashboard/RecentPlantList";
 import AdminNavBar from "@/app/components/main/AdminNavBar";
+import RecentTransactionList from "@/app/components/adminDashboard/RecentTransactionList";
+import Payment from "@/app/api/APIs/payment";
+import { RecentTransactionData } from "@/app/models/payment.models";
 
 const defaultProfit: Profit = {
   totalProfit: 0,
@@ -43,6 +46,9 @@ const Dashboard = () => {
   const [totalProfit, setTotalProfit] = useState<Profit>(defaultProfit);
   const [monthProfit, setMonthProfit] = useState<Profit>(defaultProfit);
   const [recentTreeList, setRecentTreeList] = useState<RecentTree[]>([]);
+  const [recentTransactions, setRecentTransaction] = useState<
+    RecentTransactionData[]
+  >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     try {
@@ -56,18 +62,16 @@ const Dashboard = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(recentTreeList);
-  }, [recentTreeList]);
-
   const getDashboardData = async () => {
     try {
       const responseTotal = await Revenue.getTotalProfit();
       const responseThisMonth = await Revenue.getThisMonthProfit();
       const responseTreeList = await Tree.getRecentTrees();
+      const responseTransaction = await Payment.getRecentTransaction();
       setTotalProfit(responseTotal);
       setMonthProfit(responseThisMonth);
       setRecentTreeList(responseTreeList);
+      setRecentTransaction(responseTransaction);
     } catch (error) {
       customToast({
         icon: <WarningIcon />,
@@ -81,10 +85,10 @@ const Dashboard = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="sticky top-0">
         <AdminNavBar />
       </div>
-      {isLoading && <Loading />}
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           <SummaryCard
@@ -127,46 +131,9 @@ const Dashboard = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm">2023-06-23</TableCell>
-                    <TableCell className="text-right">1 cây</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm">2023-06-23</TableCell>
-                    <TableCell className="text-right">1 cây</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm">2023-06-23</TableCell>
-                    <TableCell className="text-right">3 cây</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm">2023-06-23</TableCell>
-                    <TableCell className="text-right">5 cây</TableCell>
-                  </TableRow>
+                  <RecentTransactionList
+                    recentTransactions={recentTransactions}
+                  />
                 </TableBody>
               </Table>
             </CardContent>

@@ -1,6 +1,8 @@
 import requests from "../requests";
 
 const Payment = {
-  getTotalProfit: () => requests.jwtApiGet("/api/admin/total"),
+  getRecentTransaction: () =>
+    requests.jwtApiGet("/api/admin/transactions/newest"),
+  getTransactions: () => requests.jwtApiGet("/api/admin/transactions"),
 };
 export default Payment;

@@ -3,14 +3,17 @@ export const toastTop =
 export const dashboardCardIcon = "h-4 w-4 text-muted-foreground";
 
 // Trạng thái mã cây user
-export const boughtBg = "bg-slate-100 text-slate-800";
-export const boughtBtn = "bg-slate-500";
+export const greyBg = "bg-slate-100 text-slate-800";
+export const greyBtn = "bg-slate-500";
 
-export const plantedBg = "bg-amber-100 text-amber-800";
-export const plantedBtn = "bg-amber-500 ";
+export const skyBg = "bg-sky-100 text-sky-800";
+export const skyBtn = "bg-sky-500";
 
-export const grownBg = "bg-green-100 text-green-800";
-export const grownBtn = "bg-green-500";
+export const orangeBg = "bg-amber-100 text-amber-800";
+export const orangeBtn = "bg-amber-500 ";
 
-export const cancelBg = "bg-red-100 text-red-800";
-export const cancelBtn = "bg-red-500 ";
+export const lightGreenBg = "bg-green-100 text-green-800";
+export const lightGreenBtn = "bg-green-500";
+
+export const redBg = "bg-red-100 text-red-800";
+export const redBtn = "bg-red-500 ";
