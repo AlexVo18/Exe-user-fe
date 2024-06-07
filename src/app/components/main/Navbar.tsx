@@ -175,7 +175,7 @@ const Navbar = () => {
                               Cài đặt
                             </DropdownMenuItem>
                           </Link>
-                          <Link to={"/tree"}>
+                          <Link to={"/user/tree"}>
                             <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
                               <TreeDeciduous className="mr-2" size={16} />
                               Xem Cây
@@ -258,7 +258,7 @@ const Navbar = () => {
                           Cài đặt
                         </DropdownMenuItem>
                       </Link>
-                      <Link to={"/tree"}>
+                      <Link to={"/user/tree"}>
                         <DropdownMenuItem className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold flex items-center cursor-pointer">
                           <TreeDeciduous className="mr-2" size={16} />
                           Xem Cây
