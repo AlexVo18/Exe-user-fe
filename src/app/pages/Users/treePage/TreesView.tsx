@@ -139,10 +139,13 @@ const TreesView = () => {
         <div className="container mx-auto  ">
           {currentItems.length > 0 ? (
             <div className="grid grid-cols-5 mx-5 md:mx-40 my-5 gap-4">
-              <div className="col-span-2 w-full">
+              <div className="lg:col-span-2 col-span-5 w-full">
+                <div className=" text-2xl font-semibold text-mainBrown mb-5 text-center">
+                  Mã Cây
+                </div>
                 {currentItems.map((tree: UserTreesCode, index: number) => (
                   <Card
-                    className="bg-mainSkin text-mainBrown cursor-pointer hover:bg-mainDarkerSkin transition hover:text-mainDarkerBrown mb-5"
+                    className="bg-mainSkin text-mainGreen cursor-pointer hover:bg-mainDarkerSkin transition hover:text-mainDarkerBrown mb-5"
                     onClick={() => handleGetDetail(tree.plantCodeID)}
                     key={index}
                   >
@@ -196,7 +199,10 @@ const TreesView = () => {
                 </div>
               </div>
 
-              <div className="col-span-3 w-full">
+              <div className="lg:col-span-3 col-span-5 w-full">
+                <div className=" text-2xl font-semibold text-mainBrown mb-5 text-center">
+                  Nhật Ký Cây Trồng
+                </div>
                 {currentDetails.length > 0 ? (
                   <>
                     {currentDetails.map(
@@ -281,7 +287,7 @@ const TreesView = () => {
                     </div>
                   </>
                 ) : (
-                  <div className="h-full flex justify-center items-center text-2xl text-muted-foreground">
+                  <div className="lg:h-full flex justify-center items-center text-2xl text-muted-foreground text-center">
                     Chọn 1 mã cây để xem những cập nhật mới nhất
                   </div>
                 )}

@@ -1,6 +1,12 @@
+import { RecentUpdateData } from "@/app/models/news.models";
 import { Separator } from "../../ui/separator";
+import { formatDate } from "@/app/utils/formatDate";
 
-const UpdateList = () => {
+interface Props {
+  recentUpdates: RecentUpdateData[];
+}
+
+const UpdateList = ({ recentUpdates }: Props) => {
   return (
     <div className="py-10">
       <div className="text-2xl font-semibold text-center text-mainBrown">
@@ -8,17 +14,59 @@ const UpdateList = () => {
       </div>
       <main className="mt-auto">
         <div className="container mx-auto">
-          <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 mt-5 gap-2">
+          {recentUpdates.map((update: RecentUpdateData, index: number) => (
+            <div
+              className="grid grid-cols-11 xl:mx-40 lg:mx-20 gap-2 "
+              key={index}
+            >
+              <div
+                className={`${
+                  index % 2 === 0 ? "order-last justify-start" : "justify-end"
+                } flex items-center col-span-5 my-2`}
+              >
+                <img
+                  src={update.thumbnail}
+                  alt="Logo Img"
+                  className=" w-60 object-cover"
+                />
+              </div>
+              <div className="col-span-1 flex justify-center">
+                <div className="flex justify-center items-center">
+                  <Separator
+                    className="bg-mainBrown w-0.5"
+                    orientation="vertical"
+                  />
+                  <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
+                </div>
+              </div>
+              <div
+                className={`${
+                  index % 2 === 0 ? "order-first justify-end" : ""
+                } flex items-center col-span-5 my-6 `}
+              >
+                <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg border-2 border-mainGreen">
+                  <div className=" text-xl font-semibold text-mainGreen">
+                    Tháng {formatDate(update.dateCreate).slice(3, 5)}/
+                    {formatDate(update.dateCreate).slice(6, 10)}
+                  </div>
+                  {/* 150 chars */}
+                  <p className="mt-2 text-sm md:text-base text-justify ">
+                    {update.newsSummary}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 mt-5 gap-2">
             <div className="flex justify-end items-center col-span-5 my-2">
-              <img
-                src="images/Ex.svg"
-                alt="Logo Img"
-                className="w-60"
-              />
+              <img src="images/Ex.svg" alt="Logo Img" className="w-60" />
             </div>
             <div className="col-span-1 flex justify-center">
               <div className="flex justify-center items-center">
-                <Separator className="bg-mainBrown w-0.5" orientation="vertical" />
+                <Separator
+                  className="bg-mainBrown w-0.5"
+                  orientation="vertical"
+                />
                 <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
               </div>
             </div>
@@ -34,35 +82,7 @@ const UpdateList = () => {
                 </p>
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 gap-2 ">
-            <div className="flex justify-start order-last items-center col-span-5 my-2 ">
-              <img
-                src="images/Ex.svg"
-                alt="Logo Img"
-                className=" w-60"
-              />
-            </div>
-            <div className="col-span-1 flex justify-center">
-              <div className="flex justify-center items-center">
-                <Separator className="bg-mainBrown w-0.5" orientation="vertical" />
-                <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
-              </div>
-            </div>
-            <div className="flex justify-end order-first items-center col-span-5 my-6 ">
-              <div className="flex flex-col bg-white p-2 h-full w-60 rounded-lg border-2 border-mainGreen">
-                <div className=" text-xl font-semibold text-mainGreen">
-                  Tháng 11/2023
-                </div>
-                {/* 150 chars */}
-                <p className="mt-2 text-sm md:text-base text-justify "> 
-                  Tháng 1 đầu xuân năm nay, team Nuôi Cây đã cùng các chú bộ đội
-                  và người dân địa phương cùng nhau phối hợp dọp dẹp và cắt bỏ
-                  các cây cỏ
-                </p>
-              </div>
-            </div>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>

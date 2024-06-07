@@ -276,23 +276,6 @@ const Navbar = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              {userInfo.roleID === 2 ? (
-                <NavigationMenu className="font-semibold ml-4">
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <DonateButton
-                        title="QUYÊN GÓP"
-                        textColor="white"
-                        bgColor="bg-mainGreen"
-                        link={"/user/donation"}
-                        isDonate={true}
-                      />
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-              ) : (
-                <></>
-              )}
             </>
           ) : (
             <Link to={"/login"} className="ml-4 cursor-pointer">

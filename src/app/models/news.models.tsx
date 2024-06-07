@@ -14,3 +14,10 @@ export interface NewsData {
   newsDescription: string;
   dateCreate: string;
 }
+
+export interface RecentUpdateData {
+  newsID: number;
+  newsSummary: string;
+  thumbnail: string;
+  dateCreate: string;
+}
