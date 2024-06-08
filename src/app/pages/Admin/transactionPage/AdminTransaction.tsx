@@ -1,5 +1,4 @@
 import AdminNavBar from "@/app/components/main/AdminNavBar";
-import { Button } from "@/app/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,12 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/app/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu";
 import {
   Pagination,
   PaginationContent,
@@ -32,7 +25,6 @@ import {
 } from "@/app/components/ui/table";
 import { Transaction } from "@/app/models/payment.models";
 import { formatDate } from "@/app/utils/formatDate";
-import { Eye, MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import Loading from "../../loadingPage/Loading";
 import { WarningIcon } from "@/app/components/toast/ToastIcons";
@@ -46,7 +38,6 @@ const AdminTransaction = () => {
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [filterType, setFilterType] = useState<number | null>(null);
   const itemsPerPage = 10;
 
   useEffect(() => {

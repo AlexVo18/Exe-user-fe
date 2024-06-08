@@ -16,7 +16,6 @@ import {
   PaginationItem,
   PaginationLink,
 } from "../ui/pagination";
-import Loading from "@/app/pages/loadingPage/Loading";
 import customToast from "@/app/utils/customToast";
 import { WarningIcon } from "../toast/ToastIcons";
 
@@ -25,7 +24,6 @@ interface Props {
 }
 
 const AdminTreeList = ({ detailList }: Props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentDetailPage, setCurrentDetailPage] = useState<number>(1);
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
@@ -76,7 +74,6 @@ const AdminTreeList = ({ detailList }: Props) => {
 
   return (
     <>
-      {isLoading && <Loading />}
       {currentDetails.map((detail: TreeCodeDetail, detailIndex: number) => (
         <Card key={detailIndex} className="mb-5">
           <CardHeader>
