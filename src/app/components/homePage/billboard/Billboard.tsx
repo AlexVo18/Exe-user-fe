@@ -1,45 +1,17 @@
-import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs2";
-import Loading from "@/app/pages/loadingPage/Loading";
-import Donation from "@/app/api/APIs/donation";
-import customToast from "@/app/utils/customToast";
-import { WarningIcon } from "../../toast/ToastIcons";
 import TopList from "./TopList";
 import NewestList from "./NewestList";
+import {
+  NewestDonationsData,
+  TopDonationsData,
+} from "@/app/models/donation.models";
 
-const Billboard = () => {
-  const [topList, setTopList] = useState([]);
-  const [newestList, setNewestList] = useState([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  useEffect(() => {
-    try {
-      getDonationList();
-    } catch (error) {
-      customToast({
-        icon: <WarningIcon />,
-        description: "Đã xảy ra lỗi, không thể lấy danh sách",
-        duration: 3000,
-      });
-    }
-  }, []);
-  
-  const getDonationList = async () => {
-    try {
-      const responseTopList = await Donation.getTopDonations();
-      const responseNewList = await Donation.getNewestDonations();
-      setTopList(responseTopList);
-      setNewestList(responseNewList);
-    } catch (error) {
-      customToast({
-        icon: <WarningIcon />,
-        description: "Đã xảy ra lỗi, không thể lấy danh sách",
-        duration: 3000,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+interface Props {
+  topList: TopDonationsData[];
+  newestList: NewestDonationsData[];
+}
 
+const Billboard = ({ topList, newestList }: Props) => {
   return (
     <div>
       <div className="text-2xl font-semibold text-center text-white">
@@ -54,7 +26,6 @@ const Billboard = () => {
             </TabsList>
           </div>
           <div className="flex justify-center">
-            {isLoading && <Loading />}
             <TabsContent value="top" className="w-full mx-10">
               <TopList donateList={topList} />
             </TabsContent>

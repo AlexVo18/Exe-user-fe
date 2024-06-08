@@ -38,7 +38,7 @@ const Sidebar = () => {
     } else {
       return `${
         currentUrl.pathname.includes(url)
-          ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary cursor-pointer" 
+          ? "flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary cursor-pointer"
           : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary cursor-pointer"
       }`;
     }
@@ -61,11 +61,11 @@ const Sidebar = () => {
             <Users className="h-4 w-4" />
             Người dùng
           </Link>
-          <Link to={" "} className={getAcitveLink("trees")}>
+          <Link to={"tree"} className={getAcitveLink("tree")}>
             <TreeDeciduous className="h-4 w-4" />
             Cây trồng
           </Link>
-          <Link to={""} className={getAcitveLink("order")}>
+          <Link to={"transaction"} className={getAcitveLink("transaction")}>
             <ShoppingCart className="h-4 w-4" />
             Giao dịch{" "}
           </Link>

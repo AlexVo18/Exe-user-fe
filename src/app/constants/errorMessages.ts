@@ -62,3 +62,13 @@ export const ErrorMessageCreateNews = {
     required: "Thể loại tin tức đang trống",
   },
 };
+
+export const ErrorMessageCreateLog = {
+  ContentText: {
+    required: "Nội dung cập nhật đang trống",
+    min: "Nội dung cần tối thiểu 10 ký tự",
+  },
+  dateCreate: {
+    required: "Ngày cập nhật đang trống",
+  },
+};

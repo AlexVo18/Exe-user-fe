@@ -71,11 +71,11 @@ const AdminNavBar = () => {
               <Users className="h-5 w-5" />
               Người dùng
             </Link>
-            <Link to={""} className={getAcitveLink("trees")}>
+            <Link to={"tree"} className={getAcitveLink("tree")}>
               <TreeDeciduous className="h-5 w-5" />
               Cây trồng
             </Link>
-            <Link to={""} className={getAcitveLink("order")}>
+            <Link to={"transaction"} className={getAcitveLink("transaction")}>
               <ShoppingCart className="h-5 w-5" />
               Giao dịch
             </Link>

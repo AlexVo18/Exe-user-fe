@@ -23,3 +23,22 @@ export interface Bank {
   isTransfer: number;
   swift_code: string;
 }
+
+export interface RecentTransactionData {
+  transactionID: number;
+  username: string;
+  email: string;
+  quantity: number;
+  dateCreate: string;
+}
+
+export interface Transaction {
+  transactionID: number;
+  accountBank: string;
+  bankCode: string;
+  bankName: string;
+  username: string;
+  totalAmout: number;
+  dateCreate: string;
+  status: number;
+}

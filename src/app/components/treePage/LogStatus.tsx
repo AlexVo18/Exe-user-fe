@@ -5,23 +5,33 @@ import {
   redBtn,
   lightGreenBg,
   lightGreenBtn,
-  orangeBg,
-  orangeBtn,
+  roseBg,
+  roseBtn,
+  skyBg,
+  skyBtn,
 } from "@/app/constants/cssContstants";
 
 interface Props {
   status: number;
 }
 
-const TreeStatus = ({ status }: Props) => {
+// 0 chết
+// 1 bình thường
+// 2 bệnh
+// 3 đang được chăm sóc
+// 4 khỏe mạnh
+
+const LogStatus = ({ status }: Props) => {
   return (
     <div
-      className={`inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full ${
+      className={`inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full " ${
         status === 1
           ? greyBg
           : status === 2
-          ? orangeBg
+          ? roseBg
           : status === 3
+          ? skyBg
+          : status === 4
           ? lightGreenBg
           : redBg
       }`}
@@ -31,21 +41,25 @@ const TreeStatus = ({ status }: Props) => {
           status === 1
             ? greyBtn
             : status === 2
-            ? orangeBtn
+            ? roseBtn
             : status === 3
+            ? skyBtn
+            : status === 4
             ? lightGreenBtn
             : redBtn
         }`}
       ></span>
       {status === 1
-        ? "Đã mua"
+        ? "Bình thường"
         : status === 2
-        ? "Đã trồng"
+        ? "Bệnh"
         : status === 3
-        ? "Đã ươm mầm"
-        : "Đã hủy"}
+        ? "Đang được chăm sóc"
+        : status === 4
+        ? "Khỏe mạnh"
+        : "Chết"}
     </div>
   );
 };
 
-export default TreeStatus;
+export default LogStatus;

@@ -16,7 +16,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu";
-import { Input } from "@/app/components/ui/input";
 import {
   Pagination,
   PaginationContent,
@@ -33,7 +32,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/ui/table";
-import { Eye, ListFilter, MoreHorizontal, Search } from "lucide-react";
+import { Eye, ListFilter, MoreHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { WarningIcon } from "../toast/ToastIcons";
 import customToast from "@/app/utils/customToast";
@@ -41,11 +40,14 @@ import News from "@/app/api/APIs/news";
 import Loading from "@/app/pages/loadingPage/Loading";
 import { NewsData } from "@/app/models/news.models";
 import { formatDate } from "@/app/utils/formatDate";
+import TypeNews from "../status/TypeNews";
+import { calTableIndex } from "@/app/utils/calTableIndex";
 
 const NewsList = () => {
   const [newsList, setNewsList] = useState<NewsData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filterType, setFilterType] = useState<number | null>(null);
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -53,8 +55,6 @@ const NewsList = () => {
       getNews();
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   }, []);
 
@@ -70,6 +70,8 @@ const NewsList = () => {
         description: "Đã xảy ra lỗi, không thể lấy danh sách",
         duration: 3000,
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,7 +81,7 @@ const NewsList = () => {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) =>
-      Math.min(prevPage + 1, Math.ceil(newsList.length / itemsPerPage))
+      Math.min(prevPage + 1, Math.ceil(filteredNewsList.length / itemsPerPage))
     );
   };
 
@@ -87,10 +89,19 @@ const NewsList = () => {
     setCurrentPage(page);
   };
 
+  const handleFilterChange = (type: number | null) => {
+    setFilterType(type);
+    setCurrentPage(1); // Reset to first page on filter change
+  };
+
+  const filteredNewsList = filterType
+    ? newsList.filter((news) => news.type === filterType)
+    : newsList;
+
   // Calculate slice for pagination
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, newsList.length);
-  const paginatedList = newsList.slice(startIndex, endIndex);
+  const endIndex = Math.min(startIndex + itemsPerPage, filteredNewsList.length);
+  const paginatedList = filteredNewsList.slice(startIndex, endIndex);
 
   return (
     <>
@@ -114,30 +125,42 @@ const NewsList = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+                <DropdownMenuLabel>Filter bằng</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem checked>
+                <DropdownMenuCheckboxItem
+                  checked={filterType === null}
+                  onClick={() => handleFilterChange(null)}
+                >
                   Tất Cả
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={filterType === 1}
+                  onClick={() => handleFilterChange(1)}
+                >
                   Cập Nhật Hằng Tháng
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={filterType === 2}
+                  onClick={() => handleFilterChange(2)}
+                >
                   Truyền Thông
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={filterType === 3}
+                  onClick={() => handleFilterChange(3)}
+                >
                   Nét Sống Xanh
                 </DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <div className="relative ml-auto flex-1 md:grow-0 w-auto">
+            {/* <div className="relative ml-auto flex-1 md:grow-0 w-auto">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search..."
                 className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
               />
-            </div>
+            </div> */}
           </div>
         </CardHeader>
         <CardContent>
@@ -146,6 +169,7 @@ const NewsList = () => {
               <TableRow>
                 <TableHead>No.</TableHead>
                 <TableHead>Tiêu đề</TableHead>
+                <TableHead>Thể loại</TableHead>
                 <TableHead>Thumbnail</TableHead>
                 {/* <TableHead>Tình trạng</TableHead> */}
                 <TableHead>Tóm tắt</TableHead>
@@ -158,8 +182,13 @@ const NewsList = () => {
             <TableBody>
               {paginatedList.map((news: NewsData, index: number) => (
                 <TableRow key={index + 1}>
-                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    {calTableIndex(currentPage, index, itemsPerPage)}
+                  </TableCell>
                   <TableCell>{news.newsTitle}</TableCell>
+                  <TableCell>
+                    <TypeNews type={news.type} />
+                  </TableCell>
                   <TableCell>
                     <img
                       src={news.thumbnail}
@@ -203,7 +232,7 @@ const NewsList = () => {
               </PaginationItem>
               {[
                 ...Array(
-                  Math.min(Math.ceil(newsList.length / itemsPerPage), 5)
+                  Math.min(Math.ceil(filteredNewsList.length / itemsPerPage), 5)
                 ).keys(),
               ].map((pageNum) => (
                 <PaginationItem key={pageNum + 1} className="cursor-pointer">
