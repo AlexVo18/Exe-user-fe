@@ -15,6 +15,7 @@ const User = {
       username: input.username,
       password: input.password,
     }),
+  getUserInfo: () => requests.jwtApiGet("/api/admin/users"),
 };
 
 export default User;
