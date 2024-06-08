@@ -61,7 +61,7 @@ const Sidebar = () => {
             <Users className="h-4 w-4" />
             Người dùng
           </Link>
-          <Link to={" "} className={getAcitveLink("trees")}>
+          <Link to={"tree"} className={getAcitveLink("tree")}>
             <TreeDeciduous className="h-4 w-4" />
             Cây trồng
           </Link>

@@ -17,3 +17,6 @@ export const lightGreenBtn = "bg-green-500";
 
 export const redBg = "bg-red-100 text-red-800";
 export const redBtn = "bg-red-500 ";
+
+export const roseBg = "bg-rose-100 text-rose-800";
+export const roseBtn = "bg-rose-500 ";

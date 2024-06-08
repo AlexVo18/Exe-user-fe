@@ -1,5 +1,9 @@
-import { TreeCodeDetail, UserTreesCode } from "@/app/models/tree.models";
-import { useContext, useEffect, useState } from "react";
+import {
+  TreeCodeDetail,
+  TreeCode,
+  TreeLogImage,
+} from "@/app/models/tree.models";
+import { useCallback, useContext, useEffect, useState } from "react";
 import FsLightbox from "fslightbox-react";
 import Loading from "../../loadingPage/Loading";
 import DonateButton from "@/app/components/button/DonateButton";
@@ -24,29 +28,41 @@ import {
   PaginationItem,
   PaginationLink,
 } from "@/app/components/ui/pagination";
+import LogStatus from "@/app/components/treePage/LogStatus";
 
 const TreesView = () => {
-  const [treesList, setTreeList] = useState<UserTreesCode[]>([]);
+  const [treesList, setTreeList] = useState<TreeCode[]>([]);
   const [detailList, setDetailList] = useState<TreeCodeDetail[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentDetailPage, setCurrentDetailPage] = useState<number>(1);
   const itemsPerPage = 3;
-  const itemsPerDetail = 3;
+  const itemsPerDetail = 2;
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     index: 0,
+    sources: [] as string[],
   });
   const { userInfo, userLoading } = useContext(AuthContext);
 
-  const openLightboxOnSlide = (number: number) => {
-    setIsLoading(true);
-    setLightboxController({
-      toggler: !lightboxController.toggler,
-      index: number,
-    });
-    setIsLoading(false);
-  };
+  const openLightboxOnSlide = useCallback(
+    (images: string[], index: number) => {
+      try {
+        setLightboxController({
+          toggler: !lightboxController.toggler,
+          index: index,
+          sources: images,
+        });
+      } catch (error) {
+        customToast({
+          icon: <WarningIcon />,
+          description: "Đã xảy ra lỗi, không thể mở",
+          duration: 3000,
+        });
+      }
+    },
+    [lightboxController.toggler]
+  );
 
   useEffect(() => {
     try {
@@ -136,14 +152,14 @@ const TreesView = () => {
       {isLoading || userLoading ? (
         <Loading />
       ) : (
-        <div className="container mx-auto  ">
+        <div className="container mx-auto">
           {currentItems.length > 0 ? (
             <div className="grid grid-cols-5 mx-5 md:mx-40 my-5 gap-4">
               <div className="lg:col-span-2 col-span-5 w-full">
-                <div className=" text-2xl font-semibold text-mainBrown mb-5 text-center">
+                <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Mã Cây
                 </div>
-                {currentItems.map((tree: UserTreesCode, index: number) => (
+                {currentItems.map((tree: TreeCode, index: number) => (
                   <Card
                     className="bg-mainSkin text-mainGreen cursor-pointer hover:bg-mainDarkerSkin transition hover:text-mainDarkerBrown mb-5"
                     onClick={() => handleGetDetail(tree.plantCodeID)}
@@ -154,7 +170,7 @@ const TreesView = () => {
                         <div>{tree.plantCodeID}</div>
                         <TreeStatus status={tree.status} />
                       </CardTitle>
-                      <CardDescription className="text-mainBrown ">
+                      <CardDescription className="text-mainBrown">
                         <div className="flex mt-1">
                           <div>
                             <MapPin />
@@ -200,28 +216,33 @@ const TreesView = () => {
               </div>
 
               <div className="lg:col-span-3 col-span-5 w-full">
-                <div className=" text-2xl font-semibold text-mainBrown mb-5 text-center">
+                <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Nhật Ký Cây Trồng
                 </div>
                 {currentDetails.length > 0 ? (
                   <>
                     {currentDetails.map(
-                      (detail: TreeCodeDetail, index: number) => (
-                        <Card className="" key={index}>
+                      (detail: TreeCodeDetail, detailIndex: number) => (
+                        <Card className="" key={detailIndex}>
                           <CardHeader>
-                            <CardTitle className="text-mainGreen">
-                              <span className="italic mr-1 text-black">
-                                Ngày
-                              </span>{" "}
-                              {formatDate(detail.dateCreate).slice(0, 2)}{" "}
-                              <span className="italic mr-1 text-black">
-                                Tháng
-                              </span>{" "}
-                              {formatDate(detail.dateCreate).slice(3, 5)}{" "}
-                              <span className="italic mr-1 text-black">
-                                Năm
-                              </span>{" "}
-                              {formatDate(detail.dateCreate).slice(6, 10)}
+                            <CardTitle className="flex justify-between items-center">
+                              <div className="text-mainGreen">
+                                <span className="italic mr-1 text-black">
+                                  Ngày
+                                </span>{" "}
+                                {formatDate(detail.dateCreate).slice(0, 2)}{" "}
+                                <span className="italic mr-1 text-black">
+                                  Tháng
+                                </span>{" "}
+                                {formatDate(detail.dateCreate).slice(3, 5)}{" "}
+                                <span className="italic mr-1 text-black">
+                                  Năm
+                                </span>{" "}
+                                {formatDate(detail.dateCreate).slice(6, 10)}
+                              </div>
+                              <div className="mb-2">
+                                <LogStatus status={detail.status} />
+                              </div>
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
@@ -235,16 +256,24 @@ const TreesView = () => {
                                 </div>
                                 <div className="grid grid-cols-4 gap-2 w-full">
                                   {detail.plantImageDetail.map(
-                                    (image: string, index: number) => (
+                                    (
+                                      image: TreeLogImage,
+                                      imageIndex: number
+                                    ) => (
                                       <div
-                                        key={index}
+                                        key={imageIndex}
                                         className="cursor-pointer"
                                         onClick={() =>
-                                          openLightboxOnSlide(index)
+                                          openLightboxOnSlide(
+                                            detail.plantImageDetail.map(
+                                              (img) => img.url
+                                            ),
+                                            imageIndex
+                                          )
                                         }
                                       >
                                         <img
-                                          src={image}
+                                          src={image.url}
                                           alt=""
                                           className="h-full w-full"
                                         />
@@ -254,7 +283,7 @@ const TreesView = () => {
                                 </div>
                                 <FsLightbox
                                   toggler={lightboxController.toggler}
-                                  sources={detail.plantImageDetail}
+                                  sources={lightboxController.sources}
                                   sourceIndex={lightboxController.index}
                                   type="image"
                                 />
@@ -294,11 +323,11 @@ const TreesView = () => {
               </div>
             </div>
           ) : (
-            <div className=" mx-5 md:mx-80 my-5 ">
+            <div className="mx-5 md:mx-80 my-5">
               <div className="text-2xl font-semibold text-center text-mainBrown">
                 XEM CÂY
               </div>
-              <div className="h-[200px]  flex flex-col justify-center items-center text-muted-foreground">
+              <div className="h-[200px] flex flex-col justify-center items-center text-muted-foreground">
                 <div>Bạn hiện tại đang chưa nuôi cây trồng nào</div>
                 <div className="mb-5">
                   Hãy cùng Nuôi Cây trồng thêm thât nhiều cây xanh nào
