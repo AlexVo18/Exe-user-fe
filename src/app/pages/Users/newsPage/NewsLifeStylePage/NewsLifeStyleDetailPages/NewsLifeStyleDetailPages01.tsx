@@ -1,7 +1,9 @@
+import BreadcrumbsLifeStyle from "./BreadcrumbsLifeStyle"
 
 function NewsLifeStyleDetailPages01() {
     return (
         <div className="">
+            <BreadcrumbsLifeStyle />
             <div className=" my-20 flex justify-center overflow-hidden ">
                 <div className="w-full md:w-[740px] mx-3 mb-30 ">
                     <strong className="text-3xl">Quảng Nam: Nơi “hội ngộ” của các dự án quốc tế bảo tồn động vật hoang dã</strong>
@@ -40,8 +42,6 @@ function NewsLifeStyleDetailPages01() {
                     <p className="text-sm font-light mb-3 italic my-2">WWF triển khai những chương trình hỗ trợ sinh kế cho người dân, nhằm giảm động cơ khai thác tài nguyên thiên nhiên bất hợp pháp. (ảnh WWF)</p>
                     <p className="text-lg mt-3">“Để đối phó mối đe dọa vẫn đang diễn ra đối với ĐDSH tại Quảng Nam, chúng tôi hỗ trợ thúc đẩy sản xuất kinh doanh thân thiện với bảo tồn cho các cộng đồng phụ thuộc vào rừng, tăng cường công tác quản lý rừng đặc dụng và rừng phòng hộ, tăng cường thực thi pháp luật đối với các vi phạm về rừng và động vật hoang dã, giảm nhu cầu tiêu thụ lâm sản và động vật hoang dã trái pháp luật thông qua các phương pháp thay đổi hành vi”, ông Nick Cox, Giám đốc Hợp phần Bảo tồn ĐDSH do USAID tài trợ chia sẻ.</p>
                 </div>
-
-
             </div>
         </div>
     )

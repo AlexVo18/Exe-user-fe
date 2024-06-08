@@ -1,9 +1,11 @@
+import BreadcrumbsLifeStyle from "./BreadcrumbsLifeStyle"
 
 function NewsLifeStyleDetailPages03() {
     return (
         <div className="">
-            <div className=" my-20 flex justify-center overflow-hidden ">
-                <div className="w-full md:w-[740px] mx-3 mb-30 ">
+            <BreadcrumbsLifeStyle />
+            <div className="my-20 flex justify-center overflow-hidden ">
+                <div className="w-full md:w-[740px] mx-3 mb-30">
                     <strong className="text-3xl">Quảng Nam: Mít tinh hưởng ứng Ngày Môi trường thế giới 2024</strong>
                     <h1 className="text-xs font-light my-5">04/06/2024 - 15:39</h1>
                     <p className=" text-2xl font-semibold mb-5">Sáng ngày 4/6, tại Làng Nghệ thuật Cộng đồng Tam Thanh, Sở TN&MT Quảng Nam phối hợp với UBND TP. Tam Kỳ tổ chức lễ mít tinh hưởng ứng Ngày Môi trường thế giới, Tuần lễ Biển và Hải đảo Việt Nam và "Tháng hành động vì môi trường" năm 2024.</p>
@@ -32,8 +34,6 @@ function NewsLifeStyleDetailPages03() {
                     <p className="text-sm font-light mb-3 italic my-2">Người dân cùng tham gia dọn vệ sinh hưởng ứng Ngày Môi trường thế giới</p>
                     <p className="text-lg mt-3">Ngay sau lễ, các đại biểu đã cùng với nhân dân tham gia vệ sinh môi trường bờ biển Tam Thanh, trồng cây xanh, gắn biển và bàn giao tuyến đường “Sáng – Xanh - Sạch - Đẹp” và công trình bích họa “Hoa Phượng Đỏ”.…</p>
                 </div>
-
-
             </div>
         </div>
     )

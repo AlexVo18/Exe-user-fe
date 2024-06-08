@@ -1,8 +1,10 @@
+import BreadcrumbsLifeStyle from "./BreadcrumbsLifeStyle"
 
 function NewsLifeStyleDetailPages02() {
     return (
         <div>
             <div className="">
+                <BreadcrumbsLifeStyle />
                 <div className=" my-20 flex  justify-center overflow-hidden ">
                     <div className="w-full md:w-[740px] mx-3 mb-30 ">
                         <strong className="text-3xl">'Lớp học trong rừng' tại Vườn quốc gia Cúc Phương</strong>
@@ -31,8 +33,6 @@ function NewsLifeStyleDetailPages02() {
                         <p className="text-lg mt-3">Việt Nam là quốc gia đầu tiên được Suntory mở rộng dự án bên ngoài Nhật Bản vào năm 2015 với mong muốn lan tỏa ý thức bảo vệ nguồn nước và giữ gìn vệ sinh môi trường cho học sinh và cộng đồng.</p>
                         <p className="text-lg mt-3">Sau gần 9 năm triển khai tại nhiều tỉnh, thành phố trên cả nước, hàng triệu học sinh, thầy cô giáo và người dân được hưởng lợi từ chương trình.</p>
                     </div>
-
-
                 </div>
             </div>
         </div>

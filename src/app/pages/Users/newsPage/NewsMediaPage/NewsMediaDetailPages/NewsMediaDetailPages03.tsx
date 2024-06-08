@@ -1,8 +1,10 @@
+import BreadcrumbsNewsMedia from "../BreadcrumbsNewsMedia"
 
 function NewsMediaDetailPages03() {
     return (
         <div>
             <div className="">
+                <BreadcrumbsNewsMedia />
                 <div className=" my-20 flex  justify-center overflow-hidden ">
                     <div className="w-full md:w-[740px] mx-3 mb-30 ">
                         <strong className="text-3xl">Thúc đẩy vai trò của lực lượng phi chính thức trong thực hiện EPR</strong>
