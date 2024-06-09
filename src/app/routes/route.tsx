@@ -74,6 +74,13 @@ export const router = createBrowserRouter([
             <News />
           </Suspense>
         ),
+      }, {
+        path: "/news/:type/:id",
+        element: (
+          <Suspense fallback={<></>}>
+            <DetailPage />
+          </Suspense>
+        ),
       },
       {
         path: "sponsor",
