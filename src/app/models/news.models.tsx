@@ -22,3 +22,15 @@ export interface RecentUpdateData {
   thumbnail: string;
   dateCreate: string;
 }
+
+export interface NewsDetailData {
+  newsID: number;
+  newsTitle: string;
+  newsSummary: string;
+  thumbnail: string;
+  newsDescription: string;
+  dateCreate: string;
+  ownerCreateID: number;
+  type: number;
+  status: number;
+}

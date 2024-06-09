@@ -4,14 +4,14 @@ import roles from "../constants/role";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
-import Result from "../pages/Users/resultPage/Result";
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 
 // Guest Route
 const Home = lazy(() => import("../pages/Users/homePage/Home"));
 const About = lazy(() => import("../pages/Users/aboutPage/About"));
-const News = lazy(() => import("../pages/Users/newsPage/News"));
+const News = lazy(() => import("../pages/Users/newsPage/NewsView"));
+const NewsDetail = lazy(() => import("../pages/Users/newsPage/NewsDetail"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 
@@ -19,6 +19,7 @@ const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
 const Profile = lazy(() => import("../pages/Users/profilePage/Profile"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
 const TreesView = lazy(() => import("../pages/Users/treePage/TreesView"));
+const Result = lazy(() => import("../pages/Users/resultPage/Result"));
 
 // Admin
 const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
@@ -74,11 +75,12 @@ export const router = createBrowserRouter([
             <News />
           </Suspense>
         ),
-      }, {
+      },
+      {
         path: "/news/:type/:id",
         element: (
           <Suspense fallback={<></>}>
-            <DetailPage />
+            <NewsDetail />
           </Suspense>
         ),
       },
