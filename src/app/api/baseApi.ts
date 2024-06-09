@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "";
+const baseURL = "https://nuoicay.azurewebsites.net";
 
 const baseApi = axios.create({
   baseURL,

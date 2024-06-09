@@ -1,30 +1,48 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import roles from "../constants/role";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
-import AdminNewsLayout from "../pages/Admin/AdminNewsLayout";
-import { Suspense, lazy } from "react";
+import Result from "../pages/Users/resultPage/Result";
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
+
+// Guest Route
 const Home = lazy(() => import("../pages/Users/homePage/Home"));
 const About = lazy(() => import("../pages/Users/aboutPage/About"));
 const News = lazy(() => import("../pages/Users/newsPage/News"));
 const Sponsor = lazy(() => import("../pages/Users/sponsorPage/Sponsor"));
 const Packs = lazy(() => import("../pages/Users/packsPage/Packs"));
+
+// Login User Route
+const Profile = lazy(() => import("../pages/Users/profilePage/Profile"));
 const Donation = lazy(() => import("../pages/Users/donationPage/Donation"));
-const DetailPage = lazy(() => import("../pages/Users/newsPage/RouteNewsUpdate"));
+const TreesView = lazy(() => import("../pages/Users/treePage/TreesView"));
 
-// const Loading = lazy(() => import("../pages/loadingPage/Loading"));
+// Admin
+const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
+const UserPage = lazy(() => import("../pages/Admin/userPage/UserPage"));
+const AdminTransaction = lazy(
+  () => import("../pages/Admin/transactionPage/AdminTransaction")
+);
+const AdminNewsLayout = lazy(
+  () => import("../pages/Admin/newsPage/AdminNewsLayout")
+);
+const AdminTree = lazy(() => import("../pages/Admin/treePage/AdminTree"));
 
+// Other
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
 const Login = lazy(() => import("../pages/Users/authPages/Login"));
 const ForgotPassword = lazy(
   () => import("../pages/Users/authPages/ForgotPassword")
 );
 const Recover = lazy(() => import("../pages/Users/authPages/Recover"));
 const Register = lazy(() => import("../pages/Users/authPages/Register"));
-
-const Dashboard = lazy(() => import("../pages/Admin/dashboardPage/Dashboard"));
-import UserPage from "../pages/Admin/userPage/UserPage";
+const Error = lazy(() => import("../pages/Users/errorPage/Error"));
+const AdminTreeDetail = lazy(
+  () => import("../pages/Admin/treePage/AdminTreeDetail")
+);
 
 // ********************************
 
@@ -42,7 +60,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/about",
+        path: "about",
         element: (
           <Suspense fallback={<></>}>
             <About />
@@ -50,7 +68,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/news/:type",
+        path: "news/:type",
         element: (
           <Suspense fallback={<></>}>
             <News />
@@ -65,7 +83,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/sponsor",
+        path: "sponsor",
         element: (
           <Suspense fallback={<></>}>
             <Sponsor />
@@ -73,7 +91,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/packs",
+        path: "packs",
         element: (
           <Suspense fallback={<></>}>
             <Packs />
@@ -81,20 +99,47 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/donation",
+        path: "user",
         element: (
           <Suspense fallback={<></>}>
-            <Donation />
+            <ProtectedRoute allowedRoles={[roles.NORMAL]} />
           </Suspense>
         ),
-      },
-      {
-        path: "/loading",
-        element: (
-          <Suspense fallback={<></>}>
-            <></>
-          </Suspense>
-        ),
+        children: [
+          {
+            path: "profile",
+            index: true,
+            element: (
+              <Suspense fallback={<></>}>
+                <Profile />
+              </Suspense>
+            ),
+          },
+          {
+            path: "donation",
+            element: (
+              <Suspense fallback={<></>}>
+                <Donation />
+              </Suspense>
+            ),
+          },
+          {
+            path: "result",
+            element: (
+              <Suspense fallback={<></>}>
+                <Result />
+              </Suspense>
+            ),
+          },
+          {
+            path: "tree",
+            element: (
+              <Suspense fallback={<></>}>
+                <TreesView />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },
@@ -140,28 +185,75 @@ export const router = createBrowserRouter([
   },
   {
     path: "admin",
-    element: <MainAdminLayout />,
+    element: (
+      <Suspense fallback={<></>}>
+        <ProtectedRoute allowedRoles={[roles.ADMIN]} />
+      </Suspense>
+    ),
     children: [
       {
-        index: true,
-        element: (
-          <Suspense fallback={<></>}>
-            <Dashboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: "user",
-        element: (
-          <Suspense fallback={<></>}>
-            <UserPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "news",
-        element: <AdminNewsLayout />,
+        path: "",
+        element: <MainAdminLayout />,
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<></>}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+          {
+            path: "user",
+            element: (
+              <Suspense fallback={<></>}>
+                <UserPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "transaction",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTransaction />
+              </Suspense>
+            ),
+          },
+          {
+            path: "news",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminNewsLayout />
+              </Suspense>
+            ),
+          },
+          {
+            path: "tree",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTree />
+              </Suspense>
+            ),
+          },
+          {
+            path: "treeDetail/:plantCodeID/:status",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTreeDetail />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
+  },
+  // Bắt route lỗi
+  {
+    path: "*",
+    element: (
+      <Suspense fallback={<></>}>
+        <Error />
+      </Suspense>
+    ),
   },
 ]);

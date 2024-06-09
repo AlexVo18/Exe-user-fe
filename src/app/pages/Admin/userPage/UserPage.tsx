@@ -1,7 +1,11 @@
+import UserList from "./UserList"
+
 
 const UserPage = () => {
   return (
-    <div>UserPage</div>
+    <div>
+      <UserList />
+    </div>
   )
 }
 

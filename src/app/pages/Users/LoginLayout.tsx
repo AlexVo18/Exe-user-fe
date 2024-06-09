@@ -1,14 +1,15 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
   return (
-    <div className="h-[100vh] w-full ">
-      <img
-        src="images/Login_Background.jpg"
-        alt=""
-        className="object-cover absolute -z-10 h-[100vh] w-full"
-      />
-      <div className="flex justify-center items-center h-full ">{children}</div>
+    <div
+      className={`lg:h-screen ${
+        location.pathname.includes("login") ? "h-screen" : null
+      } w-full flex justify-center items-center bg-login-background`}
+    >
+      <div className="flex justify-center items-center">{children}</div>
     </div>
   );
 };

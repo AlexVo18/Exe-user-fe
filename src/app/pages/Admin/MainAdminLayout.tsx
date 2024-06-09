@@ -1,6 +1,9 @@
-import AdminNavBar from "@/app/components/main/AdminNavBar";
 import Sidebar from "@/app/components/main/Sidebar";
+import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
+// interface Props {
+//   children: ReactNode;
+// }
 
 const MainAdminLayout = () => {
   return (
@@ -8,9 +11,11 @@ const MainAdminLayout = () => {
       <div className="hidden border-r bg-muted/40 md:block">
         <Sidebar />
       </div>
-      <div className="flex flex-col">
-        <AdminNavBar />
-        <Outlet />
+      <div className="flex flex-col ">
+        <div className="relative">
+          {/* {children} */}
+          <Outlet />
+        </div>
       </div>
     </div>
   );

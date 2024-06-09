@@ -27,10 +27,16 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: () => ({
+        "login-background": "url('/images/Login_Background.jpg')",
+      }),
       colors: {
         mainGreen: "#5C822D",
         mainBrown: "#59471F",
         mainSkin: "#F2E5C5",
+        mainDarkerSkin: "#E9DDBF",
+        mainDarkerGreen: "#55782A",
+        mainDarkerBrown: "#51411C",
         mainLighterSkin: "#f8f2e2 ",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

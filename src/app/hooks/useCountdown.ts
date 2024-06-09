@@ -8,7 +8,7 @@ export default function useCountdown() {
     // Trừ tgian trong countdown
     const timeout = setTimeout(() => {
       setSecondsLeft(secondsLeft - 1);
-    }, 1);
+    }, 1000);
     return () => clearTimeout(timeout);
   }, [secondsLeft]);
 
