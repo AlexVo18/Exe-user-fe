@@ -59,7 +59,7 @@ const UpdateList = ({ recentUpdates }: Props) => {
           ))}
           {/* <div className="grid grid-cols-11 xl:mx-40 lg:mx-20 mt-5 gap-2">
             <div className="flex justify-end items-center col-span-5 my-2">
-              <img src="images/Ex.svg" alt="Logo Img" className="w-60" />
+              <img src="images/Ex.png" alt="Logo Img" className="w-60" />
             </div>
             <div className="col-span-1 flex justify-center">
               <div className="flex justify-center items-center">

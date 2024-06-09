@@ -45,24 +45,21 @@ const TreesView = () => {
   });
   const { userInfo, userLoading } = useContext(AuthContext);
 
-  const openLightboxOnSlide = useCallback(
-    (images: string[], index: number) => {
-      try {
-        setLightboxController({
-          toggler: !lightboxController.toggler,
-          index: index,
-          sources: images,
-        });
-      } catch (error) {
-        customToast({
-          icon: <WarningIcon />,
-          description: "Đã xảy ra lỗi, không thể mở",
-          duration: 3000,
-        });
-      }
-    },
-    [lightboxController.toggler]
-  );
+  const openLightboxOnSlide = (images: string[], index: number) => {
+    try {
+      setLightboxController({
+        toggler: !lightboxController.toggler,
+        index: index,
+        sources: images,
+      });
+    } catch (error) {
+      customToast({
+        icon: <WarningIcon />,
+        description: "Đã xảy ra lỗi, không thể mở",
+        duration: 3000,
+      });
+    }
+  };
 
   useEffect(() => {
     try {
@@ -100,6 +97,7 @@ const TreesView = () => {
       if (userInfo) {
         const response = await Tree.getTreesCodeDetail(plantCodeID);
         setDetailList(response);
+        setCurrentDetailPage(1);
       }
     } catch (error) {
       customToast({
@@ -131,10 +129,11 @@ const TreesView = () => {
   // Phân trang detail
   const indexOfLastDetail = currentDetailPage * itemsPerDetail;
   const indexOfFirstDetail = indexOfLastDetail - itemsPerDetail;
-  const currentDetails = detailList.slice(
-    indexOfFirstDetail,
-    indexOfLastDetail
-  );
+  const currentDetails =
+    detailList.length < 2
+      ? detailList
+      : detailList.slice(indexOfFirstDetail, indexOfLastDetail);
+
   const totalDetailPages = Math.ceil(detailList.length / itemsPerDetail);
   const handlePreviousDetail = () => {
     if (currentDetailPage > 1) {
@@ -146,6 +145,10 @@ const TreesView = () => {
       setCurrentDetailPage(currentDetailPage + 1);
     }
   };
+  useEffect(() => {
+    console.log("Change:", currentDetails);
+    console.log("Default:", detailList);
+  }, [currentDetails]);
 
   return (
     <>
@@ -158,6 +161,25 @@ const TreesView = () => {
               <div className="lg:col-span-2 col-span-5 w-full">
                 <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Mã Cây
+                </div>
+                <div className="w-full justify-center">
+                  <Pagination>
+                    <PaginationContent className="flex justify-between">
+                      <PaginationItem className="cursor-pointer">
+                        <PaginationLink onClick={handlePreviousPage}>
+                          &lt;
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem className="cursor-default">
+                        {currentPage}/{totalPages}
+                      </PaginationItem>
+                      <PaginationItem className="cursor-pointer">
+                        <PaginationLink onClick={handleNextPage}>
+                          &gt;
+                        </PaginationLink>
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
                 </div>
                 {currentItems.map((tree: TreeCode, index: number) => (
                   <Card
@@ -194,36 +216,36 @@ const TreesView = () => {
                     </CardHeader>
                   </Card>
                 ))}
-                <div className="w-full justify-center">
-                  <Pagination>
-                    <PaginationContent className="flex justify-between">
-                      <PaginationItem className="cursor-pointer">
-                        <PaginationLink onClick={handlePreviousPage}>
-                          &lt;
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem className="cursor-default">
-                        {currentPage}/{totalPages}
-                      </PaginationItem>
-                      <PaginationItem className="cursor-pointer">
-                        <PaginationLink onClick={handleNextPage}>
-                          &gt;
-                        </PaginationLink>
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </div>
               </div>
 
               <div className="lg:col-span-3 col-span-5 w-full">
                 <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Nhật Ký Cây Trồng
                 </div>
+                <div className="w-full justify-center">
+                  <Pagination>
+                    <PaginationContent className="flex justify-between">
+                      <PaginationItem className="cursor-pointer">
+                        <PaginationLink onClick={handlePreviousDetail}>
+                          &lt;
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem className="cursor-default">
+                        {currentDetailPage}/{totalDetailPages}
+                      </PaginationItem>
+                      <PaginationItem className="cursor-pointer">
+                        <PaginationLink onClick={handleNextDetail}>
+                          &gt;
+                        </PaginationLink>
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
                 {currentDetails.length > 0 ? (
                   <>
                     {currentDetails.map(
-                      (detail: TreeCodeDetail, detailIndex: number) => (
-                        <Card className="" key={detailIndex}>
+                      (detail: TreeCodeDetail, index: number) => (
+                        <Card className="mb-4" key={index}>
                           <CardHeader>
                             <CardTitle className="flex justify-between items-center">
                               <div className="text-mainGreen">
@@ -249,7 +271,7 @@ const TreesView = () => {
                             <p>{detail.contentText}</p>
                           </CardContent>
                           <CardFooter className="flex-col">
-                            {detail.plantImageDetail.length > 0 ? (
+                            {/* {detail.plantImageDetail.length > 0 ? (
                               <>
                                 <div className="mb-2 w-full">
                                   Hình ảnh kèm theo:
@@ -281,39 +303,20 @@ const TreesView = () => {
                                     )
                                   )}
                                 </div>
-                                <FsLightbox
-                                  toggler={lightboxController.toggler}
-                                  sources={lightboxController.sources}
-                                  sourceIndex={lightboxController.index}
-                                  type="image"
-                                />
                               </>
                             ) : (
                               <></>
                             )}
+                            <FsLightbox
+                              toggler={lightboxController.toggler}
+                              sources={lightboxController.sources}
+                              sourceIndex={lightboxController.index}
+                              type="image"
+                            /> */}
                           </CardFooter>
                         </Card>
                       )
                     )}
-                    <div className="w-full justify-center">
-                      <Pagination>
-                        <PaginationContent className="flex justify-between">
-                          <PaginationItem className="cursor-pointer">
-                            <PaginationLink onClick={handlePreviousDetail}>
-                              &lt;
-                            </PaginationLink>
-                          </PaginationItem>
-                          <PaginationItem className="cursor-default">
-                            {currentDetailPage}/{totalDetailPages}
-                          </PaginationItem>
-                          <PaginationItem className="cursor-pointer">
-                            <PaginationLink onClick={handleNextDetail}>
-                              &gt;
-                            </PaginationLink>
-                          </PaginationItem>
-                        </PaginationContent>
-                      </Pagination>
-                    </div>
                   </>
                 ) : (
                   <div className="lg:h-full flex justify-center items-center text-2xl text-muted-foreground text-center">

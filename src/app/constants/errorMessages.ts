@@ -72,3 +72,11 @@ export const ErrorMessageCreateLog = {
     required: "Ngày cập nhật đang trống",
   },
 };
+
+export const ErrorMessageDonate = {
+  quantity: {
+    required: "Số lượng cây đnag thiếu",
+    min: "Phải tối thiểu 1 cây",
+    max: "Số lượng cây không được quá 1000",
+  },
+};

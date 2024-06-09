@@ -42,3 +42,15 @@ export interface Transaction {
   dateCreate: string;
   status: number;
 }
+
+export interface CreateDonationData {
+  quantity: number;
+  urlCancel: string;
+  urlReturn: string;
+}
+
+export interface CreatePayment {
+  orderID: number;
+  accountID: number;
+  quantity: number;
+}
