@@ -4,6 +4,7 @@ import roles from "../constants/role";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
+import Result from "../pages/Users/resultPage/Result";
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 
@@ -116,6 +117,14 @@ export const router = createBrowserRouter([
             ),
           },
           {
+            path: "result",
+            element: (
+              <Suspense fallback={<></>}>
+                <Result />
+              </Suspense>
+            ),
+          },
+          {
             path: "tree",
             element: (
               <Suspense fallback={<></>}>
@@ -170,60 +179,64 @@ export const router = createBrowserRouter([
   {
     path: "admin",
     element: (
-      <MainAdminLayout>
-        <Suspense fallback={<></>}>
-          <ProtectedRoute allowedRoles={[roles.ADMIN]} />
-        </Suspense>
-      </MainAdminLayout>
+      <Suspense fallback={<></>}>
+        <ProtectedRoute allowedRoles={[roles.ADMIN]} />
+      </Suspense>
     ),
     children: [
       {
-        index: true,
-        element: (
-          <Suspense fallback={<></>}>
-            <Dashboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: "user",
-        element: (
-          <Suspense fallback={<></>}>
-            <UserPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "transaction",
-        element: (
-          <Suspense fallback={<></>}>
-            <AdminTransaction />
-          </Suspense>
-        ),
-      },
-      {
-        path: "news",
-        element: (
-          <Suspense fallback={<></>}>
-            <AdminNewsLayout />
-          </Suspense>
-        ),
-      },
-      {
-        path: "tree",
-        element: (
-          <Suspense fallback={<></>}>
-            <AdminTree />
-          </Suspense>
-        ),
-      },
-      {
-        path: "treeDetail/:plantCodeID/:status",
-        element: (
-          <Suspense fallback={<></>}>
-            <AdminTreeDetail />
-          </Suspense>
-        ),
+        path: "",
+        element: <MainAdminLayout />,
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<></>}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+          {
+            path: "user",
+            element: (
+              <Suspense fallback={<></>}>
+                <UserPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "transaction",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTransaction />
+              </Suspense>
+            ),
+          },
+          {
+            path: "news",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminNewsLayout />
+              </Suspense>
+            ),
+          },
+          {
+            path: "tree",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTree />
+              </Suspense>
+            ),
+          },
+          {
+            path: "treeDetail/:plantCodeID/:status",
+            element: (
+              <Suspense fallback={<></>}>
+                <AdminTreeDetail />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },

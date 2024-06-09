@@ -8,7 +8,7 @@ const Banner = () => {
     <div className="h-[600px]">
       <img
         src="images/Banner.jpg"
-        alt="Banner.svg"
+        alt="Banner"
         className="w-full object-cover h-[600px] absolute -z-10"
       />
       <div className="grid md:grid-cols-2 z-10 text-white h-full">

@@ -103,16 +103,19 @@ const Navbar = () => {
       {/* Navbar thường */}
       <nav className="hidden flex-col justify-between gap-6 text-lg font-medium lg:flex lg:flex-row lg:items-center lg:gap-5 lg:text-sm w-full">
         <Link to={"/"}>
-          <img src="images/Logo_With_Name.svg" alt="Logo.img" />
+          <img src="/images/Logo_With_Name.jpg" alt="Logo" />
         </Link>
         <NavigationMenu className="font-semibold">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link to={"/about"} className="ml-4">
-                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+              <NavigationMenuLink
+                asChild
+                className="text-muted-foreground transition-colors hover:text-mainBrown"
+              >
+                <Link to={"/about"} className="ml-4">
                   VỀ CHÚNG TÔI
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="list-none ml-4 ">
               <NavigationMenuTrigger className="text-muted-foreground transition-colors hover:text-mainBrown font-semibold">
@@ -132,19 +135,15 @@ const Navbar = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to={"/packs"} className="">
-                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+              <NavigationMenuLink
+                asChild
+                className="text-muted-foreground transition-colors hover:text-mainBrown"
+              >
+                <Link to={"/packs"} className="">
                   ĐỒNG HÀNH NUÔI CÂY
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
-            {/* <NavigationMenuItem>
-              <Link to={"/sponsor"} className="ml-4">
-                <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
-                  TRI ÂN
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem> */}
             {userInfo ? (
               <>
                 <NavigationMenuItem>
@@ -212,11 +211,14 @@ const Navbar = () => {
               </>
             ) : (
               <NavigationMenuItem>
-                <Link to={"/login"} className="ml-4 cursor-pointer">
-                  <NavigationMenuLink className="text-muted-foreground transition-colors hover:text-mainBrown">
+                <NavigationMenuLink
+                  asChild
+                  className="text-muted-foreground transition-colors hover:text-mainBrown"
+                >
+                  <Link to={"/login"} className="ml-4 cursor-pointer">
                     ĐĂNG NHẬP
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             )}
           </NavigationMenuList>
@@ -226,7 +228,7 @@ const Navbar = () => {
       {/* Navbar mobile */}
       <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
-          <img src="images/Logo_With_Name.svg" alt="Logo.img" />
+          <img src="images/Logo_With_Name.jpg" alt="Logo.img" />
         </Link>
         <div className="flex items-center gap-2">
           {userInfo ? (

@@ -209,7 +209,7 @@ const Register = () => {
             className="w-20 cursor-pointer"
           >
             <img
-              src="images/Logo_With_Name.svg"
+              src="images/Logo_With_Name.jpg"
               alt="Logo.img"
               className="w-full"
             />
