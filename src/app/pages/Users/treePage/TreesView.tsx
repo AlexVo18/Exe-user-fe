@@ -224,7 +224,7 @@ const TreesView = () => {
                       (detail: TreeCodeDetail, index: number) => (
                         <Card className="mb-4" key={index}>
                           <CardHeader>
-                            <CardTitle className="flex justify-between items-center">
+                            <CardTitle className="lg:flex block justify-between items-center">
                               <div className="text-mainGreen">
                                 <span className="italic mr-1 text-black">
                                   Ngày
@@ -239,7 +239,7 @@ const TreesView = () => {
                                 </span>{" "}
                                 {formatDate(detail.dateCreate).slice(6, 10)}
                               </div>
-                              <div className="mb-2">
+                              <div className="mb-2 lg:mt-0 mt-2">
                                 <LogStatus status={detail.status} />
                               </div>
                             </CardTitle>
@@ -262,9 +262,19 @@ const TreesView = () => {
                                   >
                                     {detail.plantImageDetail.map(
                                       (image: string, index: number) => (
-                                        <a href={image} key={index} className="h-30 w-32 object-fill inline-block m-2">
+                                        <a
+                                          href={image.replace(
+                                            "http://",
+                                            "https://"
+                                          )}
+                                          key={index}
+                                          className="h-30 w-32 object-fill inline-block m-2"
+                                        >
                                           <img
-                                            src={image}
+                                            src={image.replace(
+                                              "http://",
+                                              "https://"
+                                            )}
                                             alt=""
                                             className="h-30 w-32 object-fill inline-block"
                                           />
