@@ -1,6 +1,6 @@
 import User from "@/app/api/APIs/user";
 import { SuccessIcon, WarningIcon } from "@/app/components/toast/ToastIcons";
-import { UpdateUserStatusParam, UserData } from "@/app/models/user.models";
+import { UserData } from "@/app/models/user.models";
 import customToast from "@/app/utils/customToast";
 import { useEffect, useState } from "react";
 import Loading from "../../loadingPage/Loading";

@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
+
 interface Props {
   icon: ReactNode;
   description: string;
 }
 
-const ToastDescription = ({ icon, description }: Props) => {
+const ToastCustomContent = ({ icon, description }: Props) => {
   return (
     <div className="flex items-center">
       <div className="mr-2">{icon}</div>
@@ -13,4 +14,4 @@ const ToastDescription = ({ icon, description }: Props) => {
   );
 };
 
-export default ToastDescription;
+export default ToastCustomContent;

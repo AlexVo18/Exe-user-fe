@@ -1,10 +1,10 @@
 import News from "@/app/api/APIs/news";
 import { WarningIcon } from "@/app/components/toast/ToastIcons";
 import { Card, CardContent } from "@/app/components/ui/card";
-import { NewsData, RecentUpdateData } from "@/app/models/news.models";
+import { NewsData } from "@/app/models/news.models";
 import customToast from "@/app/utils/customToast";
 import { formatDate } from "@/app/utils/formatDate";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loading from "../../loadingPage/Loading";
 

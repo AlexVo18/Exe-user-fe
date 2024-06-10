@@ -1,5 +1,5 @@
-import { TreeCodeDetail, TreeLogImage } from "@/app/models/tree.models";
-import { useState, useCallback } from "react";
+import { TreeCodeDetail } from "@/app/models/tree.models";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -9,15 +9,20 @@ import {
 } from "../ui/card";
 import { formatDate } from "@/app/utils/formatDate";
 import LogStatus from "../treePage/LogStatus";
-import FsLightbox from "fslightbox-react";
+import LightGallery from "lightgallery/react";
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/scss/lightgallery.scss";
+import "lightgallery/scss/lg-zoom.scss";
+import lgZoom from "lightgallery/plugins/zoom";
+
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
 } from "../ui/pagination";
-import customToast from "@/app/utils/customToast";
-import { WarningIcon } from "../toast/ToastIcons";
 
 interface Props {
   detailList: TreeCodeDetail[];
@@ -25,32 +30,8 @@ interface Props {
 
 const AdminTreeList = ({ detailList }: Props) => {
   const [currentDetailPage, setCurrentDetailPage] = useState<number>(1);
-  const [lightboxController, setLightboxController] = useState({
-    toggler: false,
-    index: 0,
-    sources: [] as string[],
-  });
 
   const itemsPerDetail = 3;
-
-  const openLightboxOnSlide = useCallback(
-    (images: string[], index: number) => {
-      try {
-        setLightboxController({
-          toggler: !lightboxController.toggler,
-          index: index,
-          sources: images,
-        });
-      } catch (error) {
-        customToast({
-          icon: <WarningIcon />,
-          description: "Đã xảy ra lỗi, không thể mở",
-          duration: 3000,
-        });
-      }
-    },
-    [lightboxController.toggler]
-  );
 
   const indexOfLastDetail = currentDetailPage * itemsPerDetail;
   const indexOfFirstDetail = indexOfLastDetail - itemsPerDetail;
@@ -74,6 +55,23 @@ const AdminTreeList = ({ detailList }: Props) => {
 
   return (
     <>
+      <div className="w-full justify-center">
+        <Pagination>
+          <PaginationContent className="flex justify-between">
+            <PaginationItem className="cursor-pointer">
+              <PaginationLink onClick={handlePreviousDetail}>
+                &lt;
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem className="cursor-default">
+              {currentDetailPage}/{totalDetailPages}
+            </PaginationItem>
+            <PaginationItem className="cursor-pointer">
+              <PaginationLink onClick={handleNextDetail}>&gt;</PaginationLink>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
       {currentDetails.map((detail: TreeCodeDetail, detailIndex: number) => (
         <Card key={detailIndex} className="mb-5">
           <CardHeader>
@@ -98,52 +96,35 @@ const AdminTreeList = ({ detailList }: Props) => {
             {detail.plantImageDetail.length > 0 && (
               <>
                 <div className="mb-2 w-full">Hình ảnh kèm theo:</div>
-                <div className="grid grid-cols-4 gap-2 w-full">
-                  {detail.plantImageDetail.map(
-                    (image: TreeLogImage, imageIndex: number) => (
-                      <div
-                        key={imageIndex}
-                        className="cursor-pointer"
-                        onClick={() =>
-                          openLightboxOnSlide(
-                            detail.plantImageDetail.map((img) => img.url),
-                            imageIndex
-                          )
-                        }
-                      >
-                        <img src={image.url} alt="" className="h-full w-full" />
-                      </div>
-                    )
-                  )}
+                <div className="w-full ">
+                  <LightGallery
+                    plugins={[lgZoom]}
+                    mode="lg-fade"
+                    speed={500}
+                    download={false}
+                  >
+                    {detail.plantImageDetail.map(
+                      (image: string, index: number) => (
+                        <a
+                          href={image}
+                          key={index}
+                          className="h-30 w-32 object-fill inline-block m-2"
+                        >
+                          <img
+                            src={image}
+                            alt=""
+                            className="h-30 w-32 object-fill inline-block"
+                          />
+                        </a>
+                      )
+                    )}
+                  </LightGallery>
                 </div>
-                <FsLightbox
-                  toggler={lightboxController.toggler}
-                  sources={lightboxController.sources}
-                  sourceIndex={lightboxController.index}
-                  type="image"
-                />
               </>
             )}
           </CardFooter>
         </Card>
       ))}
-      <div className="w-full justify-center">
-        <Pagination>
-          <PaginationContent className="flex justify-between">
-            <PaginationItem className="cursor-pointer">
-              <PaginationLink onClick={handlePreviousDetail}>
-                &lt;
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem className="cursor-default">
-              {currentDetailPage}/{totalDetailPages}
-            </PaginationItem>
-            <PaginationItem className="cursor-pointer">
-              <PaginationLink onClick={handleNextDetail}>&gt;</PaginationLink>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
-      </div>
     </>
   );
 };

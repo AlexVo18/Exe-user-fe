@@ -1,18 +1,18 @@
 import { ReactNode } from "react";
 import { toastTop } from "@/app/constants/cssContstants";
 import { toast } from "../components/ui/use-toast";
-import ToastDescription from "../components/toast/ToastDescription";
+import ToastCustomContent from "../components/toast/ToastCustomContent";
 
 interface Props {
   icon: ReactNode;
   description: string;
   duration: number;
 }
-
+// Phải để trong file tsx
 const customToast = ({ icon, description, duration }: Props) => {
   toast({
-    duration: duration || 3000,
-    description: <ToastDescription icon={icon} description={description} />,
+    duration,
+    description: <ToastCustomContent icon={icon} description={description} />,
     className: toastTop,
   });
 };

@@ -1,12 +1,8 @@
 import {
-  greyBg,
-  greyBtn,
   redBg,
   redBtn,
   lightGreenBg,
   lightGreenBtn,
-  orangeBg,
-  orangeBtn,
 } from "@/app/constants/cssContstants";
 
 interface Props {
