@@ -25,16 +25,10 @@ const AdminNewsLayout = () => {
               <TabsTrigger value="create">Tạo Mới</TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent
-            value="news"
-            // style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}
-          >
+          <TabsContent value="news">
             <NewsList />
           </TabsContent>
-          <TabsContent
-            value="create"
-            // style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}
-          >
+          <TabsContent value="create">
             <CreateNews />
           </TabsContent>
         </Tabs>

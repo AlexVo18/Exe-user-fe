@@ -1,4 +1,4 @@
-import { CreateDonationData } from "@/app/models/payment.models";
+import { CreateDonationData, CreatePayment } from "@/app/models/payment.models";
 import requests from "../requests";
 
 const Payment = {
@@ -9,5 +9,13 @@ const Payment = {
     requests.jwtApiGet(
       `/api/payos-generation-link-code?quantity=${input.quantity}&urlCancel=${input.urlCancel}&urlReturn=${input.urlReturn}`
     ),
+  sendPaymentInfo: (input: CreatePayment) =>
+    requests.jwtApiPost("/api/user/payment", {
+      orderID: input.orderID,
+      accountID: input.accountID,
+      quantity: input.quantity,
+    }),
+  getUserPayment: (accountID: number) =>
+    requests.jwtApiGet(`/api/user/payment/all/${accountID}`),
 };
 export default Payment;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://nuoicay.azurewebsites.net";
+const baseURL = import.meta.env.VITE_SERVER;
 
 const baseApi = axios.create({
   baseURL,

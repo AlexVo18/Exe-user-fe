@@ -50,10 +50,10 @@ const NewsView = () => {
   };
 
   return (
-    <>
+    <div>
       {isLoading && <Loading />}
-      <div className="container mx-auto">
-        <div className="flex lg:flex-row flex-col justify-between  mx-5 md:mx-40 my-5">
+      <div className="container mx-auto ">
+        <div className="flex lg:flex-row flex-col justify-between  mx-5 md:mx-40 my-5 ">
           <div className=" lg:mb-0 text-2xl font-semibold text-mainBrown mb-5 self-center">
             Tin Tức
           </div>
@@ -113,7 +113,7 @@ const NewsView = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -106,12 +106,12 @@ const AdminTreeList = ({ detailList }: Props) => {
                     {detail.plantImageDetail.map(
                       (image: string, index: number) => (
                         <a
-                          href={image}
+                          href={image.replace("http://", "https://")}
                           key={index}
                           className="h-30 w-32 object-fill inline-block m-2"
                         >
                           <img
-                            src={image}
+                            src={image.replace("http://", "https://")}
                             alt=""
                             className="h-30 w-32 object-fill inline-block"
                           />

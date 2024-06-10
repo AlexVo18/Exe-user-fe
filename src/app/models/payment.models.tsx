@@ -1,9 +1,9 @@
 export interface UrlParams {
-  code: number;
+  code: string;
   id: string;
   cancel: boolean;
   status: string;
-  orderCode: number;
+  orderCode: string;
 }
 
 export interface Bank {
@@ -31,7 +31,9 @@ export interface RecentTransactionData {
 
 export interface Transaction {
   transactionID: number;
+  transactionCode: string;
   accountBank: string;
+  accountName: string;
   bankCode: string;
   bankName: string;
   username: string;

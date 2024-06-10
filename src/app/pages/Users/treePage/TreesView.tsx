@@ -135,7 +135,7 @@ const TreesView = () => {
         <div className="container mx-auto">
           {currentItems.length > 0 ? (
             <div className="grid grid-cols-5 mx-5 md:mx-40 my-5 gap-4">
-              <div className="lg:col-span-2 col-span-5 w-full">
+              <Card className="lg:col-span-2 col-span-5 w-full p-5">
                 <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Mã Cây
                 </div>
@@ -193,9 +193,9 @@ const TreesView = () => {
                     </CardHeader>
                   </Card>
                 ))}
-              </div>
+              </Card>
 
-              <div className="lg:col-span-3 col-span-5 w-full">
+              <Card className="lg:col-span-3 col-span-5 w-full p-5">
                 <div className="text-2xl font-semibold text-mainBrown mb-5 text-center">
                   Nhật Ký Cây Trồng
                 </div>
@@ -297,7 +297,7 @@ const TreesView = () => {
                     Chọn 1 mã cây để xem những cập nhật mới nhất
                   </div>
                 )}
-              </div>
+              </Card>
             </div>
           ) : (
             <div className="mx-5 md:mx-80 my-5">

@@ -33,6 +33,7 @@ import Payment from "@/app/api/APIs/payment";
 import { calTableIndex } from "@/app/utils/calTableIndex";
 import { formatVND } from "@/app/utils/formatVND";
 import TypeTransaction from "@/app/components/status/TypeTransaction";
+import { hideString } from "@/app/utils/hideString";
 
 const AdminTransaction = () => {
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
@@ -105,14 +106,6 @@ const AdminTransaction = () => {
               </CardDescription>
             </div>
             <div className="ml-auto flex items-center gap-2 ">
-              {/* <div className="relative ml-auto flex-1 md:grow-0 w-auto">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search..."
-                className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-              />
-            </div> */}
             </div>
           </CardHeader>
           <CardContent>
@@ -120,7 +113,9 @@ const AdminTransaction = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>No.</TableHead>
-                  {/* <TableHead>ID</TableHead> */}
+                  <TableHead>ID</TableHead>
+                  <TableHead>STK</TableHead>
+                  <TableHead>Tên TK</TableHead>
                   <TableHead>Ngân hàng</TableHead>
                   <TableHead>Người dùng</TableHead>
                   <TableHead>Tình trạng</TableHead>
@@ -135,6 +130,11 @@ const AdminTransaction = () => {
                       <TableCell>
                         {calTableIndex(currentPage, index, itemsPerPage)}
                       </TableCell>
+                      <TableCell>{transaction.transactionCode}</TableCell>
+                      <TableCell>
+                        {hideString(transaction.accountBank)}
+                      </TableCell>
+                      <TableCell>{transaction.accountName}</TableCell>
                       <TableCell>{transaction.bankName}</TableCell>
                       <TableCell>{transaction.username}</TableCell>
                       <TableCell>

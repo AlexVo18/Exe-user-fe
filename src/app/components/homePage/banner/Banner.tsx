@@ -5,15 +5,15 @@ import { AuthContext } from "@/app/contexts/AuthContext";
 const Banner = () => {
   const { userInfo } = useContext(AuthContext);
   return (
-    <div className="h-[600px]">
+    <div className="h-[600px] bg-transparent">
       <img
         src="images/Banner.jpg"
         alt="Banner"
-        className="w-full object-cover h-[600px] absolute -z-10"
+        className="w-full object-cover h-[600px] absolute z-[1]"
       />
-      <div className="grid md:grid-cols-2 z-10 text-white h-full">
+      <div className="grid md:grid-cols-2 z-20 text-white h-full">
         <div className="flex flex-col items-center justify-center">
-          <div className="lg:mx-20 mx-10 cursor-default">
+          <div className="lg:mx-20 mx-10 cursor-default z-10">
             <div className="text-4xl font-semibold md:text-start text-center">
               ĐỒNG HÀNH CÙNG NUÔI CÂY
             </div>

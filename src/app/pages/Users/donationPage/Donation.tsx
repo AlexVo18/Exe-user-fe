@@ -3,7 +3,7 @@ import { Label } from "@/app/components/ui/label";
 import { ErrorMessageDonate } from "@/app/constants/errorMessages";
 import { calsMoney } from "@/app/utils/calsTrees";
 import { formatVND } from "@/app/utils/formatVND";
-import {  useState } from "react";
+import { useContext, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { CreateDonationData } from "@/app/models/payment.models";
@@ -11,11 +11,13 @@ import { ErrorIcon } from "@/app/components/toast/ToastIcons";
 import customToast from "@/app/utils/customToast";
 import Payment from "@/app/api/APIs/payment";
 import Loading from "../../loadingPage/Loading";
+import { QuantityContext } from "@/app/contexts/QuantityContext";
 
 const Donation = () => {
   const [openInput, setOpenInput] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [active, setActive] = useState<string>("1");
+  const { getQuantity } = useContext(QuantityContext);
   const validate = ErrorMessageDonate;
   const validationSchema = Yup.object().shape({
     quantity: Yup.number()
@@ -47,14 +49,15 @@ const Donation = () => {
   const formik = useFormik({
     initialValues: {
       quantity: 1,
-      urlCancel: "http://localhost:5173/user/result",
-      urlReturn: "http://localhost:5173/user/result",
+      urlCancel: import.meta.env.VITE_RETURN,
+      urlReturn: import.meta.env.VITE_RETURN,
     } as CreateDonationData,
     validationSchema,
     onSubmit: async (values: CreateDonationData) => {
       setIsLoading(true);
       try {
         if (values.quantity !== undefined) {
+          getQuantity(values.quantity);
           const response = await Payment.createDonation(values);
           if (response) {
             window.location.href = response;
@@ -79,9 +82,17 @@ const Donation = () => {
   return (
     <>
       {isLoading && <Loading />}
-      <main className="mt-auto ">
+      <main className="mt-auto text-mainBrown">
         <div className="container mx-auto flex justify-center ">
           <div className=" rounded-2xl shadow-2xl border-black border-[1px] my-10 w-[500px] p-10 ">
+            <div className="text-2xl text-mainGreen font-bold">
+              Quyên góp trồng cây
+            </div>
+            <div className="my-4">
+              Đồng hành cùng Nuôi Cây giúp tạo thêm nhiều màu xanh cho các cánh
+              rừng khác nhau tại Việt Nam
+            </div>
+            <div></div>
             <ul className="relative flex w-full flex-row gap-x-2">
               <li className="shrink basis-0 flex-1 group">
                 <div className="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
@@ -125,7 +136,7 @@ const Donation = () => {
             </ul>
 
             <form className="mt-5 text-mainBrown" onSubmit={handleSubmit}>
-              <Label htmlFor="username">
+              <Label htmlFor="username" className=" font-bold">
                 Số Lượng Cây <span className="text-red-500 ">*</span>
               </Label>
               <div className="text-muted-foreground text-sm">

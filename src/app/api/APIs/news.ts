@@ -9,5 +9,7 @@ const News = {
     requests.baseApiGet(`/api/home/news/type/${typeID}`),
   getNewsDetail: (newsID: number) =>
     requests.baseApiGet(`/api/home/news/detail/${newsID}`),
+  changeNewsStatus: (newsID: number) =>
+    requests.jwtApiPut(`/api/admin/news/delete/${newsID}`, null),
 };
 export default News;
