@@ -11,6 +11,7 @@ import { Check } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../loadingPage/Loading";
+import useCountdown from "@/app/hooks/useCountdown";
 
 const Result = () => {
   const [payment, setPayment] = useState<UrlParams>();
@@ -21,6 +22,7 @@ const Result = () => {
   const { userLoading, userInfo } = useContext(AuthContext);
   const url = useLocation();
   const navigate = useNavigate();
+  const { secondsLeft, start } = useCountdown();
 
   useEffect(() => {
     const params = parseParams(url.search.replace("?", ""));
@@ -31,20 +33,23 @@ const Result = () => {
   useEffect(() => {
     const sendPayment = async () => {
       try {
-        if (userInfo && payment && quantity && payment.status === "PAID") {
-          await Payment.sendPaymentInfo({
-            orderID: Number(payment.orderCode),
-            accountID: userInfo.accountID,
-            quantity: quantity,
-          });
-          customToast({
-            icon: <SuccessIcon />,
-            description: "Thanh toán thành công",
-            duration: 3000,
-          });
-          getQuantity(0);
-          setPaymentSent(true);
+        if (userInfo && payment && quantity) {
+          if (payment.status === "PAID") {
+            await Payment.sendPaymentInfo({
+              orderID: Number(payment.orderCode),
+              accountID: userInfo.accountID,
+              quantity: quantity,
+            });
+            customToast({
+              icon: <SuccessIcon />,
+              description: "Thanh toán thành công",
+              duration: 3000,
+            });
+            getQuantity(0);
+            setPaymentSent(true);
+          }
         }
+        start(10);
       } catch (error) {
         customToast({
           icon: <WarningIcon />,
@@ -64,6 +69,12 @@ const Result = () => {
       navigate("/");
     }
   }, [quantity]);
+
+  useEffect(() => {
+    if (secondsLeft === 0) {
+      navigate("/");
+    }
+  }, [secondsLeft]);
 
   return (
     <>
@@ -163,12 +174,15 @@ const Result = () => {
               </p>
             </div>
             <div className="text-center">
-              <button
+              {/* <button
                 className="bg-mainGreen text-white hover:bg-mainDarkerGreen hover:text-white px-5 py-2 rounded-lg"
                 onClick={() => navigate("/")}
               >
                 Về trang chủ
-              </button>
+              </button> */}
+              <div className="text-muted-foreground text-sm">
+                Trang sẽ chuẩn bị chuyển trang sau vài giây
+              </div>
             </div>
           </div>
         </div>

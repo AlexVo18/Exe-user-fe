@@ -22,3 +22,13 @@ export interface UpdateProfileParams {
   Email: string;
   PhoneNumber: string;
 }
+
+export interface ProfileData {
+  accountID: number;
+  fullName?: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  phoneNumber: string;
+  username: string;
+}

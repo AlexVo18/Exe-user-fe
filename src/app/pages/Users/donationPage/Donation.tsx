@@ -49,8 +49,8 @@ const Donation = () => {
   const formik = useFormik({
     initialValues: {
       quantity: 1,
-      urlCancel: "http://localhost:5173/user/result",
-      urlReturn: "http://localhost:5173/user/result",
+      urlCancel: import.meta.env.VITE_RETURN,
+      urlReturn: import.meta.env.VITE_RETURN,
     } as CreateDonationData,
     validationSchema,
     onSubmit: async (values: CreateDonationData) => {
@@ -89,7 +89,8 @@ const Donation = () => {
               Quyên góp trồng cây
             </div>
             <div className="my-4">
-              Đồng hành cùng Nuôi Cây giúp tạo thêm nhiều màu xanh cho các cánh rừng khác nhau tại Việt Nam
+              Đồng hành cùng Nuôi Cây giúp tạo thêm nhiều màu xanh cho các cánh
+              rừng khác nhau tại Việt Nam
             </div>
             <div></div>
             <ul className="relative flex w-full flex-row gap-x-2">

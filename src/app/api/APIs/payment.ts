@@ -15,5 +15,7 @@ const Payment = {
       accountID: input.accountID,
       quantity: input.quantity,
     }),
+  getUserPayment: (accountID: number) =>
+    requests.jwtApiGet(`/api/user/payment/all/${accountID}`),
 };
 export default Payment;

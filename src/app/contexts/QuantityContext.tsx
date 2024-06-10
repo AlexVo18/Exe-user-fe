@@ -1,10 +1,4 @@
-import {
-  MutableRefObject,
-  ReactNode,
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -39,10 +33,6 @@ const QuantityProvider = ({ children }: Props) => {
       setQuantityLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    console.log("quantity:", quantity);
-  }, [quantity]);
 
   const getQuantity = (number: number) => {
     setQuantity(number);

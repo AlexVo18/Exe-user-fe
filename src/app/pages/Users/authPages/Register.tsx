@@ -189,8 +189,6 @@ const Register = () => {
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("In");
     formik.handleSubmit();
   };
 

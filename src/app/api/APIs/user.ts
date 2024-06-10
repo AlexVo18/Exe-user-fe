@@ -1,4 +1,7 @@
-import { LoginData, RegisterUserData } from "@/app/models/auth.models";
+import {
+  LoginData,
+  RegisterUserData,
+} from "@/app/models/auth.models";
 import requests from "../requests";
 import {
   UpdateProfileParams,
@@ -27,13 +30,18 @@ const User = {
     }),
   updateProfile: (input: UpdateProfileParams) =>
     requests.jwtApiPost("/api/user/profile/update", {
-      AccountID: input.AccountID,
-      FullName: input.FullName,
-      Email: input.Email,
-      PhoneNumber: input.PhoneNumber,
+      accountID: input.AccountID,
+      fullName: input.FullName,
+      email: input.Email,
+      phoneNumber: input.PhoneNumber,
     }),
   getProfile: (accountID: number) =>
     requests.jwtApiGet(`/api/user/profile/${accountID}`),
+  resetPassword: (input: LoginData) =>
+    requests.baseApiPost(
+      `/api/register/reset-password?username=${input.username}&password=${input.password}`,
+      null
+    ),
 };
 
 export default User;

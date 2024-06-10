@@ -78,14 +78,6 @@ const Login = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (Object.keys(formik.errors).length > 0) {
-  //     Object.values(formik.errors).forEach((error) => {
-  //       // showToast(error);
-  //     });
-  //   }
-  // }, [formik.errors]);
-
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formik.handleSubmit();
