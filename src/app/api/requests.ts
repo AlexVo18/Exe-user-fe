@@ -11,7 +11,7 @@ const requests = {
   jwtApiPost: <T>(url: string, body: T) =>
     jwtApi.post(url, body).then(responseBody),
   jwtApiPut: <T>(url: string, body: T) =>
-    jwtApi.post(url, body).then(responseBody),
+    jwtApi.put(url, body).then(responseBody),
 
   // CRUD methods
   baseApiGet: <T>(url: string, params?: T) =>
@@ -19,7 +19,7 @@ const requests = {
   baseApiPost: <T>(url: string, body: T) =>
     baseApi.post(url, body).then(responseBody),
   baseApiPut: <T>(url: string, body: T) =>
-    baseApi.post(url, body).then(responseBody),
+    baseApi.put(url, body).then(responseBody),
 };
 
 export default requests;

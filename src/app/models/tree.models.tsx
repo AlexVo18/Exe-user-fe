@@ -22,12 +22,7 @@ export interface TreeCodeDetail {
   dateCreate: string;
   status: number;
   totalStatus: number;
-  plantImageDetail: TreeLogImage[];
-}
-
-export interface TreeLogImage {
-  imageDetailID: number;
-  url: string;
+  plantImageDetail: string[];
 }
 
 export interface CreateTreeLogData {

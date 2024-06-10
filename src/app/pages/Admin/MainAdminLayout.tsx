@@ -1,9 +1,5 @@
 import Sidebar from "@/app/components/main/Sidebar";
-import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
-// interface Props {
-//   children: ReactNode;
-// }
 
 const MainAdminLayout = () => {
   return (
@@ -13,7 +9,6 @@ const MainAdminLayout = () => {
       </div>
       <div className="flex flex-col ">
         <div className="relative">
-          {/* {children} */}
           <Outlet />
         </div>
       </div>

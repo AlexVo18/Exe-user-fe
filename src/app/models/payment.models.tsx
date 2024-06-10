@@ -1,12 +1,9 @@
-export interface Payment {
-  accountBank: string;
-  bankCode: string;
-  bankName: string;
-  accountID: number;
-  paymentText: string;
-  totalAmount: number;
-  quantity: number;
-  totalQuantity: number;
+export interface UrlParams {
+  code: number;
+  id: string;
+  cancel: boolean;
+  status: string;
+  orderCode: number;
 }
 
 export interface Bank {

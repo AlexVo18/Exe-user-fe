@@ -53,15 +53,15 @@ const Navbar = () => {
   const newsType: { title: string; href: string }[] = [
     {
       title: "Cập nhật hằng tháng",
-      href: "/news/update",
+      href: "/news/1",
     },
     {
       title: "Truyền thông",
-      href: "/news/media",
+      href: "/news/2",
     },
     {
       title: "Nét sống xanh",
-      href: "/news/life-style",
+      href: "/news/3",
     },
   ];
   const handleLogOut = () => {
@@ -228,7 +228,7 @@ const Navbar = () => {
       {/* Navbar mobile */}
       <nav className="flex justify-between items-center lg:hidden w-full ">
         <Link to={"/"}>
-          <img src="images/Logo_With_Name.jpg" alt="Logo.img" />
+          <img src="/images/Logo_With_Name.jpg" alt="Logo.img" />
         </Link>
         <div className="flex items-center gap-2">
           {userInfo ? (
@@ -324,32 +324,32 @@ const Navbar = () => {
                         TIN TỨC
                       </AccordionTrigger>
                       <AccordionContent className="py-1 px-4 flex flex-col gap-1 font-normal text-base ">
-                        <div>
+                        <SheetClose asChild>
                           <Link
-                            to={"/news"}
+                            to={"/news/1"}
                             className="text-muted-foreground hover:text-mainBrown transition-colors "
                           >
                             Cập nhật hằng tháng
                           </Link>
-                        </div>
+                        </SheetClose>
                         <Separator />
-                        <div>
+                        <SheetClose asChild>
                           <Link
-                            to={"/news"}
+                            to={"/news/2"}
                             className="text-muted-foreground hover:text-mainBrown transition-colors "
                           >
                             Truyền thông
                           </Link>
-                        </div>
+                        </SheetClose>
                         <Separator />
-                        <div>
+                        <SheetClose asChild>
                           <Link
-                            to={"/news"}
+                            to={"/news/3"}
                             className="text-muted-foreground hover:text-mainBrown transition-colors "
                           >
                             Nét sống xanh
                           </Link>
-                        </div>
+                        </SheetClose>
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -376,7 +376,7 @@ const Navbar = () => {
                   <></>
                 ) : (
                   <SheetClose asChild className="flex justify-center">
-                    <SheetClose>
+                    <div>
                       <DonateButton
                         title="QUYÊN GÓP"
                         textColor="white"
@@ -384,7 +384,7 @@ const Navbar = () => {
                         link={"/user/donation"}
                         isDonate={true}
                       />
-                    </SheetClose>
+                    </div>
                   </SheetClose>
                 )}
               </nav>
