@@ -15,3 +15,10 @@ export interface UpdateUserStatusParam {
   accountID: number;
   status: number;
 }
+
+export interface UpdateProfileParams {
+  AccountID: number;
+  FullName: string;
+  Email: string;
+  PhoneNumber: string;
+}

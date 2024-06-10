@@ -33,6 +33,7 @@ import Payment from "@/app/api/APIs/payment";
 import { calTableIndex } from "@/app/utils/calTableIndex";
 import { formatVND } from "@/app/utils/formatVND";
 import TypeTransaction from "@/app/components/status/TypeTransaction";
+import { hideString } from "@/app/utils/hideString";
 
 const AdminTransaction = () => {
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
@@ -120,7 +121,9 @@ const AdminTransaction = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>No.</TableHead>
-                  {/* <TableHead>ID</TableHead> */}
+                  <TableHead>ID</TableHead>
+                  <TableHead>STK</TableHead>
+                  <TableHead>Tên TK</TableHead>
                   <TableHead>Ngân hàng</TableHead>
                   <TableHead>Người dùng</TableHead>
                   <TableHead>Tình trạng</TableHead>
@@ -135,6 +138,11 @@ const AdminTransaction = () => {
                       <TableCell>
                         {calTableIndex(currentPage, index, itemsPerPage)}
                       </TableCell>
+                      <TableCell>{transaction.transactionCode}</TableCell>
+                      <TableCell>
+                        {hideString(transaction.accountBank)}
+                      </TableCell>
+                      <TableCell>{transaction.accountName}</TableCell>
                       <TableCell>{transaction.bankName}</TableCell>
                       <TableCell>{transaction.username}</TableCell>
                       <TableCell>

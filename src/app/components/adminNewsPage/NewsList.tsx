@@ -32,9 +32,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/ui/table";
-import { Eye, ListFilter, MoreHorizontal } from "lucide-react";
+import { Eye, ListFilter, MoreHorizontal, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { WarningIcon } from "../toast/ToastIcons";
+import { SuccessIcon, WarningIcon } from "../toast/ToastIcons";
 import customToast from "@/app/utils/customToast";
 import News from "@/app/api/APIs/news";
 import Loading from "@/app/pages/loadingPage/Loading";
@@ -42,6 +42,7 @@ import { NewsData } from "@/app/models/news.models";
 import { formatDate } from "@/app/utils/formatDate";
 import TypeNews from "../status/TypeNews";
 import { calTableIndex } from "@/app/utils/calTableIndex";
+import { Link } from "react-router-dom";
 
 const NewsList = () => {
   const [newsList, setNewsList] = useState<NewsData[]>([]);
@@ -54,20 +55,45 @@ const NewsList = () => {
     try {
       getNews();
     } catch (error) {
-      console.log(error);
+      customToast({
+        icon: <WarningIcon />,
+        description: "Đã xảy ra lỗi, không thể lấy danh sách",
+        duration: 3000,
+      });
     }
   }, []);
 
   const getNews = async () => {
     try {
       const response = await News.getAdminNewsList();
-      if (response) {
-        setNewsList(response.reverse());
-      }
+      setNewsList(response.reverse());
     } catch (error) {
       customToast({
         icon: <WarningIcon />,
         description: "Đã xảy ra lỗi, không thể lấy danh sách",
+        duration: 3000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDisableNews = async (newsID: number) => {
+    setIsLoading(true);
+    try {
+      const response = await News.changeNewsStatus(newsID);
+      await getNews();
+      if (response) {
+        customToast({
+          icon: <SuccessIcon />,
+          description: "Xóa tin tức thành công",
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      customToast({
+        icon: <WarningIcon />,
+        description: "Đã xảy ra lỗi, xóa thất bại",
         duration: 3000,
       });
     } finally {
@@ -211,11 +237,23 @@ const NewsList = () => {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>
-                          <Eye size={16} className="mr-2" />
-                          Xem
+                        <Link
+                          to={`/news/${news.type}/${news.newsID}`}
+                          target="_blank"
+                        >
+                          <DropdownMenuItem>
+                            <Eye size={16} className="mr-2" />
+                            Xem
+                          </DropdownMenuItem>
+                        </Link>
+
+                        <DropdownMenuItem
+                          className="cursor-pointer"
+                          onClick={() => handleDisableNews(news.newsID)}
+                        >
+                          <Trash2 size={16} className="mr-2" />
+                          Xóa
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

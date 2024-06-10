@@ -4,6 +4,8 @@ import roles from "../constants/role";
 import MainAdminLayout from "../pages/Admin/MainAdminLayout";
 import MainLayout from "../pages/Users/MainLayout";
 import LoginLayout from "../pages/Users/LoginLayout";
+import ProfileLayout from "../pages/Users/profilePage/ProfileLayout";
+import UserTransaction from "../pages/Users/profilePage/UserTransaction";
 
 // *** Lazy Routes (Tất cả các route ngoài trừ layout sẽ import vào đây) ***
 
@@ -109,11 +111,11 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "profile",
+            path: "result",
             index: true,
             element: (
               <Suspense fallback={<></>}>
-                <Profile />
+                <Result />
               </Suspense>
             ),
           },
@@ -126,20 +128,35 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: "result",
-            element: (
-              <Suspense fallback={<></>}>
-                <Result />
-              </Suspense>
-            ),
-          },
-          {
             path: "tree",
             element: (
               <Suspense fallback={<></>}>
                 <TreesView />
               </Suspense>
             ),
+          },
+          {
+            path: "profile",
+            element: <ProfileLayout />,
+            children: [
+              {
+                path: "",
+                index: true,
+                element: (
+                  <Suspense fallback={<></>}>
+                    <Profile />
+                  </Suspense>
+                ),
+              },
+              {
+                path: "history",
+                element: (
+                  <Suspense fallback={<></>}>
+                    <UserTransaction />
+                  </Suspense>
+                ),
+              },
+            ],
           },
         ],
       },
