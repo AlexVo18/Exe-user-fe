@@ -4,11 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/app/components/ui/label";
 import { Input } from "@/app/components/ui/input";
 import customToast from "@/app/utils/customToast";
-import {
-  ErrorIcon,
-  SuccessIcon,
-  WarningIcon,
-} from "@/app/components/toast/ToastIcons";
+import { ErrorIcon, SuccessIcon } from "@/app/components/toast/ToastIcons";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
