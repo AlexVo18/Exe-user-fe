@@ -1,5 +1,5 @@
 import Payment from "@/app/api/APIs/payment";
-import { SuccessIcon, WarningIcon } from "@/app/components/toast/ToastIcons";
+import { SuccessIcon } from "@/app/components/toast/ToastIcons";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { QuantityContext } from "@/app/contexts/QuantityContext";
 import { UrlParams } from "@/app/models/payment.models";
@@ -17,7 +17,7 @@ const Result = () => {
   const [payment, setPayment] = useState<UrlParams>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [paymentSent, setPaymentSent] = useState<boolean>(false);
-  const { quantity, getQuantity, quantityLoading } =
+  const { quantity, removeQuantity, quantityLoading } =
     useContext(QuantityContext);
   const { userLoading, userInfo } = useContext(AuthContext);
   const url = useLocation();
@@ -45,18 +45,12 @@ const Result = () => {
               description: "Thanh toán thành công",
               duration: 3000,
             });
-            getQuantity(0);
+            removeQuantity();
             setPaymentSent(true);
           }
         }
         start(10);
-      } catch (error) {
-        customToast({
-          icon: <WarningIcon />,
-          description: "Lưu thanh toán không thành công",
-          duration: 3000,
-        });
-      }
+      } catch (error) {}
     };
 
     if (payment && !paymentSent) {
@@ -181,7 +175,7 @@ const Result = () => {
                 Về trang chủ
               </button> */}
               <div className="text-muted-foreground text-sm">
-                Trang sẽ chuẩn bị chuyển trang sau vài giây
+                Trang sẽ tự động chuyển trang sau vài giây
               </div>
             </div>
           </div>

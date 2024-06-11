@@ -78,8 +78,8 @@ const Footer = () => {
                 <Facebook />
               </Link>
               <Link
-                to={"#"}
-                // target="_blank"
+                to={"https://www.instagram.com/nuoicay/"}
+                target="_blank"
                 className="rounded-full bg-white p-2"
               >
                 <Instagram />
