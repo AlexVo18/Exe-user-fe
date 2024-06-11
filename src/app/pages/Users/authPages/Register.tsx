@@ -96,7 +96,7 @@ const Register = () => {
             phoneNumber: values.phoneNumber,
             username: values.username,
           });
-          if (response === "Username is existed") {
+          if (response) {
             customToast({
               icon: <SuccessIcon />,
               description: "Tạo tài khoản thành công",
