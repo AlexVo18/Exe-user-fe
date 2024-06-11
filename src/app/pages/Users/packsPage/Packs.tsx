@@ -19,8 +19,7 @@ const Packs = () => {
               <div className="text-6xl font-semibold md:text-start text-center">
                 ĐỒNG HÀNH NUÔI CÂY
               </div>
-              <div className="flex mt-6 md:justify-start justify-center">
-              </div>
+              <div className="flex mt-6 md:justify-start justify-center"></div>
             </div>
           </div>
         </div>
@@ -34,7 +33,7 @@ const Packs = () => {
             <Card className="hover:shadow-lg transition-shadow ">
               <CardHeader className="p-0">
                 <img
-                  src="public/images/Card_1.jpg"
+                  src="/images/Card_1.jpg"
                   alt=""
                   className="rounded-t-lg h-[200px]"
                 />

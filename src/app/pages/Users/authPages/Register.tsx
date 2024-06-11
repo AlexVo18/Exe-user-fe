@@ -26,6 +26,7 @@ import { decodeOtp } from "@/app/utils/decodeOtp";
 import DotLoading from "@/app/components/main/DotLoading";
 import User from "@/app/api/APIs/user";
 import Loading from "../../loadingPage/Loading";
+import axios from "axios";
 
 const Register = () => {
   const [optInput, setOtpInput] = useState<boolean>(false);
@@ -33,7 +34,7 @@ const Register = () => {
   const [otpMail, setOtpMail] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const [isVerfied, setIsVerified] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [otpLoading, setOtpLoading] = useState<boolean>(false);
   const { secondsLeft, start } = useCountdown();
@@ -79,7 +80,7 @@ const Register = () => {
       try {
         console.log(values);
         if (
-          isVerfied &&
+          isVerified &&
           values.email !== undefined &&
           values.fullName !== undefined &&
           values.password !== undefined &&
@@ -95,7 +96,7 @@ const Register = () => {
             phoneNumber: values.phoneNumber,
             username: values.username,
           });
-          if (response) {
+          if (response === "Username is existed") {
             customToast({
               icon: <SuccessIcon />,
               description: "Tạo tài khoản thành công",
@@ -104,21 +105,29 @@ const Register = () => {
             navigate("/login");
           }
         }
-      } catch (error) {
-        customToast({
-          icon: <ErrorIcon />,
-          description: "Tạo tài khoản không thành công",
-          duration: 3000,
-        });
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            if (error.response.data === "Username is existed") {
+              customToast({
+                icon: <ErrorIcon />,
+                description: "Tên đăng nhập đã tồn tại",
+                duration: 3000,
+              });
+            } else {
+              customToast({
+                icon: <ErrorIcon />,
+                description: "Tạo tài khoản không thành công",
+                duration: 3000,
+              });
+            }
+          }
+        }
       } finally {
         setIsLoading(false);
       }
     },
   });
-
-  // useEffect(() => {
-  //   console.log("Formik state:", formik);
-  // }, [formik]);
 
   useEffect(() => {
     if (secondsLeft === 0) {
@@ -190,6 +199,19 @@ const Register = () => {
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formik.handleSubmit();
+  };
+
+  const isFormEmpty = () => {
+    return (
+      !formik.values.username ||
+      !formik.values.email ||
+      !formik.values.password ||
+      !formik.values.rePassword ||
+      !formik.values.firstName ||
+      !formik.values.lastName ||
+      !formik.values.phoneNumber ||
+      !isVerified
+    );
   };
 
   return (
@@ -355,7 +377,8 @@ const Register = () => {
                       onClick={handleSendOTP}
                       disabled={
                         isButtonDisabled ||
-                        !(formik.touched.email && !formik.errors.email)
+                        !(formik.touched.email && !formik.errors.email) ||
+                        otpLoading
                       }
                     >
                       {otpLoading ? (
@@ -372,6 +395,16 @@ const Register = () => {
                       {formik.errors.email}
                     </div>
                   ) : null}
+                  {!isVerified &&
+                  !(formik.touched.email && formik.errors.email) &&
+                  !optInput ? (
+                    <div className="text-gray-400 text-sm">
+                      Bạn cần phải xác thực email trước khi bạn có thể đăng kí
+                      được
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 {optInput ? (
                   <div className="flex justify-center text-mainBrown mt-3">
@@ -426,6 +459,7 @@ const Register = () => {
               <Button
                 type="submit"
                 className=" bg-mainGreen hover:bg-mainBrown px-40"
+                disabled={isFormEmpty()}
               >
                 Đăng Kí
               </Button>

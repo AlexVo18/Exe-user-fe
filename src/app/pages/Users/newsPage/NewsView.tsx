@@ -85,32 +85,41 @@ const NewsView = () => {
           </div>
         </div>
         <div className="grid grid-cols-6 mx-5 md:mx-40 my-5 gap-4">
-          {newsList.map((news: NewsData, index: number) => (
-            <div className="xl:col-span-3 col-span-6 w-full ">
-              <Link to={`/news/${type}/${news.newsID}`}>
-                <Card className=" w-full hover:shadow-lg transition-shadow" key={index}>
-                  <CardContent className="flex flex-col sm:flex-row p-5 gap-5">
-                    <img
-                      src={news.thumbnail}
-                      alt="thumbnail"
-                      className="w-40 h-40 object-fill rounded-xl self-center"
-                    />
-                    <div className="flex flex-col  justify-between">
-                      <div className="">
-                        <div className="text-lg font-bold text-mainGreen">
-                          {news.newsTitle}
+          {newsList.length > 0 ? (
+            newsList.map((news: NewsData, index: number) => (
+              <div className="xl:col-span-3 col-span-6 w-full ">
+                <Link to={`/news/${type}/${news.newsID}`}>
+                  <Card
+                    className=" w-full hover:shadow-lg transition-shadow"
+                    key={index}
+                  >
+                    <CardContent className="flex flex-col sm:flex-row p-5 gap-5">
+                      <img
+                        src={news.thumbnail}
+                        alt="thumbnail"
+                        className="w-40 h-40 object-fill rounded-xl self-center"
+                      />
+                      <div className="flex flex-col  justify-between">
+                        <div className="">
+                          <div className="text-lg font-bold text-mainGreen">
+                            {news.newsTitle}
+                          </div>
+                          <div className="text-justify">{news.newsSummary}</div>
                         </div>
-                        <div className="text-justify">{news.newsSummary}</div>
+                        <div className="text-sm text-muted-foreground">
+                          Ngày đăng: {formatDate(news.dateCreate)}
+                        </div>
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Ngày đăng: {formatDate(news.dateCreate)}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-6 text-neutral-500 text-center text-2xl my-10">
+              Chưa có tin tức
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

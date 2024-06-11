@@ -117,6 +117,16 @@ const CreateNews = () => {
     formik.handleSubmit();
   };
 
+  const isFormEmpty = () => {
+    return (
+      !formik.values.newsDescription ||
+      !formik.values.newsSummary ||
+      !formik.values.newsTitle ||
+      !formik.values.thumbnail ||
+      !formik.values.type
+    );
+  };
+
   return (
     <>
       {isLoading && <Loading />}
@@ -130,7 +140,9 @@ const CreateNews = () => {
               </CardDescription>
             </div>
             <div>
-              <Button type="submit">Đăng Bài</Button>
+              <Button type="submit" disabled={isFormEmpty()}>
+                Đăng Bài
+              </Button>
             </div>
           </CardHeader>
           <CardContent>

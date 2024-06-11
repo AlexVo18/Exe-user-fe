@@ -4,11 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/app/components/ui/label";
 import { Input } from "@/app/components/ui/input";
 import customToast from "@/app/utils/customToast";
-import {
-  ErrorIcon,
-  SuccessIcon,
-  WarningIcon,
-} from "@/app/components/toast/ToastIcons";
+import { ErrorIcon, SuccessIcon } from "@/app/components/toast/ToastIcons";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -26,6 +22,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/app/components/ui/input-otp";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [optInput, setOtpInput] = useState<boolean>(false);
@@ -33,7 +30,7 @@ const ForgotPassword = () => {
   const [otpMail, setOtpMail] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const [isVerfied, setIsVerified] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [otpLoading, setOtpLoading] = useState<boolean>(false);
   const [isShowned, setIsShowned] = useState<boolean>(false);
@@ -65,7 +62,7 @@ const ForgotPassword = () => {
         if (
           values.username !== undefined &&
           values.password !== undefined &&
-          isVerfied
+          isVerified
         ) {
           const response = await User.resetPassword({
             username: values.username,
@@ -74,18 +71,33 @@ const ForgotPassword = () => {
           if (response) {
             customToast({
               icon: <SuccessIcon />,
-              description: "Đăng nhập thành công",
+              description: "Đổi mật khẩu thành công",
               duration: 3000,
             });
             navigate("/login");
           }
         }
-      } catch (error) {
-        customToast({
-          icon: <ErrorIcon />,
-          description: "Tên đăng nhập hoặc Mật khẩu không đúng",
-          duration: 3000,
-        });
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            if (
+              error.response.data ===
+              "Username is not existed, please try again!"
+            ) {
+              customToast({
+                icon: <ErrorIcon />,
+                description: "Tên đăng nhập không tồn tại",
+                duration: 3000,
+              });
+            } else {
+              customToast({
+                icon: <ErrorIcon />,
+                description: "Đã có lỗi xảy ra",
+                duration: 3000,
+              });
+            }
+          }
+        }
       } finally {
         setIsLoading(false);
       }
@@ -136,12 +148,26 @@ const ForgotPassword = () => {
         setIsButtonDisabled(true);
         start(60);
       }
-    } catch (error) {
-      customToast({
-        icon: <WarningIcon />,
-        description: "Đã xảy ra lỗi, không thể lấy danh sách",
-        duration: 3000,
-      });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (
+            error.response.data === "Username is not existed, please try again!"
+          ) {
+            customToast({
+              icon: <ErrorIcon />,
+              description: "Tên đăng nhập không tồn tại",
+              duration: 3000,
+            });
+          } else {
+            customToast({
+              icon: <ErrorIcon />,
+              description: "Đã có lỗi xảy ra",
+              duration: 3000,
+            });
+          }
+        }
+      }
     } finally {
       setOtpLoading(false);
     }
@@ -156,6 +182,15 @@ const ForgotPassword = () => {
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     formik.handleSubmit();
+  };
+
+  const isFormEmpty = () => {
+    return (
+      !formik.values.password ||
+      !formik.values.rePassword ||
+      !formik.values.username ||
+      !isVerified
+    );
   };
 
   return (
@@ -197,7 +232,8 @@ const ForgotPassword = () => {
                   onClick={handleSendOTP}
                   disabled={
                     isButtonDisabled ||
-                    !(formik.touched.username && !formik.errors.username)
+                    !(formik.touched.username && !formik.errors.username) ||
+                    otpLoading
                   }
                 >
                   {otpLoading ? (
@@ -214,6 +250,16 @@ const ForgotPassword = () => {
                   {formik.errors.username}
                 </div>
               ) : null}
+              {!isVerified &&
+              !(formik.touched.username && formik.errors.username) &&
+              !optInput ? (
+                <div className="text-gray-400 text-sm">
+                  Dựa vào tên người dùng, chúng tôi sẽ gửi mail đến email bạn đã
+                  đăng ký tài khoản từ trước
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             {optInput ? (
               <div className="flex justify-center text-mainBrown mt-3">
@@ -295,6 +341,7 @@ const ForgotPassword = () => {
             <Button
               type="submit"
               className="w-full bg-mainGreen hover:bg-mainBrown"
+              disabled={isFormEmpty()}
             >
               Đổi Mật Khẩu
             </Button>
