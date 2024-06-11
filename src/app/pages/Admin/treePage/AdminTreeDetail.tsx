@@ -141,7 +141,6 @@ const AdminTreeDetail = () => {
     onSubmit: async (values: CreateTreeLogData) => {
       setIsCreateLoading(true);
       try {
-        console.log(values);
         const formData = new FormData();
         formData.append("PlantCodeID", values.PlantCodeID);
         formData.append("ContentText", values.ContentText);
@@ -161,7 +160,6 @@ const AdminTreeDetail = () => {
           });
         }
       } catch (error) {
-        console.log(error);
         customToast({
           icon: <ErrorIcon />,
           description: "Tạo cập nhật không thành công",

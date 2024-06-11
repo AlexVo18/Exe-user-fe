@@ -61,7 +61,6 @@ const UserPage = () => {
   const getUsers = async () => {
     try {
       const response = await User.getUserAdmin();
-      console.log(response);
       if (response) {
         setUsersList(response);
       }
