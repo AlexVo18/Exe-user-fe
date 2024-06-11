@@ -84,8 +84,6 @@ const Login = () => {
   };
 
   const toggleVisibility = () => {
-    // setIsShowned(!isShowned);
-    console.log(isShowned);
     setIsShowned((prevState) => !prevState);
   };
 

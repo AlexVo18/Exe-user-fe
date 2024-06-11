@@ -75,10 +75,7 @@ const Register = () => {
     validationSchema,
     onSubmit: async (values: RegisterUserData) => {
       setIsLoading(true);
-
-      console.log("Submitted values:", values);
       try {
-        console.log(values);
         if (
           isVerified &&
           values.email !== undefined &&
@@ -88,7 +85,6 @@ const Register = () => {
           values.rePassword !== undefined &&
           values.username !== undefined
         ) {
-          console.log(values);
           const response = await User.register({
             email: values.email,
             fullName: values.fullName,

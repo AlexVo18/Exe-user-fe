@@ -93,7 +93,6 @@ const Profile = () => {
     onSubmit: async (values: ProfileData) => {
       setIsLoading(true);
       try {
-        console.log(values);
         if (
           values.accountID !== undefined &&
           values.email !== undefined &&
