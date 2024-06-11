@@ -19,26 +19,6 @@ const Footer = () => {
               này. 1 đóng góp nhỏ cũng đã góp phần tạo nên 1 giá trị to lớn cho
               môi trường.{" "}
             </p>
-            <div className="flex gap-2 mt-2 text-mainBrown">
-              <Link
-                to={
-                  "https://www.facebook.com/people/Nu%C3%B4i-C%C3%A2y/61559682431421/"
-                }
-                target="_blank"
-                className="rounded-full bg-white p-2"
-              >
-                <Facebook />
-              </Link>
-              <Link
-                to={
-                  "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
-                }
-                target="_blank"
-                className="rounded-full bg-white p-2"
-              >
-                <Instagram />
-              </Link>
-            </div>
           </div>
           <div className="text-white flex flex-col">
             <div className="text-lg font-bold">THÔNG TIN</div>
@@ -81,32 +61,30 @@ const Footer = () => {
               )}
             </div>
           </div>
-          <div className="w-full bg-white rounded-3xl px-10 py-6 text-mainBrown flex flex-col gap-1 justify-center">
-            <div className="font-semibold">Thông Tin Liên Hệ</div>
-            <table>
-              <tbody>
-                <tr className="text-2xl items-center text-mainGreen">
-                  <td>
-                    <Phone />
-                  </td>
-                  <td className="font-bold pl-2">0971 366 844</td>
-                </tr>
-                <tr>
-                  <td>
-                    <Mail />
-                  </td>
-                  <td className="pl-2">Nuoicay.project@gmail.com</td>
-                </tr>
-                <tr>
-                  <td>
-                    <MapPin className="text-2xl" />
-                  </td>
-                  <td className="pl-2 leading-tight">
-                    Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="text-white flex flex-col">
+            <div className="text-lg font-bold ">LIÊN LẠC</div>
+            <Separator className="my-2" />
+            <div className="flex gap-3">
+              <Mail /> <p>Nuoicay.project@gmail.com</p>
+            </div>
+            <div className="flex gap-2 mt-3 text-mainBrown">
+              <Link
+                to={
+                  "https://www.facebook.com/people/Nu%C3%B4i-C%C3%A2y/61559682431421/"
+                }
+                target="_blank"
+                className="rounded-full bg-white p-2"
+              >
+                <Facebook />
+              </Link>
+              <Link
+                to={"#"}
+                // target="_blank"
+                className="rounded-full bg-white p-2"
+              >
+                <Instagram />
+              </Link>
+            </div>
           </div>
         </div>
         <div className="lg:mx-20 xs:mx-10 my-5">

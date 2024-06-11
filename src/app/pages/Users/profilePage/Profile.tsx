@@ -42,7 +42,7 @@ const Profile = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [otpMail, setOtpMail] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const [isVerfied, setIsVerified] = useState<boolean>(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [otp, setOtp] = useState<string>("");
   const { secondsLeft, start } = useCountdown();
   const validate = ErrorMessageRegister;
@@ -102,7 +102,7 @@ const Profile = () => {
           values.lastName !== undefined &&
           values.fullName !== undefined
         ) {
-          if (values.email === profile?.email || isVerfied) {
+          if (values.email === profile?.email || isVerified) {
             await User.updateProfile({
               AccountID: values.accountID,
               Email: values.email,
@@ -203,6 +203,17 @@ const Profile = () => {
     formik.handleSubmit();
   };
 
+  const isFormEmpty = () => {
+    return (
+      !formik.values.username ||
+      !formik.values.email ||
+      !formik.values.firstName ||
+      !formik.values.lastName ||
+      !formik.values.phoneNumber ||
+      !isVerified
+    );
+  };
+
   return (
     <>
       {isLoading || userLoading ? <Loading /> : null}
@@ -283,7 +294,8 @@ const Profile = () => {
                           formik.touched.email &&
                           !formik.errors.email &&
                           formik.values.email !== profile?.email
-                        )
+                        ) ||
+                        otpLoading
                       }
                     >
                       {otpLoading ? (
@@ -300,6 +312,16 @@ const Profile = () => {
                       {formik.errors.email}
                     </div>
                   ) : null}
+                  {!isVerified &&
+                  !(formik.touched.email && formik.errors.email) &&
+                  !optInput ? (
+                    <div className="text-gray-400 text-sm">
+                      Bạn cần phải xác thực email trước khi bạn có thể thay đổi
+                      email được
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 {optInput ? (
                   <div className="flex justify-center text-mainBrown mt-3">
@@ -367,8 +389,9 @@ const Profile = () => {
             <Button
               type="submit"
               className="bg-mainGreen hover:bg-mainDarkerGreen"
+              disabled={isFormEmpty()}
             >
-              Cập nhật 
+              Cập nhật
             </Button>
           </CardFooter>
         </form>

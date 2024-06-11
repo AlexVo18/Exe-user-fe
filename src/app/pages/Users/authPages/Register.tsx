@@ -129,10 +129,6 @@ const Register = () => {
     },
   });
 
-  // useEffect(() => {
-  //   console.log("Formik state:", formik);
-  // }, [formik]);
-
   useEffect(() => {
     if (secondsLeft === 0) {
       setIsButtonDisabled(false);
