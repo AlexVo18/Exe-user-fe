@@ -9,21 +9,16 @@ import { formatVND } from "@/app/utils/formatVND";
 import { parseParams } from "@/app/utils/parseParams";
 import { Check } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loading from "../../loadingPage/Loading";
-import useCountdown from "@/app/hooks/useCountdown";
 
 const Result = () => {
   const [payment, setPayment] = useState<UrlParams>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [paymentSent, setPaymentSent] = useState<boolean>(false);
-  const { quantity, removeQuantity, quantityLoading } =
-    useContext(QuantityContext);
+  const { quantity, quantityLoading } = useContext(QuantityContext);
   const { userLoading, userInfo } = useContext(AuthContext);
   const url = useLocation();
-  const navigate = useNavigate();
-  const { secondsLeft, start } = useCountdown();
-
   useEffect(() => {
     const params = parseParams(url.search.replace("?", ""));
     setPayment(params);
@@ -45,30 +40,15 @@ const Result = () => {
               description: "Thanh toán thành công",
               duration: 3000,
             });
-            removeQuantity();
             setPaymentSent(true);
           }
         }
-        start(10);
       } catch (error) {}
     };
-
     if (payment && !paymentSent) {
       sendPayment();
     }
   }, [payment, userInfo, quantity]);
-
-  useEffect(() => {
-    if (quantity === 0) {
-      navigate("/");
-    }
-  }, [quantity]);
-
-  useEffect(() => {
-    if (secondsLeft === 0) {
-      navigate("/");
-    }
-  }, [secondsLeft]);
 
   return (
     <>
@@ -174,9 +154,9 @@ const Result = () => {
               >
                 Về trang chủ
               </button> */}
-              <div className="text-muted-foreground text-sm">
+              {/* <div className="text-muted-foreground text-sm">
                 Trang sẽ tự động chuyển trang sau vài giây
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
