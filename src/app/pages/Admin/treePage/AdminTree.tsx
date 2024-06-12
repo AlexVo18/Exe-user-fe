@@ -128,10 +128,10 @@ const AdminTree = () => {
                   <TableHead>No.</TableHead>
                   {/* <TableHead>ID</TableHead> */}
                   <TableHead>Mã Cây</TableHead>
-                  <TableHead>Tình trạng</TableHead>
+                  <TableHead className="text-center">Tình trạng</TableHead>
                   <TableHead>Người dùng</TableHead>
                   <TableHead className="w-[400px]">Nơi trồng</TableHead>
-                  <TableHead>Ngày tạo</TableHead>
+                  <TableHead className="text-right">Ngày tạo</TableHead>
                   <TableHead>
                     <span className="sr-only">Actions</span>
                   </TableHead>
@@ -144,12 +144,12 @@ const AdminTree = () => {
                       {calTableIndex(currentPage, index, itemsPerPage)}
                     </TableCell>
                     <TableCell>{tree.plantCodeID}</TableCell>
-                    <TableCell>
+                    <TableCell className="w-[170px] text-center">
                       <TreeStatus status={tree.status} />
                     </TableCell>
                     <TableCell>{tree.username}</TableCell>
                     <TableCell>{`${tree.proviceAddress}. ${tree.proviceAddress}`}</TableCell>
-                    <TableCell>{formatDate(tree.dateCreate)}</TableCell>
+                    <TableCell className="w-[110px] text-right">{formatDate(tree.dateCreate)}</TableCell>
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>

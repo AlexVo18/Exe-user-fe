@@ -6,7 +6,7 @@ import { calsTrees } from "@/app/utils/calsTrees";
 
 interface Props {
   icon: ReactNode;
-  data: Profit ;
+  data: Profit;
   type: string;
 }
 
@@ -31,9 +31,13 @@ const SummaryCard = ({ icon, data, type }: Props) => {
         </div>
         <p className="text-xs text-muted-foreground">
           {type === "total"
-            ? ` Dự án  nhận quyên góp được ${calsTrees(data.totalProfit)} cây`
+            ? ` Dự án  nhận quyên góp được ${Math.floor(
+                calsTrees(data.totalProfit)
+              )} cây`
             : type === "monthly"
-            ? `Dự án tháng này đã nhận được ${calsTrees(data.totalProfit)} cây`
+            ? `Dự án tháng này đã nhận được ${Math.floor(
+                calsTrees(data.totalProfit)
+              )} cây`
             : `Trong đó, dự án hiện tại đã trồng được ${data.totalPlant} cây`}
         </p>
       </CardContent>
