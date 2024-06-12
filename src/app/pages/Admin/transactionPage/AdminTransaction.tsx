@@ -118,7 +118,7 @@ const AdminTransaction = () => {
                   <TableHead>Tên TK</TableHead>
                   <TableHead>Ngân hàng</TableHead>
                   <TableHead>Người dùng</TableHead>
-                  <TableHead>Tình trạng</TableHead>
+                  <TableHead className="text-center">Tình trạng</TableHead>
                   <TableHead>Ngày giao dịch</TableHead>
                   <TableHead>Số tiền</TableHead>
                 </TableRow>
@@ -137,7 +137,7 @@ const AdminTransaction = () => {
                       <TableCell>{transaction.accountName}</TableCell>
                       <TableCell>{transaction.bankName}</TableCell>
                       <TableCell>{transaction.username}</TableCell>
-                      <TableCell>
+                      <TableCell className="w-[120px] text-center">
                         <TypeTransaction type={transaction.status} />
                       </TableCell>
                       <TableCell>

@@ -195,11 +195,11 @@ const NewsList = () => {
               <TableRow>
                 <TableHead>No.</TableHead>
                 <TableHead>Tiêu đề</TableHead>
-                <TableHead>Thể loại</TableHead>
+                <TableHead className="text-center">Thể loại</TableHead>
                 <TableHead>Thumbnail</TableHead>
                 {/* <TableHead>Tình trạng</TableHead> */}
                 <TableHead>Tóm tắt</TableHead>
-                <TableHead>Ngày tạo</TableHead>
+                <TableHead className="text-right">Ngày tạo</TableHead>
                 <TableHead>
                   <span className="sr-only">Actions</span>
                 </TableHead>
@@ -212,7 +212,7 @@ const NewsList = () => {
                     {calTableIndex(currentPage, index, itemsPerPage)}
                   </TableCell>
                   <TableCell>{news.newsTitle}</TableCell>
-                  <TableCell>
+                  <TableCell className="w-[170px] text-center">
                     <TypeNews type={news.type} />
                   </TableCell>
                   <TableCell>
@@ -222,8 +222,8 @@ const NewsList = () => {
                       className="h-20"
                     />
                   </TableCell>
-                  <TableCell>{news.newsSummary}</TableCell>
-                  <TableCell>{formatDate(news.dateCreate)}</TableCell>
+                  <TableCell >{news.newsSummary}</TableCell>
+                  <TableCell className="w-[110px] text-right">{formatDate(news.dateCreate)}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
