@@ -10,7 +10,6 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {
   Select,
@@ -27,6 +26,7 @@ import { ErrorIcon, SuccessIcon } from "../toast/ToastIcons";
 import customToast from "@/app/utils/customToast";
 import Loading from "@/app/pages/loadingPage/Loading";
 import News from "@/app/api/APIs/news";
+import QuillEditor from "./QuillEditor";
 
 const CreateNews = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -247,12 +247,10 @@ const CreateNews = () => {
                   <Label htmlFor="newsDescription">
                     Nội dung <span className="text-red-600">*</span>
                   </Label>
-                  <ReactQuill
-                    theme="snow"
-                    value={formik.values.newsDescription}
+                  <QuillEditor
                     className="h-[400px] md:pb-0 "
                     id="newsDescription"
-                    onBlur={formik.handleBlur}
+                    value={formik.values.newsDescription}
                     onChange={(value) => {
                       formik.setFieldValue("newsDescription", value);
                     }}
