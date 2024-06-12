@@ -56,7 +56,7 @@ const Navbar = () => {
       href: "/news/1",
     },
     {
-      title: "Truyền thông",
+      title: "Tin mới",
       href: "/news/2",
     },
     {
@@ -338,7 +338,7 @@ const Navbar = () => {
                             to={"/news/2"}
                             className="text-muted-foreground hover:text-mainBrown transition-colors "
                           >
-                            Truyền thông
+                            Tin mới
                           </Link>
                         </SheetClose>
                         <Separator />

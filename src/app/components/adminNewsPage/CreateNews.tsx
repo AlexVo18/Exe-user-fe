@@ -217,7 +217,7 @@ const CreateNews = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="1">Cập nhật hằng tháng</SelectItem>
-                        <SelectItem value="2">Truyền thông</SelectItem>
+                        <SelectItem value="2">Tin mới</SelectItem>
                         <SelectItem value="3">Nét sống xanh</SelectItem>
                       </SelectContent>
                     </Select>

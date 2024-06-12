@@ -67,7 +67,7 @@ const NewsDetail = () => {
                     {type === "1"
                       ? "Cập nhật hằng thắng"
                       : type === "2"
-                      ? "Truyền thông"
+                      ? "Tin mới"
                       : "Nét sống xanh"}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
