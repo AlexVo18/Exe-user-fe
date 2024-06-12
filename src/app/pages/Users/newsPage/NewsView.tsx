@@ -72,7 +72,7 @@ const NewsView = () => {
               }`}
               onClick={() => handleChageType("2")}
             >
-              Truyền thông
+              Tin mới
             </div>
             <div
               className={`px-5 py-2 text-center cursor-pointer ${
@@ -87,10 +87,10 @@ const NewsView = () => {
         <div className="grid grid-cols-6 mx-5 md:mx-40 my-5 gap-4">
           {newsList.length > 0 ? (
             newsList.map((news: NewsData, index: number) => (
-              <div className="xl:col-span-3 col-span-6 w-full ">
+              <div className="xl:col-span-3 col-span-6 w-full">
                 <Link to={`/news/${type}/${news.newsID}`}>
                   <Card
-                    className=" w-full hover:shadow-lg transition-shadow"
+                    className=" w-full hover:shadow-lg transition-shadow h-full flex items-center"
                     key={index}
                   >
                     <CardContent className="flex flex-col sm:flex-row p-5 gap-5">

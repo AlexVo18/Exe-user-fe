@@ -169,7 +169,7 @@ const NewsList = () => {
                   checked={filterType === 2}
                   onClick={() => handleFilterChange(2)}
                 >
-                  Truyền Thông
+                  Tin mới
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem
                   checked={filterType === 3}

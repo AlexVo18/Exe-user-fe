@@ -14,7 +14,7 @@ const TypeNews = ({ type }: Props) => {
       {type === 1
         ? "Cập nhật hằng tháng"
         : type === 2
-        ? "Truyền thông"
+        ? "Tin mới"
         : "Nét sống xanh"}
     </div>
   );
