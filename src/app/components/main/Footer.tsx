@@ -37,10 +37,22 @@ const Footer = () => {
                 Về chúng tôi
               </Link>
               <Link
-                to={"/news"}
+                to={"/news/1"}
                 className="hover:text-mainBrown transition-colors font-bold"
               >
-                Tin tức
+                Cập nhật hằng tháng
+              </Link>
+              <Link
+                to={"/news/2"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Tin mới
+              </Link>
+              <Link
+                to={"/news/3"}
+                className="hover:text-mainBrown transition-colors font-bold"
+              >
+                Nét sống xanh
               </Link>
               <Link
                 to={"/sponsor"}
