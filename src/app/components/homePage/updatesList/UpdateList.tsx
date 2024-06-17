@@ -1,6 +1,7 @@
 import { RecentUpdateData } from "@/app/models/news.models";
 import { Separator } from "../../ui/separator";
 import { formatDate } from "@/app/utils/formatDate";
+import { Link } from "react-router-dom";
 
 interface Props {
   recentUpdates: RecentUpdateData[];
@@ -20,7 +21,8 @@ const UpdateList = ({ recentUpdates }: Props) => {
                 className="grid grid-cols-11 xl:mx-40 lg:mx-20 gap-2 "
                 key={index}
               >
-                <div
+                <Link
+                  to={`/news/1/${update.newsID}`}
                   className={`${
                     index % 2 === 0 ? "order-last justify-start" : "justify-end"
                   } flex items-center col-span-5 my-2`}
@@ -30,7 +32,7 @@ const UpdateList = ({ recentUpdates }: Props) => {
                     alt="Logo Img"
                     className=" w-60 object-cover"
                   />
-                </div>
+                </Link>
                 <div className="col-span-1 flex justify-center">
                   <div className="flex justify-center items-center">
                     <Separator
@@ -40,7 +42,8 @@ const UpdateList = ({ recentUpdates }: Props) => {
                     <div className=" w-3 h-3 bg-white rounded-full absolute border-2 border-mainBrown"></div>
                   </div>
                 </div>
-                <div
+                <Link
+                  to={`/news/1/${update.newsID}`}
                   className={`${
                     index % 2 === 0 ? "order-first justify-end" : ""
                   } flex items-center col-span-5 my-6 `}
@@ -50,12 +53,11 @@ const UpdateList = ({ recentUpdates }: Props) => {
                       Tháng {formatDate(update.dateCreate).slice(3, 5)}/
                       {formatDate(update.dateCreate).slice(6, 10)}
                     </div>
-                    {/* 150 chars */}
                     <p className="mt-2 text-sm md:text-base text-justify ">
                       {update.newsSummary}
                     </p>
                   </div>
-                </div>
+                </Link>
               </div>
             ))
           ) : (
