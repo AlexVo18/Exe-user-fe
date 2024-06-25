@@ -40,10 +40,12 @@ const Result = () => {
               description: "Thanh toán thành công",
               duration: 3000,
             });
-            setPaymentSent(true);
           }
         }
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setPaymentSent(true);
+      }
     };
     if (payment && !paymentSent) {
       sendPayment();
@@ -52,7 +54,9 @@ const Result = () => {
 
   return (
     <>
-      {userLoading || isLoading || quantityLoading ? <Loading /> : null}
+      {userLoading || isLoading || quantityLoading || paymentSent === false ? (
+        <Loading />
+      ) : null}
       <main className="mt-auto text-mainBrown">
         <div className="container mx-auto flex justify-center ">
           <div className=" rounded-2xl shadow-2xl border-black border-[1px] my-10 w-[500px] p-10 ">
@@ -110,15 +114,19 @@ const Result = () => {
             <div className="font-semibold">
               <div>
                 Trạng thái:{" "}
-                <span
-                  className={` ${
-                    payment?.status === "PAID"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {payment?.status === "PAID" ? "Thành Công" : "Đã Hủy"}
-                </span>
+                {paymentSent ? (
+                  <span
+                    className={` ${
+                      payment?.status === "PAID"
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {payment?.status === "PAID" ? "Thành Công" : "Đã Hủy"}
+                  </span>
+                ) : (
+                  <></>
+                )}
               </div>
               <div>
                 Mã đơn hàng:{" "}
