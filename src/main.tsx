@@ -14,6 +14,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Toaster />
       </QuantityProvider>
     </AuthProvider>
-    <Analytics />
+    <Analytics
+      beforeSend={(e) => {
+        if (e.url.includes("admin")) return null;
+        return e;
+      }}
+    />
   </div>
 );
