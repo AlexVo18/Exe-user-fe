@@ -7,7 +7,8 @@ import QuantityProvider from "./app/contexts/QuantityContext.tsx";
 import { Analytics } from "@vercel/analytics/react";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
+const MID = import.meta.env.VITE_MEASUREMENT_ID;
+ReactGA.initialize(MID);
 
 ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 
