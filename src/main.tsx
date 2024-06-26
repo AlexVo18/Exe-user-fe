@@ -4,6 +4,7 @@ import "./index.css";
 import { Toaster } from "./app/components/ui/toaster.tsx";
 import AuthProvider from "./app/contexts/AuthContext.tsx";
 import QuantityProvider from "./app/contexts/QuantityContext.tsx";
+import { Analytics } from "@vercel/analytics/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <div>
@@ -13,5 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Toaster />
       </QuantityProvider>
     </AuthProvider>
+    <Analytics />
   </div>
 );
